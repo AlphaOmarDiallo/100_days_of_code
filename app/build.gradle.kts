@@ -36,6 +36,7 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
     composeOptions {
@@ -74,6 +75,9 @@ dependencies {
     kaptAndroidTest("com.google.dagger:hilt-compiler:$hiltVersion")
     testImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
     kaptTest("com.google.dagger:hilt-compiler:$hiltVersion")
+
+    // Timber
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
     // Test
     testImplementation("com.google.truth:truth:1.3.0")
