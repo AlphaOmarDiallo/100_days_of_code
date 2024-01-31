@@ -16,7 +16,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.alphaomardiallo.a100_days_of_code.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -76,7 +76,9 @@ dependencies {
     kaptTest("com.google.dagger:hilt-compiler:$hiltVersion")
 
     // Test
+    testImplementation("com.google.truth:truth:1.3.0")
     testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("com.google.truth:truth:1.3.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
