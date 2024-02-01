@@ -1,4 +1,4 @@
-package com.alphaomardiallo.a100_days_of_code
+package com.alphaomardiallo.a100_days_of_code.common
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.alphaomardiallo.a100_days_of_code.ui.theme._100_days_of_codeTheme
+import com.alphaomardiallo.a100_days_of_code.common.theme._100_days_of_codeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
