@@ -1,4 +1,4 @@
-package com.alphaomardiallo.a100_days_of_code.common
+package com.alphaomardiallo.a100_days_of_code.common.presentation.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

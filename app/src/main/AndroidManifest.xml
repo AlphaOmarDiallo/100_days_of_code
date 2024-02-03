@@ -14,7 +14,7 @@
         android:theme="@style/Theme._100_days_of_code"
         tools:targetApi="31">
         <activity
-            android:name=".common.MainActivity"
+            android:name=".common.presentation.mainactivity.MainActivity"
             android:exported="true"
             android:theme="@style/Theme._100_days_of_code">
             <intent-filter>
