@@ -6,7 +6,7 @@ import com.alphaomardiallo.a100_days_of_code.common.domain.navigator.AppNavigato
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
-class BaseViewModel : ViewModel() {
+open class BaseViewModel : ViewModel() {
 
     @Inject lateinit var appNavigator: AppNavigator
 
