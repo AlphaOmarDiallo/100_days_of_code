@@ -1,4 +1,4 @@
-package com.alphaomardiallo.a100_days_of_code.common.theme
+package com.alphaomardiallo.a100_days_of_code.common.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

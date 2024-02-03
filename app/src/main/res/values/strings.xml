@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">100_days_of_code</string>
+    <string name="app_name_formatted">100 days of code</string>
+    <string name="app_name_short">100DOC</string>
+
+    <!-- Bottom nav route -->
+    <string name="bottom_nav_route_home">Home</string>
+    <string name="bottom_nav_route_history">History</string>
+    <string name="bottom_nav_route_community">Community</string>
+    <string name="bottom_nav_route_profile">Profile</string>
 </resources>
