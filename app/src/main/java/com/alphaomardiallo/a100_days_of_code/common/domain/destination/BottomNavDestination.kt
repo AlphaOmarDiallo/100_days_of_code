@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.alphaomardiallo.a100_days_of_code.R
@@ -29,7 +30,7 @@ sealed class BottomNavDestination(
     )
 
     data object Menu : BottomNavDestination(
-        icon = Icons.Default.Person,
+        icon = Icons.Default.Menu,
         resId = R.string.bottom_nav_route_menu
     )
 }
