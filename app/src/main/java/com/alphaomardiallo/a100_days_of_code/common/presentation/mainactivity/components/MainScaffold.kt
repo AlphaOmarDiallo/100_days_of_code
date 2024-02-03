@@ -30,7 +30,7 @@ fun MainScaffold(
             BottomNavDestination.Home.route,
             BottomNavDestination.History.route,
             BottomNavDestination.Community.route,
-            BottomNavDestination.Profile.route,
+            BottomNavDestination.Menu.route,
             -> true
 
             else -> false

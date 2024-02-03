@@ -22,7 +22,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.theme._100_days
 import com.alphaomardiallo.a100_days_of_code.feature.community.CommunityScreen
 import com.alphaomardiallo.a100_days_of_code.feature.history.HistoryScreen
 import com.alphaomardiallo.a100_days_of_code.feature.home.HomeScreen
-import com.alphaomardiallo.a100_days_of_code.feature.profile.ProfileScreen
+import com.alphaomardiallo.a100_days_of_code.feature.menu.MenuScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
             BottomNavDestination.Home,
             BottomNavDestination.History,
             BottomNavDestination.Community,
-            BottomNavDestination.Profile,
+            BottomNavDestination.Menu,
         )
 
         setContent {
@@ -81,8 +81,8 @@ class MainActivity : ComponentActivity() {
         composable(route = BottomNavDestination.Community.route) {
             CommunityScreen()
         }
-        composable(route = BottomNavDestination.Profile.route) {
-            ProfileScreen()
+        composable(route = BottomNavDestination.Menu.route) {
+            MenuScreen()
         }
     }
 }

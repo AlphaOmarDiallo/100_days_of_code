@@ -7,5 +7,5 @@
     <string name="bottom_nav_route_home">Home</string>
     <string name="bottom_nav_route_history">History</string>
     <string name="bottom_nav_route_community">Community</string>
-    <string name="bottom_nav_route_profile">Profile</string>
+    <string name="bottom_nav_route_menu">Menu</string>
 </resources>
