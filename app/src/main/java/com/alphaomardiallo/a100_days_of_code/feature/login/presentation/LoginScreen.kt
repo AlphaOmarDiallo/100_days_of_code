@@ -9,7 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,11 +33,25 @@ import com.alphaomardiallo.a100_days_of_code.common.domain.validator.EmailValida
 import com.alphaomardiallo.a100_days_of_code.common.domain.validator.PasswordValidator.isValidPassword
 import timber.log.Timber
 
-@Preview(showBackground = true)
+
 @Composable
 fun LoginScreen() {
 
     val viewModel: LoginViewModel = hiltViewModel()
+
+    LoginScreenContent(
+        loginWithEmail = viewModel::signInUserWithEmailAndPassword,
+        registerWithEmail = viewModel::createUserWithEmailAndPassword
+    )
+
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoginScreenContent(
+    loginWithEmail: ((String, String) -> Unit)? = null,
+    registerWithEmail: ((String, String) -> Unit)? = null,
+) {
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -42,7 +59,10 @@ fun LoginScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AppLogoAndName()
-        LoginOrSignInWithEmail(viewModel::signInUserWithEmailAndPassword)
+        LoginOrSignInWithEmail(
+            loginWithEmail = loginWithEmail,
+            registerWithEmail = registerWithEmail
+        )
     }
 }
 
@@ -64,7 +84,10 @@ private fun AppLogoAndName() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun LoginOrSignInWithEmail(loginWithEmail: (String, String) -> Unit) {
+private fun LoginOrSignInWithEmail(
+    loginWithEmail: ((String, String) -> Unit)? = null,
+    registerWithEmail: ((String, String) -> Unit)? = null,
+) {
 
     var textValueEmail by remember { mutableStateOf("") }
     var textValuePassword by remember { mutableStateOf("") }
@@ -84,32 +107,67 @@ private fun LoginOrSignInWithEmail(loginWithEmail: (String, String) -> Unit) {
             label = {
                 Text(text = stringResource(id = R.string.login_email_label))
             },
+            supportingText = {
+                Text(
+                    text = if (textValueEmail.length > 2 && !isValidEmail(textValueEmail)) {
+                        stringResource(id = R.string.login_invalid_email)
+                    } else {
+                        ""
+                    },
+                    color = MaterialTheme.colorScheme.error
+                )
+            }
         )
 
         OutlinedTextField(
             modifier = Modifier.padding(8.dp),
             value = textValuePassword,
             onValueChange = {
-                textValuePassword= it
+                textValuePassword = it
             },
             label = {
                 Text(text = stringResource(id = R.string.login_password_label))
             },
-            visualTransformation = PasswordVisualTransformation()
+            visualTransformation = PasswordVisualTransformation(),
+            supportingText = {
+                Text(
+                    text = if (textValuePassword.length > 1 && !isValidPassword(textValuePassword)) {
+                        stringResource(id = R.string.login_invalid_password)
+                    } else {
+                        ""
+                    },
+                    color = MaterialTheme.colorScheme.error
+                )
+            }
         )
 
         Text(
-            modifier= Modifier
+            modifier = Modifier
                 .padding(4.dp)
                 .clickable { Timber.d("forgotten password clicked") },
             text = stringResource(id = R.string.login_reset_password)
         )
 
         Button(
-            onClick = { loginWithEmail.invoke(textValueEmail, textValuePassword) },
+            onClick = { loginWithEmail?.invoke(textValueEmail, textValuePassword) },
             enabled = isValidEmail(textValueEmail) && isValidPassword(textValuePassword)
         ) {
             Text(text = stringResource(id = R.string.login_login_button))
+        }
+
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth(0.9f)
+                .padding(8.dp)
+        )
+
+        Text(text = stringResource(id = R.string.login_register_support_text), modifier = Modifier.padding(8.dp))
+
+        OutlinedButton(
+            onClick = { registerWithEmail?.invoke(textValueEmail, textValuePassword) },
+            enabled = isValidEmail(textValueEmail) && isValidPassword(textValuePassword)
+        ) {
+            Text(text = stringResource(id = R.string.login_register_button))
         }
     }
 }

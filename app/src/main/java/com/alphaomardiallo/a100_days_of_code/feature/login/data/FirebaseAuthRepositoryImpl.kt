@@ -26,8 +26,15 @@ class FirebaseAuthRepositoryImpl @Inject constructor() : FirebaseAuthRepository 
     override fun createUserWithEmailAndPassword(email: String, password: String): Boolean {
         auth?.createUserWithEmailAndPassword(email, password)?.addOnCompleteListener { task ->
             if (task.isSuccessful){
-                user = auth?.currentUser
-                Timber.d("[FirebaseAuth] : create user with email successful")
+                auth!!.currentUser!!.sendEmailVerification().addOnCompleteListener { taskEmail ->
+                    if (taskEmail.isSuccessful){
+                        Timber.d("[FirebaseAuth] : verification email sent")
+                        user = auth?.currentUser
+                        Timber.d("[FirebaseAuth] : create user with email successful")
+                    } else {
+                        Timber.w("[FirebaseAuth] : verification email no sent")
+                    }
+                }
             } else {
                 Timber.w("[FirebaseAuth] : create user with email unsuccessful")
             }
