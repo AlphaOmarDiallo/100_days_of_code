@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.alphaomardiallo.a100_days_of_code.common.domain.navigator.AppNavigator
 import com.alphaomardiallo.a100_days_of_code.common.presentation.base.BaseViewModel
 import com.alphaomardiallo.a100_days_of_code.common.presentation.mainactivity.model.MainState
+import com.alphaomardiallo.a100_days_of_code.feature.login.domain.destination.LoginNavigationDestination
+import com.alphaomardiallo.a100_days_of_code.feature.login.domain.usecase.GetCurrentUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.delay
@@ -14,7 +16,8 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    appNavigator: AppNavigator
+    appNavigator: AppNavigator,
+    private val getCurrentUserUseCase: GetCurrentUserUseCase,
 ): BaseViewModel() {
 
     ///////////////////////////////////////////////////////////////////////////
@@ -44,8 +47,16 @@ class MainViewModel @Inject constructor(
 
     private fun initializeApp(){
         viewModelScope.launch {
-            delay(5000)
-            mainState = mainState.copy(splashScreenOn = true)
+            // TODO: fix this 
+            delay(2000)
+
+            if (getCurrentUser() == null){
+                navigateTo(LoginNavigationDestination.Login.route)
+            }
+
+            mainState = mainState.copy(splashScreenOn = false)
         }
     }
+
+    private fun getCurrentUser() = getCurrentUserUseCase.invoke()
 }
