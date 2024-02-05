@@ -77,6 +77,7 @@ dependencies {
     kaptAndroidTest("com.google.dagger:hilt-compiler:$hiltVersion")
     testImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
     kaptTest("com.google.dagger:hilt-compiler:$hiltVersion")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
     // Navigation
     val navVersion = "2.7.6"
