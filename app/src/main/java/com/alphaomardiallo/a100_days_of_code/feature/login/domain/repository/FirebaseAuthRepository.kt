@@ -7,4 +7,8 @@ interface FirebaseAuthRepository {
     fun initializeFirebaseAuth()
 
     fun getCurrentUser(): FirebaseUser?
+
+    fun createUserWithEmailAndPassword(email: String, password: String): Boolean
+
+    fun signInUserWithEmailAndPassword(email: String, password: String): Boolean
 }
