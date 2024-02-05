@@ -2,7 +2,6 @@ package com.alphaomardiallo.a100_days_of_code.feature.login.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -224,9 +223,7 @@ private fun ProviderBox(link: Int = 0, description: Int = 0) {
         AsyncImage(
             model = stringResource(id = link),
             contentDescription = stringResource(id = description),
-            modifier = Modifier
-                .fillMaxSize()
-                .border(width = 1.dp, color = Color.Black),
+            modifier = Modifier.fillMaxSize()
         )
     }
 }
