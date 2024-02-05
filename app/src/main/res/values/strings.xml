@@ -18,5 +18,7 @@
     <!-- Login screen -->
     <string name="login_email_label">Email</string>
     <string name="login_password_label">Password</string>
+    <string name="login_reset_password">Reset your password?</string>
+    <string name="login_login_button">Login</string>
 
 </resources>
