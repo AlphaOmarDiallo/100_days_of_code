@@ -12,7 +12,20 @@
           "package_name": "com.alphaomardiallo.a100_days_of_code"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "932392045802-0amj9om2auhiibg6h9a1kpjbulmbaali.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alphaomardiallo.a100_days_of_code",
+            "certificate_hash": "2f1f196d9b1959579ed53fb81cd3b2ab8ccbbddf"
+          }
+        },
+        {
+          "client_id": "932392045802-i6jiqqsasp09i1iesnn2b47gup39b2o0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyByZqwhU-mzG4FeGJ2nTCsW_2ZZ6qE7p-k"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "932392045802-i6jiqqsasp09i1iesnn2b47gup39b2o0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
