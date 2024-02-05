@@ -23,6 +23,11 @@
     <string name="login_invalid_email">invalid email</string>
     <string name="login_login_button">Login</string>
     <string name="login_register_button">Register</string>
-    <string name="login_register_support_text">First time user? Please tap below to register</string>
+    <string name="login_register_support_text">First time user? Register below.</string>
+    <string name="login_provider_support_text">Or you can use one of these providers</string>
+    <string name="login_provider_google_link">https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Search_GSA.original.png</string>
+    <string name="login_provider_google_description">Google logo</string>
+    <string name="login_provider_github_link">https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png</string>
+    <string name="login_provider_github_description">Github logo</string>
 
 </resources>
