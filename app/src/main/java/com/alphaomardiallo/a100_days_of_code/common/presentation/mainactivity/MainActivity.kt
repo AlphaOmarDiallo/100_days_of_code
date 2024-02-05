@@ -23,6 +23,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.theme._100_days
 import com.alphaomardiallo.a100_days_of_code.feature.community.CommunityScreen
 import com.alphaomardiallo.a100_days_of_code.feature.history.HistoryScreen
 import com.alphaomardiallo.a100_days_of_code.feature.home.HomeScreen
+import com.alphaomardiallo.a100_days_of_code.feature.login.presentation.loginNavigation
 import com.alphaomardiallo.a100_days_of_code.feature.menu.MenuScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,7 +42,9 @@ class MainActivity : ComponentActivity() {
             BottomNavDestination.Menu,
         )
 
-        installSplashScreen()
+        installSplashScreen().setKeepOnScreenCondition{
+            viewModel.mainState.splashScreenOn
+        }
 
         setContent {
             val navController = rememberNavController()
@@ -66,6 +69,7 @@ class MainActivity : ComponentActivity() {
                             navController = navController, startDestination = BottomNavDestination.Home.route
                         ) {
                             bottomBarNavigation()
+                            loginNavigation()
                         }
                     }
                 }
