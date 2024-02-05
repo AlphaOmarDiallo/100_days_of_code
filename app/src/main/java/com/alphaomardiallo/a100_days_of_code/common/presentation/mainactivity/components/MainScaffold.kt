@@ -11,6 +11,7 @@ import androidx.compose.runtime.setValue
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.alphaomardiallo.a100_days_of_code.common.domain.destination.BottomNavDestination
+import com.alphaomardiallo.a100_days_of_code.feature.login.domain.destination.LoginNavigationDestination
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,13 +28,10 @@ fun MainScaffold(
 
     navBackStackEntry?.destination?.route?.let { route ->
         showNavigationBar = when (route) {
-            BottomNavDestination.Home.route,
-            BottomNavDestination.History.route,
-            BottomNavDestination.Community.route,
-            BottomNavDestination.Menu.route,
-            -> true
+            LoginNavigationDestination.Login.route
+            -> false
 
-            else -> false
+            else -> true
         }
     }
 
