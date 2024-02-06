@@ -1,5 +1,6 @@
 package com.alphaomardiallo.a100_days_of_code.feature.login.presentation
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -30,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -41,6 +43,7 @@ import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.domain.validator.EmailValidator.isValidEmail
 import com.alphaomardiallo.a100_days_of_code.common.domain.validator.PasswordValidator.isValidPassword
 import timber.log.Timber
+import kotlin.reflect.KFunction1
 
 
 @Composable
@@ -50,7 +53,8 @@ fun LoginScreen() {
 
     LoginScreenContent(
         loginWithEmail = viewModel::signInUserWithEmailAndPassword,
-        registerWithEmail = viewModel::createUserWithEmailAndPassword
+        registerWithEmail = viewModel::createUserWithEmailAndPassword,
+        signInWithGithub = viewModel::signInWithGithub
     )
 
 }
@@ -60,6 +64,7 @@ fun LoginScreen() {
 fun LoginScreenContent(
     loginWithEmail: ((String, String) -> Unit)? = null,
     registerWithEmail: ((String, String) -> Unit)? = null,
+    signInWithGithub: KFunction1<Activity, Unit>? = null,
 ) {
 
     Column(
@@ -74,7 +79,7 @@ fun LoginScreenContent(
             registerWithEmail = registerWithEmail
         )
 
-        LoginWithProvider()
+        LoginWithProvider(signInWithGithub)
     }
 }
 
@@ -185,7 +190,7 @@ private fun LoginOrSignInWithEmail(
 }
 
 @Composable
-private fun LoginWithProvider() {
+private fun LoginWithProvider(signInWithGithub: KFunction1<Activity, Unit>? = null) {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -204,8 +209,8 @@ private fun LoginWithProvider() {
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            ProviderBox(link = R.string.login_provider_google_link, description = R.string.login_provider_google_description)
-            ProviderBox(link = R.string.login_provider_github_link, description = R.string.login_provider_github_description)
+            ProviderBox(link = R.string.login_provider_google_link, description = R.string.login_provider_google_description, signIn = signInWithGithub)
+            ProviderBox(link = R.string.login_provider_github_link, description = R.string.login_provider_github_description, signIn = signInWithGithub)
         }
 
     }
@@ -213,12 +218,16 @@ private fun LoginWithProvider() {
 
 @Preview(showBackground = true)
 @Composable
-private fun ProviderBox(link: Int = 0, description: Int = 0) {
+private fun ProviderBox(link: Int = 0, description: Int = 0, signIn: KFunction1<Activity, Unit>? = null) {
+
+    val activity = LocalContext.current as Activity
+
     Box(
         modifier = Modifier
             .height(60.dp)
             .width(60.dp)
             .background(color = Color.Transparent)
+            .clickable { signIn?.invoke(activity) }
     ) {
         AsyncImage(
             model = stringResource(id = link),
