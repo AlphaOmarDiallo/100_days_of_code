@@ -50,25 +50,31 @@ import kotlin.reflect.KFunction1
 fun LoginScreen() {
 
     val viewModel: LoginViewModel = hiltViewModel()
+    val activity = LocalContext.current as Activity
 
     LoginScreenContent(
         loginWithEmail = viewModel::signInUserWithEmailAndPassword,
         registerWithEmail = viewModel::createUserWithEmailAndPassword,
-        signInWithGithub = viewModel::signInWithGithub
+        signInWithGithub = viewModel::signInWithGithub,
+        activity = activity
     )
 
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun LoginScreenContent(
     loginWithEmail: ((String, String) -> Unit)? = null,
     registerWithEmail: ((String, String) -> Unit)? = null,
     signInWithGithub: KFunction1<Activity, Unit>? = null,
+    activity: Activity? = null,
 ) {
 
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(8.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(8.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -79,7 +85,7 @@ fun LoginScreenContent(
             registerWithEmail = registerWithEmail
         )
 
-        LoginWithProvider(signInWithGithub)
+        LoginWithProvider(signInWithGithub, activity)
     }
 }
 
@@ -137,7 +143,7 @@ private fun LoginOrSignInWithEmail(
         )
 
         OutlinedTextField(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp),
             value = textValuePassword,
             onValueChange = {
                 textValuePassword = it
@@ -190,10 +196,9 @@ private fun LoginOrSignInWithEmail(
 }
 
 @Composable
-private fun LoginWithProvider(signInWithGithub: KFunction1<Activity, Unit>? = null) {
+private fun LoginWithProvider(signInWithGithub: KFunction1<Activity, Unit>? = null, activity: Activity?) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -209,25 +214,20 @@ private fun LoginWithProvider(signInWithGithub: KFunction1<Activity, Unit>? = nu
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            ProviderBox(link = R.string.login_provider_google_link, description = R.string.login_provider_google_description, signIn = signInWithGithub)
-            ProviderBox(link = R.string.login_provider_github_link, description = R.string.login_provider_github_description, signIn = signInWithGithub)
+            ProviderBox(link = R.string.login_provider_github_link, description = R.string.login_provider_github_description, signIn = signInWithGithub, activity = activity)
         }
-
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-private fun ProviderBox(link: Int = 0, description: Int = 0, signIn: KFunction1<Activity, Unit>? = null) {
-
-    val activity = LocalContext.current as Activity
+private fun ProviderBox(link: Int = 0, description: Int = 0, signIn: KFunction1<Activity, Unit>? = null, activity: Activity? = null) {
 
     Box(
         modifier = Modifier
             .height(60.dp)
             .width(60.dp)
             .background(color = Color.Transparent)
-            .clickable { signIn?.invoke(activity) }
+            .clickable { activity?.let { signIn?.invoke(it) } }
     ) {
         AsyncImage(
             model = stringResource(id = link),
