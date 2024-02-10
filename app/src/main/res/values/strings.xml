@@ -10,7 +10,7 @@
     <string name="bottom_nav_route_home">Home</string>
     <string name="bottom_nav_route_history">History</string>
     <string name="bottom_nav_route_community">Community</string>
-    <string name="bottom_nav_route_menu">Menu</string>
+    <string name="bottom_nav_route_settings">Settings</string>
 
     <!-- Login nav route -->
     <string name="login_nav_route_login">Login</string>
