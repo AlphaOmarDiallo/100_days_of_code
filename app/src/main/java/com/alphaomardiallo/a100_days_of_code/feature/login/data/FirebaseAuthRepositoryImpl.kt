@@ -84,4 +84,10 @@ class FirebaseAuthRepositoryImpl @Inject constructor() : FirebaseAuthRepository 
                 }
         }
     }
+
+    override fun logOut(): Boolean {
+        Firebase.auth.signOut()
+        user = auth?.currentUser
+        return user == null
+    }
 }

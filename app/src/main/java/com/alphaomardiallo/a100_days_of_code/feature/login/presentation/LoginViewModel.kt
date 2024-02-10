@@ -1,7 +1,7 @@
 package com.alphaomardiallo.a100_days_of_code.feature.login.presentation
 
 import android.app.Activity
-import androidx.lifecycle.ViewModel
+import com.alphaomardiallo.a100_days_of_code.common.presentation.base.BaseViewModel
 import com.alphaomardiallo.a100_days_of_code.feature.login.domain.usecase.CreateUserWithPasswordAndEmail
 import com.alphaomardiallo.a100_days_of_code.feature.login.domain.usecase.SignInUserWithEmailAndPasswordUseCase
 import com.alphaomardiallo.a100_days_of_code.feature.login.domain.usecase.SignInWithGithubUseCase
@@ -13,7 +13,7 @@ class LoginViewModel @Inject constructor(
     private val signInUserWithEmailAndPasswordUseCase: SignInUserWithEmailAndPasswordUseCase,
     private val createUserWithPasswordAndEmail: CreateUserWithPasswordAndEmail,
     private val signInWithGithubUseCase: SignInWithGithubUseCase
-): ViewModel() {
+): BaseViewModel() {
 
     fun signInUserWithEmailAndPassword(email: String, password: String){
         signInUserWithEmailAndPasswordUseCase.invoke(email = email, password = password)

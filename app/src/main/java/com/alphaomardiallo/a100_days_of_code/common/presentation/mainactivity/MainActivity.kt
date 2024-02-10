@@ -24,7 +24,7 @@ import com.alphaomardiallo.a100_days_of_code.feature.community.CommunityScreen
 import com.alphaomardiallo.a100_days_of_code.feature.history.HistoryScreen
 import com.alphaomardiallo.a100_days_of_code.feature.home.HomeScreen
 import com.alphaomardiallo.a100_days_of_code.feature.login.presentation.loginNavigation
-import com.alphaomardiallo.a100_days_of_code.feature.menu.MenuScreen
+import com.alphaomardiallo.a100_days_of_code.feature.settings.MenuScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
             BottomNavDestination.Home,
             BottomNavDestination.History,
             BottomNavDestination.Community,
-            BottomNavDestination.Menu,
+            BottomNavDestination.Settings,
         )
 
         installSplashScreen().setKeepOnScreenCondition{
@@ -88,7 +88,7 @@ class MainActivity : ComponentActivity() {
         composable(route = BottomNavDestination.Community.route) {
             CommunityScreen()
         }
-        composable(route = BottomNavDestination.Menu.route) {
+        composable(route = BottomNavDestination.Settings.route) {
             MenuScreen()
         }
     }

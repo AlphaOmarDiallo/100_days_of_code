@@ -4,8 +4,8 @@ import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.alphaomardiallo.a100_days_of_code.R
 
@@ -29,8 +29,8 @@ sealed class BottomNavDestination(
         resId = R.string.bottom_nav_route_community
     )
 
-    data object Menu : BottomNavDestination(
-        icon = Icons.Default.Menu,
-        resId = R.string.bottom_nav_route_menu
+    data object Settings : BottomNavDestination(
+        icon = Icons.Default.Settings,
+        resId = R.string.bottom_nav_route_settings
     )
 }

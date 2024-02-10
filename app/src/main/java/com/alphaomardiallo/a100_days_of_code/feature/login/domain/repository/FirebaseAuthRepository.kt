@@ -14,4 +14,6 @@ interface FirebaseAuthRepository {
     fun signInUserWithEmailAndPassword(email: String, password: String): Boolean
 
     fun signInWithGithub(activity: Activity)
+
+    fun logOut(): Boolean
 }
