@@ -1,6 +1,6 @@
-package com.alphaomardiallo.a100_days_of_code.feature.login.domain.usecase
+package com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.usecase
 
-import com.alphaomardiallo.a100_days_of_code.feature.login.domain.repository.FirebaseAuthRepository
+import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.repository.FirebaseAuthRepository
 import javax.inject.Inject
 
 class GetCurrentUserUseCase @Inject constructor(

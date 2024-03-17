@@ -1,7 +1,7 @@
-package com.alphaomardiallo.a100_days_of_code.feature.login.di
+package com.alphaomardiallo.a100_days_of_code.feature.loginregistration.di
 
-import com.alphaomardiallo.a100_days_of_code.feature.login.domain.repository.FirebaseAuthRepository
-import com.alphaomardiallo.a100_days_of_code.feature.login.data.FirebaseAuthRepositoryImpl
+import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.repository.FirebaseAuthRepository
+import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.data.FirebaseAuthRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

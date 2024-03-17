@@ -1,4 +1,4 @@
-package com.alphaomardiallo.a100_days_of_code.feature.login.domain.repository
+package com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.repository
 
 import android.app.Activity
 import com.google.firebase.auth.FirebaseUser
@@ -13,7 +13,7 @@ interface FirebaseAuthRepository {
 
     fun signInUserWithEmailAndPassword(email: String, password: String): Boolean
 
-    fun signInWithGithub(activity: Activity)
+    fun signInOrRegisterWithGithub(activity: Activity, navigate: () -> Unit): Boolean
 
     fun logOut(): Boolean
 }

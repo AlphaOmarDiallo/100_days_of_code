@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.alphaomardiallo.a100_days_of_code.common.domain.navigator.AppNavigator
 import com.alphaomardiallo.a100_days_of_code.common.presentation.base.BaseViewModel
 import com.alphaomardiallo.a100_days_of_code.common.presentation.mainactivity.model.MainState
-import com.alphaomardiallo.a100_days_of_code.feature.login.domain.destination.LoginNavigationDestination
-import com.alphaomardiallo.a100_days_of_code.feature.login.domain.usecase.GetCurrentUserUseCase
+import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.destination.LoginRegistrationNavigationDestination
+import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.usecase.GetCurrentUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.delay
@@ -51,7 +51,7 @@ class MainViewModel @Inject constructor(
             delay(2000)
 
             if (getCurrentUser() == null){
-                navigateTo(LoginNavigationDestination.Login.route)
+                navigateTo(LoginRegistrationNavigationDestination.Login.route)
             }
 
             mainState = mainState.copy(splashScreenOn = false)
