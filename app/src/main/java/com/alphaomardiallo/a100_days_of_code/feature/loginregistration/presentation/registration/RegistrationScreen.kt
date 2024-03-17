@@ -55,7 +55,7 @@ private fun RegistrationScreenContent(
         LoginOrSignInWithEmail(
             buttonClickAction = registerWithEmail,
             supportTextClickAction = navigateToLogin,
-            type = LoginOrRegistrationType.LOGIN
+            type = LoginOrRegistrationType.REGISTRATION
         )
 
         LoginWithProvider(registerWithGithub, activity)
