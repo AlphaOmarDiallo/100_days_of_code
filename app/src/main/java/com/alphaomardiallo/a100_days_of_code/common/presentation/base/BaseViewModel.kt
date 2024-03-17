@@ -2,6 +2,7 @@ package com.alphaomardiallo.a100_days_of_code.common.presentation.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alphaomardiallo.a100_days_of_code.common.domain.destination.BottomNavDestination
 import com.alphaomardiallo.a100_days_of_code.common.domain.navigator.AppNavigator
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -31,4 +32,6 @@ abstract class BaseViewModel : ViewModel() {
             )
         }
     }
+
+    fun navigateToApp() = navigateTo(BottomNavDestination.Settings.route)
 }

@@ -1,7 +1,6 @@
 package com.alphaomardiallo.a100_days_of_code.feature.loginregistration.presentation.login
 
 import android.app.Activity
-import com.alphaomardiallo.a100_days_of_code.common.domain.destination.BottomNavDestination
 import com.alphaomardiallo.a100_days_of_code.common.presentation.base.BaseViewModel
 import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.destination.LoginRegistrationNavigationDestination
 import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.usecase.SignInUserWithEmailAndPasswordUseCase
@@ -24,6 +23,4 @@ class LoginViewModel @Inject constructor(
     }
 
     fun navigateToRegistration() = navigateTo(LoginRegistrationNavigationDestination.Registration.route)
-
-    private fun navigateToApp() = navigateTo(BottomNavDestination.Settings.route)
 }
