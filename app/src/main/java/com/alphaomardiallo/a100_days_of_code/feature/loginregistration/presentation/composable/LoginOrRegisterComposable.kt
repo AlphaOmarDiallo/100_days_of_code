@@ -113,12 +113,6 @@ fun LoginOrSignInWithEmail(
                 Text(text = stringResource(id = R.string.login_login_button))
             }
 
-            Spacer(modifier = Modifier.padding(8.dp))
-
-            SupportText(
-                supportTextClickAction = supportTextClickAction,
-                type = type
-            )
         } else {
             OutlinedButton(
                 onClick = { buttonClickAction?.invoke(textValueEmail, textValuePassword) },
@@ -128,12 +122,14 @@ fun LoginOrSignInWithEmail(
             ) {
                 Text(text = stringResource(id = R.string.login_register_button))
             }
-
-            SupportText(
-                supportTextClickAction = supportTextClickAction,
-                type = type
-            )
         }
+
+        Spacer(modifier = Modifier.padding(8.dp))
+
+        SupportText(
+            supportTextClickAction = supportTextClickAction,
+            type = type
+        )
 
         Divider(
             modifier = Modifier
