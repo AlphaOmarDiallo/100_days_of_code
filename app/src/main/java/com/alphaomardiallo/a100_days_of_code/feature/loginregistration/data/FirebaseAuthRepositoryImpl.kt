@@ -1,7 +1,7 @@
-package com.alphaomardiallo.a100_days_of_code.feature.login.data
+package com.alphaomardiallo.a100_days_of_code.feature.loginregistration.data
 
 import android.app.Activity
-import com.alphaomardiallo.a100_days_of_code.feature.login.domain.repository.FirebaseAuthRepository
+import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.repository.FirebaseAuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.OAuthProvider
@@ -59,7 +59,7 @@ class FirebaseAuthRepositoryImpl @Inject constructor() : FirebaseAuthRepository 
         return auth?.currentUser != null
     }
 
-    override fun signInWithGithub(activity: Activity) {
+    override fun signInOrRegisterWithGithub(activity: Activity, navigate: () -> Unit): Boolean {
         val provider = OAuthProvider.newBuilder("github.com")
 
         val pendingResultTask = auth?.pendingAuthResult
@@ -68,6 +68,7 @@ class FirebaseAuthRepositoryImpl @Inject constructor() : FirebaseAuthRepository 
             pendingResultTask
                 .addOnSuccessListener {
                     Timber.d("[FirebaseAuth] : sign in user with github awaiting result")
+                    navigate.invoke()
                 }
                 .addOnFailureListener {
                     Timber.w("[FirebaseAuth] : sign in user with github result failed")
@@ -83,6 +84,8 @@ class FirebaseAuthRepositoryImpl @Inject constructor() : FirebaseAuthRepository 
                     Timber.w("[FirebaseAuth] : sign in user with github unsuccessful")
                 }
         }
+
+        return auth?.currentUser != null
     }
 
     override fun logOut(): Boolean {

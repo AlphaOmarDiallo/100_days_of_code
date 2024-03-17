@@ -14,6 +14,7 @@
 
     <!-- Login nav route -->
     <string name="login_nav_route_login">Login</string>
+    <string name="login_nav_route_registration">Registration</string>
 
     <!-- Login screen -->
     <string name="login_email_label">Email</string>
@@ -23,7 +24,8 @@
     <string name="login_invalid_email">invalid email</string>
     <string name="login_login_button">Login</string>
     <string name="login_register_button">Register</string>
-    <string name="login_register_support_text">First time user? Register below.</string>
+    <string name="login_register_support_text">First time user? Register</string>
+    <string name="login_register_support_text_two">Already have an account? Login</string>
     <string name="login_provider_support_text">Or use a provider</string>
     <string name="login_provider_google_link">https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Search_GSA.original.png</string>
     <string name="login_provider_google_description">Google logo</string>

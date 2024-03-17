@@ -1,7 +1,7 @@
 package com.alphaomardiallo.a100_days_of_code
 
 import android.app.Application
-import com.alphaomardiallo.a100_days_of_code.feature.login.domain.usecase.InitializeFirebaseAuthUseCase
+import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.usecase.InitializeFirebaseAuthUseCase
 import com.google.firebase.FirebaseApp
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
