@@ -5,8 +5,9 @@ import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.re
 import javax.inject.Inject
 
 class SignInOrRegisterWithGithubUseCase @Inject constructor(
-    private val firebaseAuthRepository: FirebaseAuthRepository
+    private val firebaseAuthRepository: FirebaseAuthRepository,
 ) {
 
-    fun invoke(activity: Activity, navigate: () -> Unit) = firebaseAuthRepository.signInOrRegisterWithGithub(activity, navigate)
+    fun invoke(activity: Activity, result: () -> Unit) =
+        firebaseAuthRepository.signInOrRegisterWithGithub(activity, result)
 }

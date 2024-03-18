@@ -25,7 +25,11 @@ class FirebaseAuthRepositoryImpl @Inject constructor() : FirebaseAuthRepository 
         return user
     }
 
-    override fun createUserWithEmailAndPassword(email: String, password: String): Boolean {
+    override fun createUserWithEmailAndPassword(
+        email: String,
+        password: String,
+        result: () -> Unit,
+    ): Boolean {
         auth?.createUserWithEmailAndPassword(email, password)?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 auth!!.currentUser!!.sendEmailVerification().addOnCompleteListener { taskEmail ->
@@ -33,6 +37,7 @@ class FirebaseAuthRepositoryImpl @Inject constructor() : FirebaseAuthRepository 
                         Timber.d("[FirebaseAuth] : verification email sent")
                         user = auth?.currentUser
                         Timber.d("[FirebaseAuth] : create user with email successful")
+                        result.invoke()
                     } else {
                         Timber.w("[FirebaseAuth] : verification email no sent")
                     }
@@ -45,12 +50,16 @@ class FirebaseAuthRepositoryImpl @Inject constructor() : FirebaseAuthRepository 
         return auth?.currentUser != null
     }
 
-    override fun signInUserWithEmailAndPassword(email: String, password: String): Boolean {
+    override fun signInUserWithEmailAndPassword(
+        email: String,
+        password: String,
+        result: () -> Unit,
+    ): Boolean {
         auth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 user = auth?.currentUser
                 Timber.d("[FirebaseAuth] : sign in user with email successful")
-
+                result.invoke()
             } else {
                 Timber.w("[FirebaseAuth] : sign in user with email unsuccessful")
             }
@@ -59,7 +68,7 @@ class FirebaseAuthRepositoryImpl @Inject constructor() : FirebaseAuthRepository 
         return auth?.currentUser != null
     }
 
-    override fun signInOrRegisterWithGithub(activity: Activity, navigate: () -> Unit): Boolean {
+    override fun signInOrRegisterWithGithub(activity: Activity, result: () -> Unit): Boolean {
         val provider = OAuthProvider.newBuilder("github.com")
 
         val pendingResultTask = auth?.pendingAuthResult
@@ -68,17 +77,17 @@ class FirebaseAuthRepositoryImpl @Inject constructor() : FirebaseAuthRepository 
             pendingResultTask
                 .addOnSuccessListener {
                     Timber.d("[FirebaseAuth] : sign in user with github awaiting result")
-                    navigate.invoke()
+                    result.invoke()
                 }
                 .addOnFailureListener {
                     Timber.w("[FirebaseAuth] : sign in user with github result failed")
                 }
         } else {
             // Start sign in here
-
             auth?.startActivityForSignInWithProvider(activity, provider.build())
                 ?.addOnSuccessListener {
                     Timber.d("[FirebaseAuth] : sign in user with github successful")
+                    result.invoke()
                 }
                 ?.addOnFailureListener {
                     Timber.w("[FirebaseAuth] : sign in user with github unsuccessful")

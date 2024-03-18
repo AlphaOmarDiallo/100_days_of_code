@@ -9,11 +9,11 @@ interface FirebaseAuthRepository {
 
     fun getCurrentUser(): FirebaseUser?
 
-    fun createUserWithEmailAndPassword(email: String, password: String): Boolean
+    fun createUserWithEmailAndPassword(email: String, password: String, result: () -> Unit): Boolean
 
-    fun signInUserWithEmailAndPassword(email: String, password: String): Boolean
+    fun signInUserWithEmailAndPassword(email: String, password: String, result: () -> Unit): Boolean
 
-    fun signInOrRegisterWithGithub(activity: Activity, navigate: () -> Unit): Boolean
+    fun signInOrRegisterWithGithub(activity: Activity, result: () -> Unit): Boolean
 
     fun logOut(): Boolean
 }

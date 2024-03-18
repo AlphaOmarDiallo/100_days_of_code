@@ -4,8 +4,9 @@ import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.re
 import javax.inject.Inject
 
 class CreateUserWithPasswordAndEmailUseCase @Inject constructor(
-    private val firebaseAuthRepository: FirebaseAuthRepository
+    private val firebaseAuthRepository: FirebaseAuthRepository,
 ) {
 
-    fun invoke(email: String, password: String) = firebaseAuthRepository.createUserWithEmailAndPassword(email, password)
+    fun invoke(email: String, password: String, result: () -> Unit) =
+        firebaseAuthRepository.createUserWithEmailAndPassword(email, password, result)
 }
