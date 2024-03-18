@@ -8,14 +8,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.util.LoginOrRegistrationType
 import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.presentation.composable.AppLogoAndName
 import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.presentation.composable.LoginOrSignInWithEmail
@@ -27,11 +25,6 @@ fun RegistrationScreen() {
 
     val viewModel: RegistrationViewModel = hiltViewModel()
     val activity = LocalContext.current as Activity
-    val state by viewModel.registrationState.collectAsStateWithLifecycle()
-
-    if (state.isLoggedIn){
-        viewModel.navigateToApp()
-    }
 
     RegistrationScreenContent(
         registerWithEmail = viewModel::createUserWithEmailAndPassword,
@@ -48,7 +41,7 @@ private fun RegistrationScreenContent(
     registerWithGithub: KFunction1<Activity, Unit>? = null,
     navigateToLogin: () -> Unit = {},
     activity: Activity? = null,
-){
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()

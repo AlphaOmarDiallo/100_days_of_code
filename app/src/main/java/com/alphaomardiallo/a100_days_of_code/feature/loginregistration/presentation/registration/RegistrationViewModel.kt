@@ -8,10 +8,6 @@ import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.us
 import com.alphaomardiallo.a100_days_of_code.feature.loginregistration.domain.usecase.SignInOrRegisterWithGithubUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import timber.log.Timber
 
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
@@ -20,37 +16,25 @@ class RegistrationViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     ///////////////////////////////////////////////////////////////////////////
-    // State
-    ///////////////////////////////////////////////////////////////////////////
-
-    private val _registrationState = MutableStateFlow(RegistrationUiState())
-    val registrationState: StateFlow<RegistrationUiState> = _registrationState.asStateFlow()
-
-    ///////////////////////////////////////////////////////////////////////////
     // Public functions
     ///////////////////////////////////////////////////////////////////////////
 
     fun createUserWithEmailAndPassword(email: String, password: String) {
-        if (createUserWithPasswordAndEmailUseCase.invoke(email = email, password = password)){
-            navigateTo(BottomNavDestination.Home.route)
-        } else {
-            Timber.w("message erreur")
-        }
 
+        createUserWithPasswordAndEmailUseCase.invoke(email = email, password = password) {
+            navToHome()
+        }
     }
 
     fun registerWithGithub(activity: Activity) {
-        val result = signInOrRegisterWithGithubUseCase.invoke(activity = activity, ::navigateToApp)
-        updateRegistrationState(result)
+        signInOrRegisterWithGithubUseCase.invoke(activity = activity) {
+            navToHome()
+        }
     }
 
     fun navigateToLoginScreen() = navigateTo(LoginRegistrationNavigationDestination.Login.route)
 
-    ///////////////////////////////////////////////////////////////////////////
-    // Private functions
-    ///////////////////////////////////////////////////////////////////////////
-
-    private fun updateRegistrationState(result: Boolean) {
-        _registrationState.value = _registrationState.value.copy(isLoggedIn = result)
+    private fun navToHome() {
+        navigateTo(BottomNavDestination.Home.route)
     }
 }
