@@ -1,4 +1,4 @@
-package com.alphaomardiallo.a100_days_of_code.feature.loginregistration.presentation
+package com.alphaomardiallo.a100_days_of_code.feature.loginregistration.presentation.navigation
 
 import androidx.activity.compose.BackHandler
 import androidx.navigation.NavGraphBuilder
