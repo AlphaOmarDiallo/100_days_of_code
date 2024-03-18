@@ -27,7 +27,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -77,14 +80,20 @@ dependencies {
     kaptAndroidTest("com.google.dagger:hilt-compiler:$hiltVersion")
     testImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
     kaptTest("com.google.dagger:hilt-compiler:$hiltVersion")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // Navigation
-    val navVersion = "2.7.6"
+    val navVersion = "2.7.7"
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     implementation("androidx.navigation:navigation-compose:$navVersion")
     androidTestImplementation("androidx.navigation:navigation-testing:$navVersion")
+
+    // Coroutines
+    val coroutinesVersion = "1.7.3"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 
     // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
@@ -97,7 +106,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
 
     // Coil
-    implementation("io.coil-kt:coil-compose:2.5.0")
+    implementation("io.coil-kt:coil-compose:2.6.0")
 
     // Test
     testImplementation("com.google.truth:truth:1.3.0")
