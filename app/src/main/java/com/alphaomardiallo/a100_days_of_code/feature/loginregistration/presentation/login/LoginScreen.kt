@@ -59,6 +59,10 @@ private fun LoginScreenContent(
             type = LoginOrRegistrationType.LOGIN
         )
 
-        LoginWithProvider(signInWithGithub, activity)
+        LoginWithProvider(
+            isLogin = true,
+            signInWithProvider = signInWithGithub,
+            activity = activity
+        )
     }
 }

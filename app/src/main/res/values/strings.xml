@@ -29,8 +29,11 @@
     <string name="login_provider_support_text">Or use a provider</string>
     <string name="login_provider_google_link">https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Search_GSA.original.png</string>
     <string name="login_provider_google_description">Google logo</string>
+    <string name="login_provider_google_support_text_login">Login with Google</string>
+    <string name="login_provider_google_support_text_register">Register with Google</string>
     <string name="login_provider_github_link">https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png</string>
     <string name="login_provider_github_description">Github logo</string>
-    <string name="login_provider_github_support_text">Login with Github</string>
+    <string name="login_provider_github_support_text_login">Login with Github</string>
+    <string name="login_provider_github_support_text_register">Register with Github</string>
 
 </resources>

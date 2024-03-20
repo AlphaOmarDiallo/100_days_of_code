@@ -58,6 +58,10 @@ private fun RegistrationScreenContent(
             type = LoginOrRegistrationType.REGISTRATION
         )
 
-        LoginWithProvider(registerWithGithub, activity)
+        LoginWithProvider(
+            isLogin = false,
+            signInWithProvider = registerWithGithub,
+            activity = activity
+        )
     }
 }
