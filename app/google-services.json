@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "47682508517",
+    "project_id": "days-of-code-64599",
+    "storage_bucket": "days-of-code-64599.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47682508517:android:776c5fbc5e64a0d84ae60c",
+        "android_client_info": {
+          "package_name": "com.alphaomardiallo.a100_days_of_code"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsk9e89TIaiDgJVDcxpRApjPLQj6ZpfUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
