@@ -1,4 +1,4 @@
-package com.alphaomardiallo.a100_days_of_code
+package com.alphaomardiallo.a100_days_of_code.common.presentation
 
 import _100_days_of_codeTheme
 import android.os.Bundle
