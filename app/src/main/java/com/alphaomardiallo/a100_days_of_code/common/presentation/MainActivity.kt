@@ -13,8 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
+    private val mainViewmodel: MainViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
@@ -22,6 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             _100_days_of_codeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    mainViewmodel.doSomething()
                     Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
