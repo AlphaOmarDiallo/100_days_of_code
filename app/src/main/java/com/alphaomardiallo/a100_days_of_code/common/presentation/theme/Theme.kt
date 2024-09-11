@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import com.alphaomardiallo.a100_days_of_code.ui.theme.AppTypography
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.AppTypography
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,

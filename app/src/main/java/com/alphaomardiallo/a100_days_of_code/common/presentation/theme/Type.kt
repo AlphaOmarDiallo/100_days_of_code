@@ -1,4 +1,4 @@
-package com.alphaomardiallo.a100_days_of_code.ui.theme
+package com.alphaomardiallo.a100_days_of_code.common.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.font.FontFamily
