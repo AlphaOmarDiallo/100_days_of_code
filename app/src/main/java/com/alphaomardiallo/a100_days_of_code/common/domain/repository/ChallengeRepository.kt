@@ -1,13 +1,14 @@
 package com.alphaomardiallo.a100_days_of_code.common.domain.repository
 
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.Challenge
+import kotlinx.coroutines.flow.Flow
 
 interface ChallengeRepository {
     suspend fun upsertChallenge(challenge: Challenge): Long
 
     suspend fun deleteChallenge(challenge: Challenge)
 
-    suspend fun getChallengeById(id: Long): Challenge?
+    fun getChallengeById(id: Long): Flow<Challenge?>
 
-    suspend fun getAllChallenges(): List<Challenge>
+    fun getAllChallenges(): Flow<List<Challenge>>
 }

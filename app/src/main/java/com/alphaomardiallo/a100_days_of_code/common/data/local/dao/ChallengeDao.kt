@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import com.alphaomardiallo.a100_days_of_code.common.data.local.entity.ChallengeEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ChallengeDao {
@@ -17,8 +18,8 @@ interface ChallengeDao {
     suspend fun deleteChallenge(challenge: ChallengeEntity)
 
     @Query("SELECT * FROM table_challenge WHERE id = :id")
-    suspend fun getChallengeById(id: Long): ChallengeEntity?
+    fun getChallengeById(id: Long): Flow<ChallengeEntity?>
 
     @Query("SELECT * FROM table_challenge")
-    suspend fun getAllChallenges(): List<ChallengeEntity>
+    fun getAllChallenges(): Flow<List<ChallengeEntity>>
 }

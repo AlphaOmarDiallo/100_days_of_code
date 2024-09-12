@@ -22,5 +22,5 @@ val commonModule = module {
     single<UserRepository> { UserRepositoryImp(userDao = get()) }
 
     // Main
-    viewModel { MainViewModel() }
+    viewModel { MainViewModel(userRepository = get(), challengeRepository = get()) }
 }
