@@ -1,13 +1,9 @@
-package com.alphaomardiallo.a100_days_of_code.common.data.local.entity
+package com.alphaomardiallo.a100_days_of_code.common.domain.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.alphaomardiallo.a100_days_of_code.common.domain.model.Challenge
-import com.alphaomardiallo.a100_days_of_code.common.domain.model.Entry
+import com.alphaomardiallo.a100_days_of_code.common.data.local.entity.ChallengeEntity
 
-@Entity(tableName = "table_challenge")
-data class ChallengeEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+data class Challenge(
+    val id: Long = 0,
     val declarationOfIntention: String = "",
     val currentProgress: Int = 0,
     val startDate: Long? = null,
@@ -15,8 +11,8 @@ data class ChallengeEntity(
     val isCompleted: Boolean = false,
     val entries: List<Entry>
 ) {
-    fun toDomain(): Challenge {
-        return Challenge(
+    fun toEntity(): ChallengeEntity {
+        return ChallengeEntity(
             id = id,
             declarationOfIntention = declarationOfIntention,
             currentProgress = currentProgress,

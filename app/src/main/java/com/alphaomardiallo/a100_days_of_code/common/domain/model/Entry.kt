@@ -1,4 +1,4 @@
-package com.alphaomardiallo.a100_days_of_code.common.data.model
+package com.alphaomardiallo.a100_days_of_code.common.domain.model
 
 data class Entry(
     val id: String = "",

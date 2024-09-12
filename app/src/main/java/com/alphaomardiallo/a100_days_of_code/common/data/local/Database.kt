@@ -9,7 +9,7 @@ import androidx.room.TypeConverters
 import com.alphaomardiallo.a100_days_of_code.common.data.local.dao.ChallengeDao
 import com.alphaomardiallo.a100_days_of_code.common.data.local.dao.UserDao
 import com.alphaomardiallo.a100_days_of_code.common.data.local.entity.ChallengeEntity
-import com.alphaomardiallo.a100_days_of_code.common.data.model.Entry
+import com.alphaomardiallo.a100_days_of_code.common.domain.model.Entry
 import com.alphaomardiallo.a100_days_of_code.common.data.local.entity.UserEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
