@@ -1,11 +1,11 @@
 package com.alphaomardiallo.a100_days_of_code.common.domain.repository
 
-import com.alphaomardiallo.a100_days_of_code.common.data.local.entity.UserEntity
+import com.alphaomardiallo.a100_days_of_code.common.domain.model.User
 
 interface UserRepository {
-    suspend fun upsertUser(user: UserEntity): Long
+    suspend fun upsertUser(user: User): Long
 
-    suspend fun deleteUser(user: UserEntity)
+    suspend fun deleteUser(user: User)
 
-    suspend fun getUserById(id: Long): UserEntity?
+    suspend fun getUserById(id: Long): User?
 }
