@@ -36,7 +36,7 @@ fun CommitScreen(
             .padding(largePadding())
             .fillMaxSize()
             .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Column {
             LargeTitle(
@@ -48,35 +48,35 @@ fun CommitScreen(
             MediumSpacer()
             BodyText(
                 modifier = Modifier.fillMaxWidth(),
-                text = R.string.onboarding_subtitle,
+                text = R.string.onboarding_commit_subtitle,
                 align = TextAlign.Justify,
                 color = getTextColor()
             )
             MediumSpacer()
         }
         Column {
-            Title(text = R.string.onboarding_rules_title)
+            Title(text = R.string.onboarding_commit_rules_title)
             MediumSpacer()
             BodyText(
-                text = R.string.onboarding_rules_1,
+                text = R.string.onboarding_commit_rules_1,
                 align = TextAlign.Justify,
                 color = getTextColor()
             )
             SmallSpacer()
             BodyText(
-                text = R.string.onboarding_rules_2,
+                text = R.string.onboarding_commit_rules_2,
                 align = TextAlign.Justify,
                 color = getTextColor()
             )
             SmallSpacer()
             BodyText(
-                text = R.string.onboarding_rules_3,
+                text = R.string.onboarding_commit_rules_3,
                 align = TextAlign.Justify,
                 color = getTextColor()
             )
             SmallSpacer()
             BodyText(
-                text = R.string.onboarding_rules_4,
+                text = R.string.onboarding_commit_rules_4,
                 align = TextAlign.Justify,
                 color = getTextColor()
             )
@@ -85,7 +85,7 @@ fun CommitScreen(
         }
 
         LargeSensitiveActionButton(
-            text = R.string.onboarding_button_commit,
+            text = R.string.onboarding_commit_button_commit,
             icon = R.drawable.sharp_code_24
         ) {
             commitButtonAction.invoke()

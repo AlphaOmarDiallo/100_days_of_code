@@ -4,14 +4,20 @@
     <string name="app_name_formatted" translatable="false">100 Days Of Code</string>
 
     <!-- OnBoarding -->
-    <string name="onboarding_title">Welcome to the 100 Days Of Code challenge!</string>
-    <string name="onboarding_subtitle">You are about to start a journey of 100 days of learning code. 100 days of commitment that will help you reach your goals.</string>
-    <string name="onboarding_rules_title">Read the rules carefully</string>
-    <string name="onboarding_rules_1">Commit to the challenge publicly.</string>
-    <string name="onboarding_rules_2">Code for a minimum of one hour each day.</string>
-    <string name="onboarding_rules_3">Share your progress daily, with #100DaysOfCode.</string>
-    <string name="onboarding_rules_4">Each day, try to encourage at least two people participating in the challenge.</string>
-    <string name="onboarding_rules_5">Your mental and physical health is your priority. Allow yourself days of rest.</string>
-    <string name="onboarding_button_commit">Time to commit</string>
-    <string name="onboarding_button_start">Let\'s start!</string>
+    <string name="onboarding_commit_title">Welcome to the 100 Days Of Code challenge!</string>
+    <string name="onboarding_commit_subtitle">You are about to start a journey of 100 days of learning code. 100 days of commitment that will help you reach your goals.</string>
+    <string name="onboarding_commit_rules_title">Read the rules carefully</string>
+    <string name="onboarding_commit_rules_1">Commit to the challenge publicly.</string>
+    <string name="onboarding_commit_rules_2">Code for a minimum of one hour each day.</string>
+    <string name="onboarding_commit_rules_3">Share your progress daily, with #100DaysOfCode.</string>
+    <string name="onboarding_commit_rules_4">Each day, try to encourage at least two people participating in the challenge.</string>
+    <string name="onboarding_commit_rules_5">Your mental and physical health is your priority. Allow yourself days of rest.</string>
+    <string name="onboarding_commit_button_commit">Time to commit</string>
+
+    <string name="onboarding_start_title">Time to commit</string>
+    <string name="onboarding_start_button_start">Let\'s start!</string>
+    <string name="onboarding_start_name_question">How do you want to be called?</string>
+    <string name="onboarding_start_name_sub_question">It can be anything you want. It\'s just to personalize your experience.</string>
+    <string name="onboarding_start_intention_question">What are you hoping to achieve during this challenge?</string>
+    <string name="onboarding_start_intention_sub_question">Say what you want to achieve during this challenge. It will be shown on your dashboard to keep you on track. You can edit it later, learning is not a straight path.</string>
 </resources>

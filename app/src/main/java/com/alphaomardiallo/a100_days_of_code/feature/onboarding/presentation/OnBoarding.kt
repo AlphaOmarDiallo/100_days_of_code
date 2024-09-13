@@ -36,13 +36,13 @@ fun OnBoarding(paddingValues: PaddingValues) {
                 .fillMaxSize()
         ) { page ->
             when (page) {
-                0 -> CommitScreen() {
+                0 -> CommitScreen {
                     coroutineScope.launch {
                         pagerState.animateScrollToPage(1)
                     }
                 }
 
-                1 -> StartScreen() {
+                1 -> StartScreen {
                     coroutineScope.launch {
                         pagerState.animateScrollToPage(0)
                     }

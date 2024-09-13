@@ -22,6 +22,7 @@ import com.alphaomardiallo.a100_days_of_code.R
 @Composable
 fun LottieWithCoilPlaceholder(
     modifier: Modifier = Modifier,
+    iterateForever: Boolean = true,
     image: Int = R.drawable.sharp_code_24,
     lottieJson: Int = R.raw.rocket_animation
 ) {
@@ -54,7 +55,7 @@ fun LottieWithCoilPlaceholder(
                 composition = rememberLottieComposition(
                     spec = LottieCompositionSpec.RawRes(lottieJson)
                 ).value,
-                iterations = LottieConstants.IterateForever,
+                iterations = if (iterateForever) LottieConstants.IterateForever else 1,
                 modifier = Modifier.size(200.dp)
             )
         }
