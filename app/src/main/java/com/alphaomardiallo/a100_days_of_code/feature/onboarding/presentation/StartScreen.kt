@@ -78,7 +78,7 @@ fun StartScreen(
                 returnButtonAction.invoke()
             }
             LargeSensitiveActionButton(
-                text = R.string.onboarding_commit_button_commit,
+                text = R.string.onboarding_start_button_start,
                 icon = R.drawable.sharp_code_24
             ) {
                 startButtonAction.invoke()
