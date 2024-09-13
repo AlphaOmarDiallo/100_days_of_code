@@ -10,7 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.Dashboard
-import com.alphaomardiallo.a100_days_of_code.feature.firststart.presentation.FirstStart
+import com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation.OnBoarding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
             _100_days_of_codeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     if (uiState.shouldShowOnboarding){
-                        FirstStart(paddingValues = innerPadding)
+                        OnBoarding(paddingValues = innerPadding)
                     } else {
                         Dashboard(paddingValues = innerPadding)
                     }

@@ -23,6 +23,7 @@ googleFirebaseCrashlytics = "3.0.2"
 zoom = "1.1.0-alpha05"
 splashscreen = "1.0.1"
 ad_mob = "23.3.0"
+lottie = "6.5.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -56,6 +57,7 @@ firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashly
 zoomimage = { module = "io.github.panpf.zoomimage:zoomimage-compose-coil", version.ref = "zoom" }
 splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 admob-sdk = { module = "com.google.android.gms:play-services-ads", version.ref = "ad_mob"}
+lottie-animation = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

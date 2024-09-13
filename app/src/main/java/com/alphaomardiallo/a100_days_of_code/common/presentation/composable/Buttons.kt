@@ -48,10 +48,10 @@ fun SmallIconButton(
     containerHeight: Dp = SMALL_BUTTON_SIZE,
     containerWidth: Dp = SMALL_BUTTON_SIZE,
     containerCornerShape: Dp = mediumPadding(),
-    content: () -> Unit = {}
+    click: () -> Unit = {}
 ) {
     Card(
-        onClick = { content.invoke() },
+        onClick = { click.invoke() },
         modifier = modifier
             .width(containerHeight)
             .height(containerWidth),
@@ -85,13 +85,13 @@ fun SmallIconButton(
 @Composable
 fun SmallIconButtonClose(
     icon: Int = R.drawable.sharp_close_24,
-    content: () -> Unit = {}
+    click: () -> Unit = {}
 ) {
     SmallIconButton(
         icon = icon,
         containerColor = MaterialTheme.colorScheme.errorContainer,
         contentColor = MaterialTheme.colorScheme.onErrorContainer,
-        content = content
+        click = click
     )
 }
 
@@ -99,7 +99,7 @@ fun SmallIconButtonClose(
 fun MediumCategoryButton(
     label: Int = R.string.app_name,
     icon: Int = R.drawable.ic_launcher_foreground,
-    content: () -> Unit = {}
+    click: () -> Unit = {}
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         SmallIconButton(
@@ -108,7 +108,7 @@ fun MediumCategoryButton(
             containerWidth = MEDIUM_BUTTON_SIZE,
             containerColor = MaterialTheme.colorScheme.surfaceContainer,
             contentColor = MaterialTheme.colorScheme.onSurface,
-            content = content
+            click = click
         )
         SmallSpacer()
         SmallBodyText(text = label, align = TextAlign.Center)
@@ -119,7 +119,7 @@ fun MediumCategoryButton(
 fun LargeProviderLoginButton(
     icon: Int? = R.drawable.ic_google,
     text: Int = R.string.app_name,
-    content: () -> Unit = {}
+    click: () -> Unit = {}
 ) {
     icon?.let {
         SmallIconButton(
@@ -129,7 +129,7 @@ fun LargeProviderLoginButton(
             iconColorUnspecified = true,
             containerColor = MaterialTheme.colorScheme.surfaceContainer,
             contentColor = MaterialTheme.colorScheme.onSurface,
-            content = content
+            click = click
         )
     }
 }
@@ -138,13 +138,13 @@ fun LargeProviderLoginButton(
 fun LargeActionButton(
     icon: Int? = null,
     text: Int = R.string.app_name,
-    content: () -> Unit = {}
+    click: () -> Unit = {}
 ) {
     SmallIconButton(
         modifier = Modifier.fillMaxWidth(),
         icon = icon,
         text = text,
-        content = content
+        click = click
     )
 }
 
@@ -152,7 +152,7 @@ fun LargeActionButton(
 fun LargeSensitiveActionButton(
     text: Int = R.string.app_name,
     icon: Int? = null,
-    content: () -> Unit = {}
+    click: () -> Unit = {}
 ) {
     SmallIconButton(
         modifier = Modifier.fillMaxWidth(),
@@ -160,7 +160,7 @@ fun LargeSensitiveActionButton(
         text = text,
         containerColor = MaterialTheme.colorScheme.errorContainer,
         contentColor = MaterialTheme.colorScheme.onErrorContainer,
-        content = content
+        click = click
     )
 }
 

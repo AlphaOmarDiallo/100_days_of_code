@@ -10,6 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -22,12 +23,14 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadd
 fun LargeTitle(
     modifier: Modifier = Modifier,
     text: Int = R.string.app_name,
-    align: TextAlign = TextAlign.Left
+    align: TextAlign = TextAlign.Left,
+    color: Color = MaterialTheme.colorScheme.onBackground
 ) {
     Text(
         text = stringResource(id = text),
         modifier = modifier,
         style = MaterialTheme.typography.bodyLarge.copy(
+            color = color,
             textAlign = align,
             fontWeight = FontWeight.Bold
         )
@@ -38,14 +41,16 @@ fun LargeTitle(
 fun Title(
     modifier: Modifier = Modifier,
     text: Int = R.string.app_name,
-    align: TextAlign = TextAlign.Left
+    align: TextAlign = TextAlign.Left,
+    color: Color = MaterialTheme.colorScheme.onBackground
 ) {
     Text(
         text = stringResource(id = text),
         modifier = modifier,
         style = MaterialTheme.typography.bodyMedium.copy(
             textAlign = align,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = color
         )
     )
 }
@@ -54,14 +59,16 @@ fun Title(
 fun SmallTitle(
     modifier: Modifier = Modifier,
     text: Int = R.string.app_name,
-    align: TextAlign = TextAlign.Left
+    align: TextAlign = TextAlign.Left,
+    color: Color = MaterialTheme.colorScheme.onBackground
 ) {
     Text(
         text = stringResource(id = text),
         modifier = modifier,
         style = MaterialTheme.typography.bodySmall.copy(
             textAlign = align,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = color
         )
     )
 }
@@ -71,6 +78,7 @@ fun SmallTitleClickable(
     modifier: Modifier = Modifier,
     text: Int = R.string.app_name,
     align: TextAlign = TextAlign.Left,
+    color: Color = MaterialTheme.colorScheme.onBackground,
     content: () -> Unit = {}
 ) {
     Text(
@@ -79,41 +87,51 @@ fun SmallTitleClickable(
         style = MaterialTheme.typography.bodySmall.copy(
             textAlign = align,
             fontWeight = FontWeight.W600,
-            textDecoration = TextDecoration.Underline
+            textDecoration = TextDecoration.Underline,
+            color = color
         )
     )
 }
 
 @Composable
 fun LargeBodyText(
+    modifier: Modifier = Modifier,
     text: Int = R.string.app_name,
-    align: TextAlign = TextAlign.Left
+    align: TextAlign = TextAlign.Left,
+    color: Color = MaterialTheme.colorScheme.onBackground
 ) {
     Text(
         text = stringResource(id = text),
-        style = MaterialTheme.typography.bodyLarge.copy(textAlign = align)
+        style = MaterialTheme.typography.bodyLarge.copy(textAlign = align, color = color),
+        modifier = modifier
     )
 }
 
 @Composable
 fun BodyText(
+    modifier: Modifier = Modifier,
     text: Int = R.string.app_name,
-    align: TextAlign = TextAlign.Left
+    align: TextAlign = TextAlign.Left,
+    color: Color = MaterialTheme.colorScheme.onBackground
 ) {
     Text(
         text = stringResource(id = text),
-        style = MaterialTheme.typography.bodyMedium.copy(textAlign = align)
+        style = MaterialTheme.typography.bodyMedium.copy(textAlign = align, color = color),
+        modifier = modifier
     )
 }
 
 @Composable
 fun SmallBodyText(
+    modifier: Modifier = Modifier,
     text: Int = R.string.app_name,
-    align: TextAlign = TextAlign.Left
+    align: TextAlign = TextAlign.Left,
+    color: Color = MaterialTheme.colorScheme.onBackground
 ) {
     Text(
         text = stringResource(id = text),
-        style = MaterialTheme.typography.bodySmall.copy(textAlign = align)
+        style = MaterialTheme.typography.bodySmall.copy(textAlign = align, color = color),
+        modifier = modifier
     )
 }
 

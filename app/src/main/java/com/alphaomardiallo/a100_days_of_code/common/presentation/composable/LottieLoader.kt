@@ -1,0 +1,62 @@
+package com.alphaomardiallo.a100_days_of_code.common.presentation.composable
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.alphaomardiallo.a100_days_of_code.R
+
+@Composable
+fun LottieWithCoilPlaceholder(
+    modifier: Modifier = Modifier,
+    image: Int = R.drawable.sharp_code_24,
+    lottieJson: Int = R.raw.rocket_animation
+) {
+    var isLoading by remember { mutableStateOf(true) }
+    var showPlaceholder by remember { mutableStateOf(true) }
+
+    Box(modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+        if (showPlaceholder) {
+            AsyncImage(
+                model = image,
+                contentDescription = "Placeholder Image",
+                modifier = Modifier.fillMaxSize(),
+                onLoading = {
+                    isLoading = true
+                    showPlaceholder = true
+                },
+                onSuccess = {
+                    isLoading = false
+                    showPlaceholder = false
+                },
+                onError = {
+                    isLoading = false
+                    showPlaceholder = true
+                }
+            )
+        }
+
+        if (!isLoading) {
+            LottieAnimation(
+                composition = rememberLottieComposition(
+                    spec = LottieCompositionSpec.RawRes(lottieJson)
+                ).value,
+                iterations = LottieConstants.IterateForever,
+                modifier = Modifier.size(200.dp)
+            )
+        }
+    }
+}
