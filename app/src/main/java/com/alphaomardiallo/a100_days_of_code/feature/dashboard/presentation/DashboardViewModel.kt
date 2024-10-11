@@ -1,4 +1,4 @@
-package com.alphaomardiallo.a100_days_of_code.common.presentation
+package com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,11 +9,11 @@ import com.alphaomardiallo.a100_days_of_code.common.domain.repository.UserReposi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel(
+class DashboardViewModel(
     private val userRepository: UserRepository,
 ) : ViewModel() {
 
-    var state by mutableStateOf(MainState())
+    var state by mutableStateOf(DashboardState())
         private set
 
     init {
@@ -32,7 +32,7 @@ class MainViewModel(
     }
 }
 
-data class MainState(
+data class DashboardState(
     val uiReady: Boolean = false,
     val shouldShowOnboarding: Boolean? = null
 )

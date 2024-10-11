@@ -48,6 +48,7 @@ fun SmallIconButton(
     containerHeight: Dp = SMALL_BUTTON_SIZE,
     containerWidth: Dp = SMALL_BUTTON_SIZE,
     containerCornerShape: Dp = mediumPadding(),
+    enabled: Boolean = true,
     click: () -> Unit = {}
 ) {
     Card(
@@ -55,6 +56,7 @@ fun SmallIconButton(
         modifier = modifier
             .width(containerHeight)
             .height(containerWidth),
+        enabled = enabled,
         shape = RoundedCornerShape(containerCornerShape),
         border = BorderStroke(0.5.dp, if (isSystemInDarkTheme()) Color.White else Color.Black),
         colors = CardDefaults.cardColors().copy(
@@ -152,7 +154,8 @@ fun LargeActionButton(
 fun LargeSensitiveActionButton(
     text: Int = R.string.app_name,
     icon: Int? = null,
-    click: () -> Unit = {}
+    isEnabled: Boolean = true,
+    click: () -> Unit = {},
 ) {
     SmallIconButton(
         modifier = Modifier.fillMaxWidth(),
@@ -160,6 +163,7 @@ fun LargeSensitiveActionButton(
         text = text,
         containerColor = MaterialTheme.colorScheme.errorContainer,
         contentColor = MaterialTheme.colorScheme.onErrorContainer,
+        enabled = isEnabled,
         click = click
     )
 }

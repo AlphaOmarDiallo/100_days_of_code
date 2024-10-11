@@ -48,7 +48,7 @@ fun MultiLineTextFields(
         },
         modifier = modifier
             .fillMaxWidth()
-            .height(150.dp),
+            .height(100.dp),
         singleLine = false
     )
 }

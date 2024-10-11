@@ -4,6 +4,7 @@ import _100_days_of_codeTheme
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,9 +12,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.BodyText
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeSensitiveActionButton
@@ -36,7 +39,8 @@ fun CommitScreen(
             .padding(largePadding())
             .fillMaxSize()
             .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.SpaceEvenly
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column {
             LargeTitle(
@@ -46,12 +50,16 @@ fun CommitScreen(
                 color = getTextColor()
             )
             MediumSpacer()
-            BodyText(
-                modifier = Modifier.fillMaxWidth(),
-                text = R.string.onboarding_commit_subtitle,
-                align = TextAlign.Justify,
-                color = getTextColor()
-            )
+            Row(verticalAlignment = Alignment.CenterVertically){
+                LottieWithCoilPlaceholder(size = 50.dp)
+
+                BodyText(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = R.string.onboarding_commit_subtitle,
+                    align = TextAlign.Justify,
+                    color = getTextColor()
+                )
+            }
             MediumSpacer()
         }
         Column {
@@ -80,7 +88,6 @@ fun CommitScreen(
                 align = TextAlign.Justify,
                 color = getTextColor()
             )
-            LottieWithCoilPlaceholder()
             SmallSpacer()
         }
 

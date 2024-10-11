@@ -9,7 +9,7 @@ data class Challenge(
     val startDate: Long? = null,
     val endDate: Long? = null,
     val isCompleted: Boolean = false,
-    val entries: List<Entry>
+    val entries: List<Entry> = emptyList()
 ) {
     fun toEntity(): ChallengeEntity {
         return ChallengeEntity(
