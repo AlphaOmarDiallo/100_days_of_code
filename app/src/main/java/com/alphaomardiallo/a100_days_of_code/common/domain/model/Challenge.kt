@@ -8,7 +8,7 @@ data class Challenge(
     val currentProgress: Int = 0,
     val startDate: Long? = null,
     val endDate: Long? = null,
-    val isCompleted: Boolean = false,
+    var isCompleted: Boolean = false,
     val entries: List<Entry> = emptyList()
 ) {
     fun toEntity(): ChallengeEntity {

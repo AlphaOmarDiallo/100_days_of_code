@@ -25,10 +25,13 @@
     <!-- Dashboard -->
     <string name="dashboard_title">Hey %s!</string>
     <string name="dashboard_title_no_user">Welcome!</string>
+    <string name="dashboard_title_all_challenges_done">Welcome!</string>
     <string name="dashboard_subtitle_no_user">Time to start a new learning journey!</string>
+    <string name="dashboard_subtitle_all_challenges_done">Welcome back! Jumping on a new learning journey?</string>
     <string name="dashboard_subtitle">Welcome to your dashboard</string>
     <string name="dashboard_my_progress_title">Current challenge</string>
     <string name="dashboard_my_progress_percentage">%d%% of the challenge is completed</string>
     <string name="dashboard_my_progress_goal">Goal</string>
     <string name="dashboard_my_progress_start">Start</string>
+    <string name="dashboard_my_progress_challenges_completed">So far, you have completed %d challenges. That represents %d fo learning.</string>
 </resources>

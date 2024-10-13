@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -40,7 +41,11 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.smallPadd
 import timber.log.Timber
 
 @Composable
-fun ProgressSection(challenges: List<Challenge?> = emptyList(), user: User? = null, startAction: () -> Unit? = {}) {
+fun ProgressSection(
+    challenges: List<Challenge?> = emptyList(),
+    user: User? = null,
+    startAction: () -> Unit? = {}
+) {
     val currentChallenge = challenges.filterNotNull().find { !it.isCompleted }
 
     if (user == null) {
@@ -59,7 +64,7 @@ fun ProgressSection(challenges: List<Challenge?> = emptyList(), user: User? = nu
 private fun NoUserNoChallenge(startAction: () -> Unit? = {}) {
     EventCard(
         modifier = Modifier.background(MaterialTheme.colorScheme.tertiaryContainer),
-        click = { Timber.d("My progress card clicked") }
+        cardHeight = 170.dp
     ) {
         Column(
             modifier = Modifier
@@ -76,6 +81,14 @@ private fun NoUserNoChallenge(startAction: () -> Unit? = {}) {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
+                    Box(modifier = Modifier.padding(smallPadding())) {
+                        Box(modifier = Modifier.size(140.dp), contentAlignment = Alignment.Center) {
+                            LottieWithCoilPlaceholder(
+                                size = 140.dp,
+                                lottieJson = R.raw.rocket_animation
+                            )
+                        }
+                    }
                     Column(
                         modifier = Modifier
                             .fillMaxHeight()
@@ -86,17 +99,8 @@ private fun NoUserNoChallenge(startAction: () -> Unit? = {}) {
                         MediumCategoryButton(
                             label = R.string.dashboard_my_progress_start,
                             icon = R.drawable.ic_launcher_foreground
-                        ){
+                        ) {
                             startAction.invoke()
-                        }
-                    }
-
-                    Box(modifier = Modifier.padding(smallPadding())) {
-                        Box(modifier = Modifier.size(140.dp), contentAlignment = Alignment.Center) {
-                            LottieWithCoilPlaceholder(
-                                size = 140.dp,
-                                lottieJson = R.raw.rocket_animation
-                            )
                         }
                     }
                 }
@@ -169,7 +173,10 @@ private fun OnGoingChallenge(challenge: Challenge?) {
 }
 
 @Composable
-private fun AllChallengesCompleted() {
+private fun AllChallengesCompleted(
+    challenges: List<Challenge> = emptyList(),
+    startAction: () -> Unit? = {}
+) {
     EventCard(
         modifier = Modifier.background(MaterialTheme.colorScheme.tertiaryContainer),
         click = { Timber.d("My progress card clicked") }
@@ -177,9 +184,49 @@ private fun AllChallengesCompleted() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(smallPadding())
+                .padding(smallPadding()),
+            verticalArrangement = Arrangement.Center
         ) {
-
+            Title(text = R.string.dashboard_subtitle_all_challenges_done)
+            Row(
+                modifier = Modifier.fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .weight(1f),
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    MediumSpacer()
+                    SmallTitleString(
+                        text = String.format(
+                            stringResource(id = R.string.dashboard_my_progress_challenges_completed),
+                            challenges.size,
+                            (challenges.size * 100)
+                        )
+                    )
+                    LottieWithCoilPlaceholder(
+                        size = 80.dp,
+                        lottieJson = R.raw.plant_growing
+                    )
+                }
+                Column(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .weight(1f),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    MediumCategoryButton(
+                        label = R.string.dashboard_my_progress_start,
+                        icon = R.drawable.ic_launcher_foreground
+                    ) {
+                        startAction.invoke()
+                    }
+                }
+            }
         }
     }
 }
@@ -221,7 +268,9 @@ private fun ProgressSectionContentPreview() {
 @Composable
 private fun OnBoardingPreview() {
     _100_days_of_codeTheme {
-        ProgressSectionContentPreview()
+        Surface {
+            ProgressSectionContentPreview()
+        }
     }
 }
 
@@ -229,6 +278,8 @@ private fun OnBoardingPreview() {
 @Composable
 private fun OnBoardingDarkPreview() {
     _100_days_of_codeTheme {
-        ProgressSectionContentPreview()
+        Surface {
+            ProgressSectionContentPreview()
+        }
     }
 }
