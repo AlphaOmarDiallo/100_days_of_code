@@ -21,4 +21,14 @@
     <string name="onboarding_start_intention_question">What are you hoping to achieve during this challenge?</string>
     <string name="onboarding_start_intention_sub_question">Say what you want to achieve during this challenge. It will be shown on your dashboard to keep you on track. You can edit it later, learning is not a straight path.</string>
     <string name="onboarding_start_start_from">Start from day:</string>"
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">Hey %s!</string>
+    <string name="dashboard_title_no_user">Welcome!</string>
+    <string name="dashboard_subtitle_no_user">Time to start a new learning journey!</string>
+    <string name="dashboard_subtitle">Welcome to your dashboard</string>
+    <string name="dashboard_my_progress_title">Current challenge</string>
+    <string name="dashboard_my_progress_percentage">%d%% of the challenge is completed</string>
+    <string name="dashboard_my_progress_goal">Goal</string>
+    <string name="dashboard_my_progress_start">Start</string>
 </resources>

@@ -5,5 +5,5 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val dashboardModule = module {
-    viewModel { DashboardViewModel(userRepository = get()) }
+    viewModel { DashboardViewModel(userRepository = get(), challengeRepository = get()) }
 }

@@ -3,6 +3,7 @@ package com.alphaomardiallo.a100_days_of_code.common.presentation.composable
 import _100_days_of_codeTheme
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -56,6 +58,7 @@ fun EventCard(
                 .fillMaxSize()
                 .padding(smallPadding())
                 .clickable { click.invoke() }
+                .background(MaterialTheme.colorScheme.tertiaryContainer)
         ) {
             content.invoke()
         }
@@ -84,11 +87,15 @@ private fun PreviewContentPhone() {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewsCards() {
-    PreviewContentPhone()
+    Surface {
+        PreviewContentPhone()
+    }
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun PreviewsCardsNight() {
-    PreviewContentPhone()
+    Surface {
+        PreviewContentPhone()
+    }
 }

@@ -15,6 +15,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -146,7 +147,9 @@ fun StartScreen(
 @Composable
 private fun OnBoardingPreview() {
     _100_days_of_codeTheme {
-        StartScreen()
+        Surface {
+            StartScreen()
+        }
     }
 }
 
@@ -154,6 +157,8 @@ private fun OnBoardingPreview() {
 @Composable
 private fun OnBoardingDarkPreview() {
     _100_days_of_codeTheme {
-        StartScreen()
+        Surface {
+            StartScreen()
+        }
     }
 }

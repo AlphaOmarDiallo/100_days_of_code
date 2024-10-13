@@ -38,6 +38,24 @@ fun LargeTitle(
 }
 
 @Composable
+fun LargeTitleString(
+    modifier: Modifier = Modifier,
+    text: String = "",
+    align: TextAlign = TextAlign.Left,
+    color: Color = MaterialTheme.colorScheme.onBackground
+) {
+    Text(
+        text = text,
+        modifier = modifier,
+        style = MaterialTheme.typography.bodyLarge.copy(
+            color = color,
+            textAlign = align,
+            fontWeight = FontWeight.Bold
+        )
+    )
+}
+
+@Composable
 fun Title(
     modifier: Modifier = Modifier,
     text: Int = R.string.app_name,
@@ -64,6 +82,24 @@ fun SmallTitle(
 ) {
     Text(
         text = stringResource(id = text),
+        modifier = modifier,
+        style = MaterialTheme.typography.bodySmall.copy(
+            textAlign = align,
+            fontWeight = FontWeight.Bold,
+            color = color
+        )
+    )
+}
+
+@Composable
+fun SmallTitleString(
+    modifier: Modifier = Modifier,
+    text: String = "",
+    align: TextAlign = TextAlign.Left,
+    color: Color = MaterialTheme.colorScheme.onBackground
+) {
+    Text(
+        text = text,
         modifier = modifier,
         style = MaterialTheme.typography.bodySmall.copy(
             textAlign = align,
@@ -122,6 +158,20 @@ fun BodyText(
 }
 
 @Composable
+fun BodyTextString(
+    modifier: Modifier = Modifier,
+    text: String = "",
+    align: TextAlign = TextAlign.Left,
+    color: Color = MaterialTheme.colorScheme.onBackground
+) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.bodyMedium.copy(textAlign = align, color = color),
+        modifier = modifier
+    )
+}
+
+@Composable
 fun SmallBodyText(
     modifier: Modifier = Modifier,
     text: Int = R.string.app_name,
@@ -130,6 +180,20 @@ fun SmallBodyText(
 ) {
     Text(
         text = stringResource(id = text),
+        style = MaterialTheme.typography.bodySmall.copy(textAlign = align, color = color),
+        modifier = modifier
+    )
+}
+
+@Composable
+fun SmallBodyTextString(
+    modifier: Modifier = Modifier,
+    text: String = "",
+    align: TextAlign = TextAlign.Left,
+    color: Color = MaterialTheme.colorScheme.onBackground
+) {
+    Text(
+        text = text,
         style = MaterialTheme.typography.bodySmall.copy(textAlign = align, color = color),
         modifier = modifier
     )
@@ -161,11 +225,15 @@ private fun PreviewContentPhone() {
 @Preview(showBackground = true)
 @Composable
 fun TextPreviews() {
-    PreviewContentPhone()
+    Surface {
+        PreviewContentPhone()
+    }
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun TextPreviewsDark() {
-    PreviewContentPhone()
+    Surface {
+        PreviewContentPhone()
+    }
 }

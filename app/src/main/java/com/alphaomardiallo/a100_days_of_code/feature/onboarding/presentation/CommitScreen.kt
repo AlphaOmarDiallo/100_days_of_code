@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -104,7 +105,9 @@ fun CommitScreen(
 @Composable
 private fun OnBoardingPreview() {
     _100_days_of_codeTheme {
-        CommitScreen()
+        Surface {
+            CommitScreen()
+        }
     }
 }
 
@@ -112,6 +115,8 @@ private fun OnBoardingPreview() {
 @Composable
 private fun OnBoardingDarkPreview() {
     _100_days_of_codeTheme {
-        CommitScreen()
+        Surface {
+            CommitScreen()
+        }
     }
 }

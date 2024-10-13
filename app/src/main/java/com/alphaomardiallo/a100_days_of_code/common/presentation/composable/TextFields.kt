@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -66,11 +67,15 @@ private fun PreviewContent() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun TextFieldsPreview() {
-    PreviewContent()
+    Surface {
+        PreviewContent()
+    }
 }
 
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun TextFieldsDarkPreview() {
-    PreviewContent()
+    Surface {
+        PreviewContent()
+    }
 }

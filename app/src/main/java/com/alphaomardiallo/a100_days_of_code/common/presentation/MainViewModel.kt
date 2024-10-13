@@ -1,38 +1,11 @@
 package com.alphaomardiallo.a100_days_of_code.common.presentation
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.alphaomardiallo.a100_days_of_code.common.domain.repository.UserRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import timber.log.Timber
 
-class MainViewModel(
-    private val userRepository: UserRepository,
-) : ViewModel() {
-
-    var state by mutableStateOf(MainState())
-        private set
+class MainViewModel : ViewModel() {
 
     init {
-        shouldShowOnboarding()
-    }
-
-    private fun shouldShowOnboarding() {
-        viewModelScope.launch(Dispatchers.IO) {
-            userRepository.getUserById(1).collect { user ->
-                state = state.copy(
-                    uiReady = true,
-                    shouldShowOnboarding = user == null
-                )
-            }
-        }
+        Timber.d("MainViewModel init")
     }
 }
-
-data class MainState(
-    val uiReady: Boolean = false,
-    val shouldShowOnboarding: Boolean? = null
-)

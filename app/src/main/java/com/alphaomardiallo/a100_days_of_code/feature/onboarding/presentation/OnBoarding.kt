@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -26,7 +27,10 @@ fun OnBoarding(viewmodel: OnBoardingViewModel = koinViewModel(), onClose: () -> 
 }
 
 @Composable
-fun OnBoardingContent(onClose: () -> Unit = {}, createUser: (str1: String, str2: String, int: Int) -> Unit = { _, _, _ -> }) {
+fun OnBoardingContent(
+    onClose: () -> Unit = {},
+    createUser: (str1: String, str2: String, int: Int) -> Unit = { _, _, _ -> }
+) {
     val pagerState = rememberPagerState(pageCount = { 2 })
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -74,7 +78,9 @@ fun OnBoardingContent(onClose: () -> Unit = {}, createUser: (str1: String, str2:
 @Composable
 private fun OnBoardingPreview() {
     _100_days_of_codeTheme {
-        OnBoardingContent()
+        Surface {
+            OnBoardingContent()
+        }
     }
 }
 
@@ -82,6 +88,8 @@ private fun OnBoardingPreview() {
 @Composable
 private fun OnBoardingDarkPreview() {
     _100_days_of_codeTheme {
-        OnBoardingContent()
+        Surface {
+            OnBoardingContent()
+        }
     }
 }

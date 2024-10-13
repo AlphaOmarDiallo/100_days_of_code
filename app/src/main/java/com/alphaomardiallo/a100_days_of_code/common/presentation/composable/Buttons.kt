@@ -177,7 +177,6 @@ private fun PreviewContentPhone() {
                 MediumSpacer()
                 SmallIconButtonClose()
                 MediumSpacer()
-                MediumSpacer()
                 MediumCategoryButton()
                 MediumSpacer()
                 LargeProviderLoginButton()
@@ -197,11 +196,14 @@ private fun PreviewContentPhone() {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewsButtons() {
-    PreviewContentPhone()
+    Surface {
+        PreviewContentPhone()
+    }
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun PreviewsButtonsNight() {
-    PreviewContentPhone()
-}
+    Surface {
+        PreviewContentPhone()
+    }}
