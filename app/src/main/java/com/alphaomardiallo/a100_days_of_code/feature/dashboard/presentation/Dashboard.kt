@@ -43,7 +43,8 @@ import timber.log.Timber
 @Composable
 fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
-    var showDialog by remember { mutableStateOf(false) }
+    var showOnBoardingDialog by remember { mutableStateOf(false) }
+    var showAddEntryDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(uiState.value.user) {
         if (uiState.value.user != null) {
@@ -69,20 +70,35 @@ fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
             user = uiState.value.user,
             challenges = uiState.value.challenges
         ) {
-            showDialog = true
+            showOnBoardingDialog = true
         }
 
-        if (showDialog) {
+        // On boarding dialog
+        if (showOnBoardingDialog) {
             BasicAlertDialog(
-                onDismissRequest = { showDialog = false },
+                onDismissRequest = { showOnBoardingDialog = false },
                 modifier = Modifier.fillMaxSize(),
                 properties = DialogProperties(usePlatformDefaultWidth = false)
             ) {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     OnBoarding {
-                        showDialog = false
+                        showOnBoardingDialog = false
                     }
                 }
+            }
+        }
+
+        // Add entry dialog
+        if (showAddEntryDialog) {
+            BasicAlertDialog(
+                onDismissRequest = { showAddEntryDialog = false },
+                modifier = Modifier.fillMaxSize(),
+                properties = DialogProperties(usePlatformDefaultWidth = false)
+            ) {
+                Surface(modifier = Modifier.fillMaxSize()) {
+
+                }
+
             }
         }
     }
