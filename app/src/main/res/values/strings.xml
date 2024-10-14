@@ -33,5 +33,13 @@
     <string name="dashboard_my_progress_percentage">%d%% of the challenge is completed</string>
     <string name="dashboard_my_progress_goal">Goal</string>
     <string name="dashboard_my_progress_start">Start</string>
-    <string name="dashboard_my_progress_challenges_completed">So far, you have completed %d challenges. That represents %d fo learning.</string>
+    <string name="dashboard_my_progress_challenges_completed">So far, you have completed %d challenges. That represents %d days of learning.</string>
+
+    <!-- Add Entry -->
+    <string name="add_entry_title">Track progress</string>"
+    <string name="add_entry_title_of_entry">Name today\'s progress</string>"
+    <string name="add_entry_description">What have you been doing today?</string>"
+    <string name="add_entry_mood_title">How are you feeling?</string>
+    <string name="add_entry_validate">Save</string>
+    <string name="add_entry_validate_error">Please fill all the fields</string>
 </resources>

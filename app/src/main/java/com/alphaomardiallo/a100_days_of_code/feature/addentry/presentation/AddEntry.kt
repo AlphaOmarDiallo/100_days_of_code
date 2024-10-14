@@ -1,9 +1,159 @@
 package com.alphaomardiallo.a100_days_of_code.feature.addentry.presentation
 
+import _100_days_of_codeTheme
+import android.content.res.Configuration
+import android.widget.Toast
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
+import androidx.compose.material3.Surface
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import com.alphaomardiallo.a100_days_of_code.R
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeActionButton
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeTitle
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MediumSpacer
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MultiLineTextFields
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SingleLineTextFields
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallIconButton
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun AddEntryScreen(viewModel: AddEntryViewModel = koinViewModel()) {
+fun AddEntryScreen(viewModel: AddEntryViewModel = koinViewModel(), onClose: () -> Unit) {
+    AddEntryScreenContent(onClose, viewModel::addEntry)
+}
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun AddEntryScreenContent(
+    onClose: () -> Unit = {},
+    saveData: (String, String, Float) -> Unit = { _, _, _ -> }
+) {
+    val context = LocalContext.current
+    var titleValue by remember { mutableStateOf("") }
+    var descriptionValue by remember { mutableStateOf("") }
+    var sliderValue by remember { mutableFloatStateOf(3f) }
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { LargeTitle(text = R.string.add_entry_title) },
+                navigationIcon = {
+                    SmallIconButton {
+                        onClose.invoke()
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors().copy(
+                    containerColor = MaterialTheme.colorScheme.tertiary,
+                    titleContentColor = MaterialTheme.colorScheme.onTertiary
+                )
+            )
+        },
+        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+        contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(largePadding())
+        ) {
+            Title(text = R.string.add_entry_title_of_entry)
+            SmallSpacer()
+            SingleLineTextFields { title ->
+                titleValue = title
+            }
+            MediumSpacer()
+
+            Title(text = R.string.add_entry_description)
+            SmallSpacer()
+            MultiLineTextFields { description ->
+                descriptionValue = description
+            }
+            MediumSpacer()
+
+            Title(text = R.string.add_entry_mood_title)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.sharp_mood_bad_24),
+                    contentDescription = ""
+                )
+
+                Slider(
+                    value = sliderValue,
+                    onValueChange = { newValue ->
+                        sliderValue = newValue
+                    },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = largePadding()),
+                    valueRange = 1f..5f,
+                    steps = 3,
+                )
+
+                Icon(
+                    painter = painterResource(id = R.drawable.baseline_mood_24),
+                    contentDescription = ""
+                )
+            }
+            MediumSpacer()
+
+            LargeActionButton(
+                icon = R.drawable.ic_launcher_foreground,
+                text = R.string.add_entry_validate
+            ) {
+                if (titleValue.isNotBlank() && descriptionValue.isNotBlank()) {
+                    saveData.invoke(titleValue, descriptionValue, sliderValue)
+                    onClose.invoke()
+                } else {
+                    Toast.makeText(context, R.string.add_entry_validate_error, Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun AddEntryPreview() {
+    _100_days_of_codeTheme {
+        Surface {
+            AddEntryScreenContent()
+        }
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun AddEntryDarkPreview() {
+    _100_days_of_codeTheme {
+        Surface {
+            AddEntryScreenContent()
+        }
+    }
 }

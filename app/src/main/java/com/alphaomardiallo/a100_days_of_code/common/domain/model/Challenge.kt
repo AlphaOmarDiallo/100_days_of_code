@@ -11,6 +11,17 @@ data class Challenge(
     var isCompleted: Boolean = false,
     val entries: List<Entry> = emptyList()
 ) {
+    fun addEntry(newEntry: Entry): Challenge {
+        val updatedEntries = entries + newEntry
+        val updatedProgress = currentProgress + 1
+
+        return this.copy(
+            entries = updatedEntries,
+            currentProgress = updatedProgress,
+            isCompleted = updatedProgress >= 100
+        )
+    }
+
     fun toEntity(): ChallengeEntity {
         return ChallengeEntity(
             id = id,

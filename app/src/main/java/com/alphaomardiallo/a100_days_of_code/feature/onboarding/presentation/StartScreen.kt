@@ -82,7 +82,7 @@ fun StartScreen(
                     text = R.string.onboarding_start_button_start,
                     icon = R.drawable.sharp_code_24,
                 ) {
-                    startButtonAction.invoke(name, intention, sliderPosition.toInt())
+                    startButtonAction.invoke(name, intention, (sliderPosition * 100).toInt())
                 }
             }
         },

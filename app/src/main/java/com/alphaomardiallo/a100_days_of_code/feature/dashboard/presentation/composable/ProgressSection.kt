@@ -55,7 +55,9 @@ fun ProgressSection(
             challenges.mapNotNull { it?.isCompleted }
             OnGoingChallenge(challenge = currentChallenge)
         } else {
-            AllChallengesCompleted()
+            AllChallengesCompleted(
+                challenges = challenges.filterNotNull(),
+            )
         }
     }
 }

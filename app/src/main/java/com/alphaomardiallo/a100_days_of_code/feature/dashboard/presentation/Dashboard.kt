@@ -33,11 +33,11 @@ import com.alphaomardiallo.a100_days_of_code.common.domain.model.User
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.getPreviewChallenges
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.getPreviewUser
+import com.alphaomardiallo.a100_days_of_code.feature.addentry.presentation.AddEntryScreen
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.DashboardTitleSection
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.ProgressSection
 import com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation.OnBoarding
 import org.koin.androidx.compose.koinViewModel
-import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,7 +55,7 @@ fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
     Scaffold(
         floatingActionButton = {
             if (uiState.value.user != null) {
-                FloatingActionButton(onClick = { Timber.d("Floating action button clicked") }) {
+                FloatingActionButton(onClick = { showAddEntryDialog = true }) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_launcher_foreground),
                         contentDescription = "",
@@ -96,9 +96,10 @@ fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
                 properties = DialogProperties(usePlatformDefaultWidth = false)
             ) {
                 Surface(modifier = Modifier.fillMaxSize()) {
-
+                    AddEntryScreen {
+                        showAddEntryDialog = false
+                    }
                 }
-
             }
         }
     }
