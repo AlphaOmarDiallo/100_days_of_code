@@ -40,6 +40,7 @@
     <string name="add_entry_title_of_entry">Name today\'s progress</string>"
     <string name="add_entry_description">What have you been doing today?</string>"
     <string name="add_entry_mood_title">How are you feeling?</string>
-    <string name="add_entry_validate">Save</string>
+    <string name="add_entry_validate">Save progress</string>
     <string name="add_entry_validate_error">Please fill all the fields</string>
+    <string name="add_entry_select_date">Select a date</string>
 </resources>

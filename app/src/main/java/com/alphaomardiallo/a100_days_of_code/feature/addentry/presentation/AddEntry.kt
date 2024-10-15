@@ -1,8 +1,11 @@
 package com.alphaomardiallo.a100_days_of_code.feature.addentry.presentation
 
 import _100_days_of_codeTheme
+import android.app.DatePickerDialog
 import android.content.res.Configuration
+import android.widget.DatePicker
 import android.widget.Toast
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -26,9 +30,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeActionButton
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeTitle
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MediumSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MultiLineTextFields
@@ -38,6 +44,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Smal
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import org.koin.androidx.compose.koinViewModel
+import java.util.Calendar
 
 @Composable
 fun AddEntryScreen(viewModel: AddEntryViewModel = koinViewModel(), onClose: () -> Unit) {
@@ -54,6 +61,15 @@ private fun AddEntryScreenContent(
     var titleValue by remember { mutableStateOf("") }
     var descriptionValue by remember { mutableStateOf("") }
     var sliderValue by remember { mutableFloatStateOf(3f) }
+    var showDatePicker by remember { mutableStateOf(false) }
+
+    var selectedDate by remember { mutableStateOf("") }
+
+    // Get current date values
+    val calendar = Calendar.getInstance()
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH)
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
 
     Scaffold(
         topBar = {
@@ -122,6 +138,25 @@ private fun AddEntryScreenContent(
             }
             MediumSpacer()
 
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Start
+            ) {
+                SmallIconButton(
+                    icon = R.drawable.sharp_edit_calendar_24
+                ) {
+                    showDatePicker = true
+                }
+                LargeSpacer()
+                Text(
+                    text = selectedDate.ifEmpty { stringResource(id = R.string.add_entry_select_date) },
+                    modifier = Modifier.padding(largePadding())
+                )
+            }
+
+            MediumSpacer()
+
             LargeActionButton(
                 icon = R.drawable.ic_launcher_foreground,
                 text = R.string.add_entry_validate
@@ -135,6 +170,20 @@ private fun AddEntryScreenContent(
                 }
             }
         }
+    }
+
+    if (showDatePicker) {
+        DatePickerDialog(
+            LocalContext.current,
+            { _: DatePicker, selectedYear: Int, selectedMonth: Int, selectedDayOfMonth: Int ->
+                selectedDate = "$selectedDayOfMonth/${selectedMonth + 1}/$selectedYear"
+                calendar.set(selectedYear, selectedMonth, selectedDayOfMonth)
+                showDatePicker = false
+            },
+            year,
+            month,
+            day
+        ).show()
     }
 }
 
