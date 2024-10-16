@@ -37,6 +37,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Smal
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallTitleString
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.smallPadding
 import timber.log.Timber
 
@@ -58,7 +59,7 @@ fun ProgressSection(
         } else {
             AllChallengesCompleted(
                 challenges = challenges.filterNotNull(),
-            ){
+            ) {
                 addChallenge.invoke()
             }
         }
@@ -68,13 +69,15 @@ fun ProgressSection(
 @Composable
 private fun NoUserNoChallenge(startAction: () -> Unit? = {}) {
     EventCard(
-        modifier = Modifier.background(MaterialTheme.colorScheme.tertiaryContainer),
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.tertiaryContainer)
+            .padding(smallPadding()),
         cardHeight = 170.dp
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(smallPadding())
+                .padding(mediumPadding())
         ) {
             Column(
                 modifier = Modifier
@@ -117,7 +120,11 @@ private fun NoUserNoChallenge(startAction: () -> Unit? = {}) {
 @Composable
 private fun OnGoingChallenge(challenge: Challenge?) {
     EventCard(
-        modifier = Modifier.background(MaterialTheme.colorScheme.tertiaryContainer),
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.tertiaryContainer)
+            .padding(
+                smallPadding()
+            ),
         click = { Timber.d("My progress card clicked") }
     ) {
         val targetProgress = (challenge?.currentProgress?.toFloat()?.div(100)) ?: 0f
@@ -129,7 +136,7 @@ private fun OnGoingChallenge(challenge: Challenge?) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(smallPadding()),
+                .padding(mediumPadding()),
             verticalArrangement = Arrangement.Center
         ) {
             Title(text = R.string.dashboard_my_progress_title)
@@ -183,13 +190,17 @@ private fun AllChallengesCompleted(
     startAction: () -> Unit? = {}
 ) {
     EventCard(
-        modifier = Modifier.background(MaterialTheme.colorScheme.tertiaryContainer),
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.tertiaryContainer)
+            .padding(
+                smallPadding()
+            ),
         click = { Timber.d("My progress card clicked") }
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(smallPadding()),
+                .padding(mediumPadding()),
             verticalArrangement = Arrangement.Center
         ) {
             Title(text = R.string.dashboard_subtitle_all_challenges_done)

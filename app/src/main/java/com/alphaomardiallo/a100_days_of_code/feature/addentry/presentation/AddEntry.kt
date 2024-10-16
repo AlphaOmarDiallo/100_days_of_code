@@ -5,7 +5,6 @@ import android.app.DatePickerDialog
 import android.content.res.Configuration
 import android.widget.DatePicker
 import android.widget.Toast
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,7 +31,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -52,7 +50,6 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Smal
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
-import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.smallPadding
 import org.koin.androidx.compose.koinViewModel
 import java.util.Calendar
 
