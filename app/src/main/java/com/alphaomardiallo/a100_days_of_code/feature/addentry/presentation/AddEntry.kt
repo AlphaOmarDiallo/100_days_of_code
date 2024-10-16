@@ -32,7 +32,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeActionButton
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeSpacer
@@ -64,16 +63,15 @@ fun AddEntryScreen(
 @Composable
 private fun AddEntryScreenContent(
     onClose: () -> Unit = {},
-    saveData: (String, String, Float) -> Unit = { _, _, _ -> },
+    saveData: (String, String, Float, String) -> Unit = { _, _, _, _ -> },
     challengeProgress: Int = 0
 ) {
     val context = LocalContext.current
-    var titleValue by remember { mutableStateOf("Day $challengeProgress") }
+    var titleValue by remember { mutableStateOf("Day ${challengeProgress + 1}") }
     var descriptionValue by remember { mutableStateOf("") }
     var sliderValue by remember { mutableFloatStateOf(3f) }
     var showDatePicker by remember { mutableStateOf(false) }
 
-    // Get current date values
     val calendar = Calendar.getInstance()
     val year = calendar.get(Calendar.YEAR)
     val month = calendar.get(Calendar.MONTH)
@@ -107,7 +105,7 @@ private fun AddEntryScreenContent(
         ) {
             Title(text = R.string.add_entry_title_of_entry)
             SmallSpacer()
-            SingleLineTextFields(textValue = "Day $challengeProgress") { title ->
+            SingleLineTextFields(textValue = "Day ${challengeProgress + 1}") { title ->
                 titleValue = title
             }
             MediumSpacer()
@@ -172,7 +170,7 @@ private fun AddEntryScreenContent(
                 text = R.string.add_entry_validate
             ) {
                 if (titleValue.isNotBlank() && descriptionValue.isNotBlank()) {
-                    saveData.invoke(titleValue, descriptionValue, sliderValue)
+                    saveData.invoke(titleValue, descriptionValue, sliderValue, selectedDate)
                     onClose.invoke()
                 } else {
                     Toast.makeText(context, R.string.add_entry_validate_error, Toast.LENGTH_SHORT)

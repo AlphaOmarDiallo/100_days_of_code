@@ -5,5 +5,5 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val addEntryModule = module {
-    viewModel { AddEntryViewModel(challengeRepository = get()) }
+    viewModel { AddEntryViewModel(challengeRepository = get(), stringDateToMillis = get()) }
 }

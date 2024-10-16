@@ -18,7 +18,8 @@ data class Challenge(
         return this.copy(
             entries = updatedEntries,
             currentProgress = updatedProgress,
-            isCompleted = updatedProgress >= 100
+            isCompleted = updatedProgress >= 100,
+            endDate = if (updatedProgress >= 100) System.currentTimeMillis() else null
         )
     }
 

@@ -6,6 +6,7 @@ import com.alphaomardiallo.a100_days_of_code.common.domain.model.Challenge
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.User
 import com.alphaomardiallo.a100_days_of_code.common.domain.repository.ChallengeRepository
 import com.alphaomardiallo.a100_days_of_code.common.domain.repository.UserRepository
+import com.alphaomardiallo.a100_days_of_code.common.domain.usecase.StringDateToMillis
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 
 class DashboardViewModel(
     private val userRepository: UserRepository,
-    private val challengeRepository: ChallengeRepository
+    private val challengeRepository: ChallengeRepository,
+    private val stringDateToMillis: StringDateToMillis
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(DashboardState())
@@ -36,13 +38,35 @@ class DashboardViewModel(
         }
     }
 
-    fun createNewUserAndChallenge(name: String, intention: String, startFrom: Int = 0) {
+    fun createNewUserAndChallenge(
+        name: String,
+        intention: String,
+        startFrom: Int = 0,
+        startDate: String = ""
+    ) {
         viewModelScope.launch {
             userRepository.upsertUser(User(name = name))
             challengeRepository.upsertChallenge(
                 Challenge(
                     currentProgress = startFrom,
-                    declarationOfIntention = intention
+                    declarationOfIntention = intention,
+                    startDate = stringDateToMillis.invoke(startDate)
+                )
+            )
+        }
+    }
+
+    fun createNewChallenge(
+        intention: String,
+        startFrom: Int = 0,
+        startDate: String = ""
+    ) {
+        viewModelScope.launch {
+            challengeRepository.upsertChallenge(
+                Challenge(
+                    currentProgress = startFrom,
+                    declarationOfIntention = intention,
+                    startDate = stringDateToMillis.invoke(startDate)
                 )
             )
         }

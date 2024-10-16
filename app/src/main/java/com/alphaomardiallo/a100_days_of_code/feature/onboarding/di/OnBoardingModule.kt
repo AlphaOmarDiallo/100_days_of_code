@@ -8,7 +8,8 @@ val onBoardingModule = module {
     viewModel<OnBoardingViewModel> {
         OnBoardingViewModel(
             userRepository = get(),
-            challengeRepository = get()
+            challengeRepository = get(),
+            stringDateToMillis = get()
         )
     }
 }

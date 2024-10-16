@@ -21,6 +21,7 @@
     <string name="onboarding_start_intention_question">What are you hoping to achieve during this challenge?</string>
     <string name="onboarding_start_intention_sub_question">Say what you want to achieve during this challenge. It will be shown on your dashboard to keep you on track. You can edit it later, learning is not a straight path.</string>
     <string name="onboarding_start_start_from">Start from day:</string>"
+    <string name="onboarding_start_start_from_date">Start date</string>"
 
     <!-- Dashboard -->
     <string name="dashboard_title">Hey %s!</string>

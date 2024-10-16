@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.Challenge
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.Entry
 import com.alphaomardiallo.a100_days_of_code.common.domain.repository.ChallengeRepository
+import com.alphaomardiallo.a100_days_of_code.common.domain.usecase.StringDateToMillis
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -12,7 +13,8 @@ import kotlinx.coroutines.launch
 import java.util.UUID
 
 class AddEntryViewModel(
-    private val challengeRepository: ChallengeRepository
+    private val challengeRepository: ChallengeRepository,
+    private val stringDateToMillis: StringDateToMillis
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AddEntryState())
@@ -27,7 +29,7 @@ class AddEntryViewModel(
         }
     }
 
-    fun addEntry(title: String, description: String, mood: Float) {
+    fun addEntry(title: String, description: String, mood: Float, date: String) {
         viewModelScope.launch {
             val updatedChallenge = uiState.value.currentChallenge?.addEntry(
                 Entry(
@@ -35,7 +37,7 @@ class AddEntryViewModel(
                     title = title,
                     content = description,
                     mood = mood.toInt(),
-                    date = System.currentTimeMillis()
+                    date = stringDateToMillis.invoke(date)
                 )
             )
             updatedChallenge?.let {

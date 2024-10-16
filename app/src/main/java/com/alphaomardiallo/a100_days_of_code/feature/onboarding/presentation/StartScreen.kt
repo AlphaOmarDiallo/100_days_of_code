@@ -1,7 +1,9 @@
 package com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation
 
 import _100_days_of_codeTheme
+import android.app.DatePickerDialog
 import android.content.res.Configuration
+import android.widget.DatePicker
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,11 +28,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeSensitiveActionButton
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeTitle
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LottieWithCoilPlaceholder
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MediumSpacer
@@ -43,6 +48,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Smal
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.smallPadding
 import timber.log.Timber
+import java.util.Calendar
 
 @Composable
 private fun getTextColor() = MaterialTheme.colorScheme.onPrimaryContainer
@@ -52,11 +58,18 @@ private fun getTextColor() = MaterialTheme.colorScheme.onPrimaryContainer
 fun StartScreen(
     firstChallenge: Boolean = true,
     returnButtonAction: () -> Unit = {},
-    startButtonAction: (String, String, Int) -> Unit = { _, _, _ -> }
+    startButtonAction: (String, String, Int, String) -> Unit = { _, _, _, _ -> }
 ) {
     var name by remember { mutableStateOf("") }
     var intention by remember { mutableStateOf("") }
     var sliderPosition by remember { mutableFloatStateOf(0f) }
+
+    val calendar = Calendar.getInstance()
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH)
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
+    var showDatePicker by remember { mutableStateOf(false) }
+    var selectedDate by remember { mutableStateOf("$day/${month + 1}/$year") }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -76,7 +89,7 @@ fun StartScreen(
         },
         bottomBar = {
             Row(modifier = Modifier.padding(smallPadding())) {
-                if (firstChallenge){
+                if (firstChallenge) {
                     SmallIconButton(modifier = Modifier.padding(end = largePadding())) {
                         returnButtonAction.invoke()
                     }
@@ -85,7 +98,12 @@ fun StartScreen(
                     text = R.string.onboarding_start_button_start,
                     icon = R.drawable.sharp_code_24,
                 ) {
-                    startButtonAction.invoke(name, intention, (sliderPosition * 100).toInt())
+                    startButtonAction.invoke(
+                        name,
+                        intention,
+                        (sliderPosition * 100).toInt(),
+                        selectedDate
+                    )
                 }
             }
         },
@@ -97,16 +115,18 @@ fun StartScreen(
                 .padding(largePadding())
                 .padding(paddingValues)
                 .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.SpaceEvenly
+            verticalArrangement = Arrangement.Top
         ) {
-            SmallTitle(text = R.string.onboarding_start_name_question)
-            SmallBodyText(
-                text = R.string.onboarding_start_name_sub_question,
-                align = TextAlign.Justify
-            )
-            SmallSpacer()
-            SingleLineTextFields { name = it }
-            MediumSpacer()
+            if (firstChallenge) {
+                SmallTitle(text = R.string.onboarding_start_name_question)
+                SmallBodyText(
+                    text = R.string.onboarding_start_name_sub_question,
+                    align = TextAlign.Justify
+                )
+                SmallSpacer()
+                SingleLineTextFields { name = it }
+                MediumSpacer()
+            }
 
             SmallTitle(text = R.string.onboarding_start_intention_question)
             SmallBodyText(
@@ -115,7 +135,25 @@ fun StartScreen(
             )
             SmallSpacer()
             MultiLineTextFields { intention = it }
-            SmallSpacer()
+            MediumSpacer()
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Start
+            ) {
+                SmallIconButton(
+                    icon = R.drawable.sharp_edit_calendar_24
+                ) {
+                    showDatePicker = true
+                }
+                LargeSpacer()
+                Text(
+                    text = selectedDate.ifEmpty { stringResource(id = R.string.onboarding_start_start_from_date) },
+                    modifier = Modifier.padding(largePadding())
+                )
+            }
+            MediumSpacer()
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -141,6 +179,20 @@ fun StartScreen(
                         }
                     )
                 }
+            }
+
+            if (showDatePicker) {
+                DatePickerDialog(
+                    LocalContext.current,
+                    { _: DatePicker, selectedYear: Int, selectedMonth: Int, selectedDayOfMonth: Int ->
+                        selectedDate = "$selectedDayOfMonth/${selectedMonth + 1}/$selectedYear"
+                        calendar.set(selectedYear, selectedMonth, selectedDayOfMonth)
+                        showDatePicker = false
+                    },
+                    year,
+                    month,
+                    day
+                ).show()
             }
         }
     }

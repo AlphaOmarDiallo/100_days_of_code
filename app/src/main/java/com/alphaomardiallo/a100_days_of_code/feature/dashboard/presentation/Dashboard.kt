@@ -124,13 +124,17 @@ fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
                         firstChallenge = false,
                         returnButtonAction = {
                             showAddNewChallengeDialog = false
-                        }) { name, intention, startFrom ->
-                        if (name.isEmpty() || intention.isEmpty()) {
+                        }) { name, intention, startFrom, date ->
+                        if (intention.isEmpty()) {
                             Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT)
                                 .show()
                         } else {
                             Timber.d("name: $name, intention: $intention, startFrom: $startFrom")
-                            viewModel.createNewUserAndChallenge(name, intention, startFrom)
+                            viewModel.createNewChallenge(
+                                intention = intention,
+                                startFrom = startFrom,
+                                startDate = date
+                            )
                             showAddNewChallengeDialog = false
                         }
                     }

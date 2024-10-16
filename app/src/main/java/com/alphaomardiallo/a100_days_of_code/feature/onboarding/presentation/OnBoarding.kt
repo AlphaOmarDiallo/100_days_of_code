@@ -21,15 +21,15 @@ import timber.log.Timber
 
 @Composable
 fun OnBoarding(viewmodel: OnBoardingViewModel = koinViewModel(), onClose: () -> Unit) {
-    OnBoardingContent(onClose = onClose) { name, intention, startFrom ->
-        viewmodel.createNewUserAndChallenge(name, intention, startFrom)
+    OnBoardingContent(onClose = onClose) { name, intention, startFrom, startDate ->
+        viewmodel.createNewUserAndChallenge(name, intention, startFrom, startDate)
     }
 }
 
 @Composable
 fun OnBoardingContent(
     onClose: () -> Unit = {},
-    createUser: (str1: String, str2: String, int: Int) -> Unit = { _, _, _ -> }
+    createUser: (str1: String, str2: String, int: Int, str3: String) -> Unit = { _, _, _, _ -> }
 ) {
     val pagerState = rememberPagerState(pageCount = { 2 })
     val coroutineScope = rememberCoroutineScope()
@@ -60,12 +60,12 @@ fun OnBoardingContent(
                             pagerState.animateScrollToPage(0)
                         }
                     }
-                ) { name, intention, startFrom ->
+                ) { name, intention, startFrom, startDate ->
                     if (name.isEmpty() || intention.isEmpty()) {
                         Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT).show()
                     } else {
                         Timber.d("name: $name, intention: $intention, startFrom: $startFrom")
-                        createUser.invoke(name, intention, startFrom)
+                        createUser.invoke(name, intention, startFrom, startDate)
                         onClose.invoke()
                     }
                 }
