@@ -32,6 +32,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeActionButton
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeSpacer
@@ -47,29 +48,38 @@ import org.koin.androidx.compose.koinViewModel
 import java.util.Calendar
 
 @Composable
-fun AddEntryScreen(viewModel: AddEntryViewModel = koinViewModel(), onClose: () -> Unit) {
-    AddEntryScreenContent(onClose, viewModel::addEntry)
+fun AddEntryScreen(
+    viewModel: AddEntryViewModel = koinViewModel(),
+    progress: Int = 0,
+    onClose: () -> Unit
+) {
+    AddEntryScreenContent(
+        onClose = onClose,
+        saveData = viewModel::addEntry,
+        challengeProgress = progress
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AddEntryScreenContent(
     onClose: () -> Unit = {},
-    saveData: (String, String, Float) -> Unit = { _, _, _ -> }
+    saveData: (String, String, Float) -> Unit = { _, _, _ -> },
+    challengeProgress: Int = 0
 ) {
     val context = LocalContext.current
-    var titleValue by remember { mutableStateOf("") }
+    var titleValue by remember { mutableStateOf("Day $challengeProgress") }
     var descriptionValue by remember { mutableStateOf("") }
     var sliderValue by remember { mutableFloatStateOf(3f) }
     var showDatePicker by remember { mutableStateOf(false) }
-
-    var selectedDate by remember { mutableStateOf("") }
 
     // Get current date values
     val calendar = Calendar.getInstance()
     val year = calendar.get(Calendar.YEAR)
     val month = calendar.get(Calendar.MONTH)
     val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+    var selectedDate by remember { mutableStateOf("$day/${month + 1}/$year") }
 
     Scaffold(
         topBar = {
@@ -97,7 +107,7 @@ private fun AddEntryScreenContent(
         ) {
             Title(text = R.string.add_entry_title_of_entry)
             SmallSpacer()
-            SingleLineTextFields { title ->
+            SingleLineTextFields(textValue = "Day $challengeProgress") { title ->
                 titleValue = title
             }
             MediumSpacer()
@@ -116,7 +126,7 @@ private fun AddEntryScreenContent(
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.sharp_mood_bad_24),
-                    contentDescription = ""
+                    contentDescription = stringResource(id = R.string.add_entry_icon_bad_mood)
                 )
 
                 Slider(
@@ -133,7 +143,7 @@ private fun AddEntryScreenContent(
 
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_mood_24),
-                    contentDescription = ""
+                    contentDescription = stringResource(id = R.string.add_entry_icon_good_mood)
                 )
             }
             MediumSpacer()

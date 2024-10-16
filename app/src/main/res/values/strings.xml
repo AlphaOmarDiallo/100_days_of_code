@@ -43,4 +43,6 @@
     <string name="add_entry_validate">Save progress</string>
     <string name="add_entry_validate_error">Please fill all the fields</string>
     <string name="add_entry_select_date">Select a date</string>
+    <string name="add_entry_icon_good_mood">Icon happy smiley</string>
+    <string name="add_entry_icon_bad_mood">Icon sad smiley</string>
 </resources>

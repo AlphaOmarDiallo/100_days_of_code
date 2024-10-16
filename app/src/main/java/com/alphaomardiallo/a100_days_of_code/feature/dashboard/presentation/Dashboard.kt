@@ -90,13 +90,15 @@ fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
 
         // Add entry dialog
         if (showAddEntryDialog) {
+            val progress =
+                uiState.value.challenges.find { !it?.isCompleted!! }?.currentProgress ?: 0
             BasicAlertDialog(
                 onDismissRequest = { showAddEntryDialog = false },
                 modifier = Modifier.fillMaxSize(),
                 properties = DialogProperties(usePlatformDefaultWidth = false)
             ) {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    AddEntryScreen {
+                    AddEntryScreen(progress = progress) {
                         showAddEntryDialog = false
                     }
                 }

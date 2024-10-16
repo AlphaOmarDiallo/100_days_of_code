@@ -19,9 +19,10 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SingleLineTextFields(
     modifier: Modifier = Modifier,
-    onTextChange: (String) -> Unit = {}
+    textValue: String = "",
+    onTextChange: (String) -> Unit = {},
 ) {
-    var text by remember { mutableStateOf("") }
+    var text by remember { mutableStateOf(textValue) }
 
     OutlinedTextField(
         value = text,
