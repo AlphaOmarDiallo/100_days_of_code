@@ -50,6 +50,7 @@ private fun getTextColor() = MaterialTheme.colorScheme.onPrimaryContainer
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StartScreen(
+    firstChallenge: Boolean = true,
     returnButtonAction: () -> Unit = {},
     startButtonAction: (String, String, Int) -> Unit = { _, _, _ -> }
 ) {
@@ -75,8 +76,10 @@ fun StartScreen(
         },
         bottomBar = {
             Row(modifier = Modifier.padding(smallPadding())) {
-                SmallIconButton(modifier = Modifier.padding(end = largePadding())) {
-                    returnButtonAction.invoke()
+                if (firstChallenge){
+                    SmallIconButton(modifier = Modifier.padding(end = largePadding())) {
+                        returnButtonAction.invoke()
+                    }
                 }
                 LargeSensitiveActionButton(
                     text = R.string.onboarding_start_button_start,

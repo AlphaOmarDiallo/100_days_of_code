@@ -44,6 +44,7 @@ import timber.log.Timber
 fun ProgressSection(
     challenges: List<Challenge?> = emptyList(),
     user: User? = null,
+    addChallenge: () -> Unit? = {},
     startAction: () -> Unit? = {}
 ) {
     val currentChallenge = challenges.filterNotNull().find { !it.isCompleted }
@@ -57,7 +58,9 @@ fun ProgressSection(
         } else {
             AllChallengesCompleted(
                 challenges = challenges.filterNotNull(),
-            )
+            ){
+                addChallenge.invoke()
+            }
         }
     }
 }

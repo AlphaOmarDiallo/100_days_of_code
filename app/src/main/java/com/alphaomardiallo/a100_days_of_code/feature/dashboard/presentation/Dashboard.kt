@@ -2,6 +2,7 @@ package com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation
 
 import _100_days_of_codeTheme
 import android.content.res.Configuration
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -22,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,14 +39,18 @@ import com.alphaomardiallo.a100_days_of_code.feature.addentry.presentation.AddEn
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.DashboardTitleSection
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.ProgressSection
 import com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation.OnBoarding
+import com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation.StartScreen
 import org.koin.androidx.compose.koinViewModel
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
+    val context = LocalContext.current
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     var showOnBoardingDialog by remember { mutableStateOf(false) }
     var showAddEntryDialog by remember { mutableStateOf(false) }
+    var showAddNewChallengeDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(uiState.value.user) {
         if (uiState.value.user != null) {
@@ -68,7 +74,8 @@ fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
         DashboardContent(
             paddingValues = paddingValues,
             user = uiState.value.user,
-            challenges = uiState.value.challenges
+            challenges = uiState.value.challenges,
+            addChallengeDialog = { showAddNewChallengeDialog = true }
         ) {
             showOnBoardingDialog = true
         }
@@ -104,6 +111,32 @@ fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
                 }
             }
         }
+
+        // Add new challenge dialog
+        if (showAddNewChallengeDialog) {
+            BasicAlertDialog(
+                onDismissRequest = { showAddNewChallengeDialog = false },
+                modifier = Modifier.fillMaxSize(),
+                properties = DialogProperties(usePlatformDefaultWidth = false)
+            ) {
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    StartScreen(
+                        firstChallenge = false,
+                        returnButtonAction = {
+                            showAddNewChallengeDialog = false
+                        }) { name, intention, startFrom ->
+                        if (name.isEmpty() || intention.isEmpty()) {
+                            Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            Timber.d("name: $name, intention: $intention, startFrom: $startFrom")
+                            viewModel.createNewUserAndChallenge(name, intention, startFrom)
+                            showAddNewChallengeDialog = false
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -112,6 +145,7 @@ private fun DashboardContent(
     paddingValues: PaddingValues = PaddingValues(),
     user: User? = null,
     challenges: List<Challenge?> = emptyList(),
+    addChallengeDialog: () -> Unit = {},
     showDialog: () -> Unit = {}
 ) {
     Column(
@@ -124,7 +158,11 @@ private fun DashboardContent(
         // Welcome section
         DashboardTitleSection(user = user)
         // Current progress section
-        ProgressSection(challenges = challenges, user = user) {
+        ProgressSection(
+            challenges = challenges,
+            user = user,
+            addChallenge = { addChallengeDialog.invoke() }
+        ) {
             showDialog.invoke()
         }
     }
