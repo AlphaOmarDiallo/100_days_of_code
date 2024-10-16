@@ -46,4 +46,6 @@
     <string name="add_entry_select_date">Select a date</string>
     <string name="add_entry_icon_good_mood">Icon happy smiley</string>
     <string name="add_entry_icon_bad_mood">Icon sad smiley</string>
+    <string name="add_entry_end_challenge">Bravo! You have completed the challenge!</string>
+    <string name="add_entry_end_challenge_button">Celebrate it</string>
 </resources>

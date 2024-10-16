@@ -173,6 +173,7 @@ fun StartScreen(
                     }
                     Slider(
                         value = sliderPosition,
+                        valueRange = 0f..0.99f,
                         onValueChange = {
                             sliderPosition = it
                             Timber.e("Slider: $it")

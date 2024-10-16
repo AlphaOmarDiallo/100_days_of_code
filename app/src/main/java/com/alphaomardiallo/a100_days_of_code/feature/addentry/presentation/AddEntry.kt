@@ -5,12 +5,16 @@ import android.app.DatePickerDialog
 import android.content.res.Configuration
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -28,14 +32,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.DialogProperties
 import com.alphaomardiallo.a100_days_of_code.R
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.EmptyCard
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeActionButton
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeTitle
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LottieWithCoilPlaceholder
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MediumSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MultiLineTextFields
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SingleLineTextFields
@@ -43,6 +52,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Smal
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.smallPadding
 import org.koin.androidx.compose.koinViewModel
 import java.util.Calendar
 
@@ -70,8 +80,9 @@ private fun AddEntryScreenContent(
     var titleValue by remember { mutableStateOf("Day ${challengeProgress + 1}") }
     var descriptionValue by remember { mutableStateOf("") }
     var sliderValue by remember { mutableFloatStateOf(3f) }
-    var showDatePicker by remember { mutableStateOf(false) }
+    var showEndChallengeDialog by remember { mutableStateOf(false) }
 
+    var showDatePicker by remember { mutableStateOf(false) }
     val calendar = Calendar.getInstance()
     val year = calendar.get(Calendar.YEAR)
     val month = calendar.get(Calendar.MONTH)
@@ -171,7 +182,11 @@ private fun AddEntryScreenContent(
             ) {
                 if (titleValue.isNotBlank() && descriptionValue.isNotBlank()) {
                     saveData.invoke(titleValue, descriptionValue, sliderValue, selectedDate)
-                    onClose.invoke()
+                    if (challengeProgress + 1 == 100) {
+                        showEndChallengeDialog = true
+                    } else {
+                        onClose.invoke()
+                    }
                 } else {
                     Toast.makeText(context, R.string.add_entry_validate_error, Toast.LENGTH_SHORT)
                         .show()
@@ -192,6 +207,35 @@ private fun AddEntryScreenContent(
             month,
             day
         ).show()
+    }
+
+    if (showEndChallengeDialog) {
+        BasicAlertDialog(
+            onDismissRequest = {
+                showEndChallengeDialog = false
+                onClose.invoke()
+            },
+            modifier = Modifier.wrapContentSize(),
+            properties = DialogProperties(usePlatformDefaultWidth = true)
+        ) {
+            Surface(modifier = Modifier.wrapContentSize(), shape = RoundedCornerShape(10.dp)) {
+                EmptyCard() {
+                    Column(
+                        modifier = Modifier.padding(largePadding()),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        LargeTitle(text = R.string.add_entry_end_challenge)
+                        MediumSpacer()
+                        LottieWithCoilPlaceholder()
+                        MediumSpacer()
+                        LargeActionButton(text = R.string.add_entry_end_challenge_button) {
+                            onClose.invoke()
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
