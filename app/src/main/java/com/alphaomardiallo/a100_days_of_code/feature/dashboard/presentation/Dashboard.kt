@@ -60,7 +60,7 @@ fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
 
     Scaffold(
         floatingActionButton = {
-            if (uiState.value.user != null) {
+            if (uiState.value.challenges.find{ it?.isCompleted == false } != null) {
                 FloatingActionButton(onClick = { showAddEntryDialog = true }) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_launcher_foreground),
