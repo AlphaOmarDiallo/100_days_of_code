@@ -30,11 +30,17 @@
     <string name="dashboard_subtitle_no_user">Time to start a new learning journey!</string>
     <string name="dashboard_subtitle_all_challenges_done">Welcome back! Jumping on a new learning journey?</string>
     <string name="dashboard_subtitle">Welcome to your dashboard</string>
+
     <string name="dashboard_my_progress_title">Current challenge</string>
     <string name="dashboard_my_progress_percentage">%d%% of the challenge is completed</string>
     <string name="dashboard_my_progress_goal">Goal</string>
     <string name="dashboard_my_progress_start">Start</string>
     <string name="dashboard_my_progress_challenges_completed">So far, you have completed %d challenges. That represents %d days of learning.</string>
+
+    <string name="dashboard_stat_challenges_completed">Challenge\ncompleted</string>
+    <string name="dashboard_stat_longest_streak">Longest\nstreak</string>
+    <string name="dashboard_stat_current_streak">Current\nstreak</string>
+    <string name="dashboard_stat_mood">Your\nmood</string>
 
     <!-- Add Entry -->
     <string name="add_entry_title">Track progress</string>"

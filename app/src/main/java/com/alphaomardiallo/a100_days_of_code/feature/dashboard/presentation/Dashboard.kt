@@ -32,12 +32,17 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.Challenge
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.User
+import com.alphaomardiallo.a100_days_of_code.common.domain.model.getAverageMoodFromCurrentChallenge
+import com.alphaomardiallo.a100_days_of_code.common.domain.model.getLongestStreak
+import com.alphaomardiallo.a100_days_of_code.common.domain.model.getOverallLongestStreak
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MediumSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.getPreviewChallenges
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.getPreviewUser
 import com.alphaomardiallo.a100_days_of_code.feature.addentry.presentation.AddEntryScreen
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.DashboardTitleSection
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.ProgressSection
+import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.StatSection
 import com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation.OnBoarding
 import com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation.StartScreen
 import org.koin.androidx.compose.koinViewModel
@@ -60,7 +65,7 @@ fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
 
     Scaffold(
         floatingActionButton = {
-            if (uiState.value.challenges.find{ it?.isCompleted == false } != null) {
+            if (uiState.value.challenges.find { it?.isCompleted == false } != null) {
                 FloatingActionButton(onClick = { showAddEntryDialog = true }) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_launcher_foreground),
@@ -168,6 +173,36 @@ private fun DashboardContent(
             addChallenge = { addChallengeDialog.invoke() }
         ) {
             showDialog.invoke()
+        }
+        MediumSpacer()
+        // Stat section
+        if (challenges.isNotEmpty()) {
+            val completedChallenges = challenges.filterNotNull().filter { it.isCompleted }
+            val longestStreak = challenges.filterNotNull().getOverallLongestStreak()
+            val currentStreak =
+                challenges.find { it?.isCompleted == false }?.getLongestStreak() ?: 0
+            val currentMood = challenges.filterNotNull().getAverageMoodFromCurrentChallenge() ?: 0
+
+            val list = listOf(
+                StatItem(
+                    stat = completedChallenges.size,
+                    label = R.string.dashboard_stat_challenges_completed
+                ),
+                /*StatItem(
+                    stat = longestStreak,
+                    label = R.string.dashboard_stat_longest_streak
+                ),
+                StatItem(
+                    stat = currentStreak,
+                    label = R.string.dashboard_stat_current_streak
+                ),*/
+                StatItem(
+                    stat = currentMood.toInt(),
+                    label = R.string.dashboard_stat_mood
+                )
+
+            )
+            StatSection(list = list)
         }
     }
 }
