@@ -33,7 +33,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Titl
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Info
 
-private const val CardHeight = 100
+private const val CardHeight = 70
 
 @Composable
 fun LinkSection(navController: NavController? = null) {
@@ -48,7 +48,7 @@ fun LinkSection(navController: NavController? = null) {
                 click = { navController?.navigate(Info) },
                 backgroundColor = MaterialTheme.colorScheme.secondaryContainer
             ) {
-                Row {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Sharp.List,
                         contentDescription = Icons.AutoMirrored.Sharp.List.name,
@@ -67,7 +67,7 @@ fun LinkSection(navController: NavController? = null) {
                 click = { navController?.navigate(Info) },
                 backgroundColor = MaterialTheme.colorScheme.primary
             ) {
-                Row {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         imageVector = Icons.Sharp.Build,
                         contentDescription = Icons.Sharp.Build.name,
@@ -88,7 +88,7 @@ fun LinkSection(navController: NavController? = null) {
                 click = { navController?.navigate(Info) },
                 backgroundColor = MaterialTheme.colorScheme.secondary
             ) {
-                Row {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         imageVector = Icons.Sharp.Warning,
                         contentDescription = Icons.Sharp.Warning.name,
@@ -107,7 +107,11 @@ fun LinkSection(navController: NavController? = null) {
                 click = { navController?.navigate(Info) },
                 backgroundColor = MaterialTheme.colorScheme.errorContainer
             ) {
-                Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.Center,verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Icon(imageVector = Icons.Sharp.Info, contentDescription = Icons.Sharp.Info.name)
                     SmallSpacer()
                     Title(
@@ -127,7 +131,10 @@ private fun Card(
     backgroundColor: Color = Color.Transparent,
     content: @Composable () -> Unit = {}
 ) {
-    EmptyCard(modifier = modifier.height(CardHeight.dp), click = { click.invoke() }) {
+    EmptyCard(
+        modifier = modifier.height(CardHeight.dp),
+        circleShape = true,
+        click = { click.invoke() }) {
         Box(
             modifier = Modifier
                 .background(backgroundColor)

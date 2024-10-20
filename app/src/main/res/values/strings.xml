@@ -24,7 +24,7 @@
     <string name="onboarding_start_start_from_date">Start date</string>"
 
     <!-- Info -->
-    <string name="info_title">About me</string>
+    <string name="info_title">About us</string>
     <string name="info_description">I am an experienced Android developer specializing in Kotlin Multiplatform, with 3 years of expertise in building and maintaining high-traffic B2B and B2C apps. I\'ve worked on notable projects like Dakar, Tour de France, and Total, focusing on delivering user-friendly and reliable mobile solutions. I leverage modern tools such as Compose and Koin to create impactful apps available on the Play Store.</string>
     <string name="info_my_apps">My apps</string>
     <string name="info_my_website">https://alphaomardiallo.com</string>

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -28,13 +29,14 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.smallPadd
 @Composable
 fun EmptyCard(
     modifier: Modifier = Modifier,
+    circleShape: Boolean = false,
     click: () -> Unit = {},
     content: @Composable () -> Unit = {}
 ) {
     Card(
         onClick = { click.invoke() },
         modifier = modifier,
-        shape = RoundedCornerShape(10.dp),
+        shape = if (circleShape) RoundedCornerShape(50.dp) else RoundedCornerShape(10.dp),
         border = BorderStroke(0.5.dp, if (isSystemInDarkTheme()) Color.White else Color.Black)
     ) {
         content.invoke()
