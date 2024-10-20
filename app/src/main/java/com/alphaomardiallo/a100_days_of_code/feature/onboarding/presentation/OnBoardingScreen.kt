@@ -20,7 +20,7 @@ import org.koin.androidx.compose.koinViewModel
 import timber.log.Timber
 
 @Composable
-fun OnBoarding(viewmodel: OnBoardingViewModel = koinViewModel(), onClose: () -> Unit) {
+fun OnBoardingScreen(viewmodel: OnBoardingViewModel = koinViewModel(), onClose: () -> Unit) {
     OnBoardingContent(onClose = onClose) { name, intention, startFrom, startDate ->
         viewmodel.createNewUserAndChallenge(name, intention, startFrom, startDate)
     }

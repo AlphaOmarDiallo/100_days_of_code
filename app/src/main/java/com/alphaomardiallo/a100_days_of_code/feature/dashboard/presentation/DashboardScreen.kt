@@ -29,32 +29,30 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.Challenge
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.User
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.getAverageMoodFromCurrentChallenge
-import com.alphaomardiallo.a100_days_of_code.common.domain.model.getLongestStreak
-import com.alphaomardiallo.a100_days_of_code.common.domain.model.getOverallLongestStreak
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MediumSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
+import com.alphaomardiallo.a100_days_of_code.common.presentation.util.AddEntry
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.getPreviewChallenges
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.getPreviewUser
-import com.alphaomardiallo.a100_days_of_code.feature.addentry.presentation.AddEntryScreen
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.DashboardTitleSection
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.ProgressSection
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.StatSection
-import com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation.OnBoarding
+import com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation.OnBoardingScreen
 import com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation.StartScreen
 import org.koin.androidx.compose.koinViewModel
 import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
+fun DashboardScreen(navController: NavController, viewModel: DashboardViewModel = koinViewModel()) {
     val context = LocalContext.current
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     var showOnBoardingDialog by remember { mutableStateOf(false) }
-    var showAddEntryDialog by remember { mutableStateOf(false) }
     var showAddNewChallengeDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(uiState.value.user) {
@@ -66,7 +64,7 @@ fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
     Scaffold(
         floatingActionButton = {
             if (uiState.value.challenges.find { it?.isCompleted == false } != null) {
-                FloatingActionButton(onClick = { showAddEntryDialog = true }) {
+                FloatingActionButton(onClick = { navController.navigate(AddEntry) }) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_launcher_foreground),
                         contentDescription = "",
@@ -93,25 +91,8 @@ fun Dashboard(viewModel: DashboardViewModel = koinViewModel()) {
                 properties = DialogProperties(usePlatformDefaultWidth = false)
             ) {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    OnBoarding {
+                    OnBoardingScreen {
                         showOnBoardingDialog = false
-                    }
-                }
-            }
-        }
-
-        // Add entry dialog
-        if (showAddEntryDialog) {
-            val progress =
-                uiState.value.challenges.find { !it?.isCompleted!! }?.currentProgress ?: 0
-            BasicAlertDialog(
-                onDismissRequest = { showAddEntryDialog = false },
-                modifier = Modifier.fillMaxSize(),
-                properties = DialogProperties(usePlatformDefaultWidth = false)
-            ) {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    AddEntryScreen(progress = progress) {
-                        showAddEntryDialog = false
                     }
                 }
             }
@@ -178,9 +159,6 @@ private fun DashboardContent(
         // Stat section
         if (challenges.isNotEmpty()) {
             val completedChallenges = challenges.filterNotNull().filter { it.isCompleted }
-            val longestStreak = challenges.filterNotNull().getOverallLongestStreak()
-            val currentStreak =
-                challenges.find { it?.isCompleted == false }?.getLongestStreak() ?: 0
             val currentMood = challenges.filterNotNull().getAverageMoodFromCurrentChallenge() ?: 0
 
             val list = listOf(
@@ -188,14 +166,6 @@ private fun DashboardContent(
                     stat = completedChallenges.size,
                     label = R.string.dashboard_stat_challenges_completed
                 ),
-                /*StatItem(
-                    stat = longestStreak,
-                    label = R.string.dashboard_stat_longest_streak
-                ),
-                StatItem(
-                    stat = currentStreak,
-                    label = R.string.dashboard_stat_current_streak
-                ),*/
                 StatItem(
                     stat = currentMood.toInt(),
                     label = R.string.dashboard_stat_mood
@@ -216,18 +186,9 @@ private fun DashboardContentPreview() {
 }
 
 @Preview(showBackground = true, showSystemUi = true)
-@Composable
-private fun DashboardPreview() {
-    _100_days_of_codeTheme {
-        Surface {
-            DashboardContentPreview()
-        }
-    }
-}
-
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun DashboardDarkPreview() {
+private fun DashboardPreview() {
     _100_days_of_codeTheme {
         Surface {
             DashboardContentPreview()

@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.google.firebase.crashlytics)
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -98,4 +100,9 @@ dependencies {
     implementation(libs.splashscreen)
     implementation(libs.lottie.animation)
     //implementation(libs.admob.sdk)
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.android)
+    implementation(libs.ktor.logging)
+    implementation(libs.ktor.serialization)
+    implementation(libs.serialization)
 }

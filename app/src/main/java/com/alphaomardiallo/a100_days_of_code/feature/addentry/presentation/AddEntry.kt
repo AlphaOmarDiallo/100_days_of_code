@@ -37,6 +37,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
+import androidx.navigation.NavController
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.EmptyCard
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeActionButton
@@ -55,12 +56,12 @@ import java.util.Calendar
 
 @Composable
 fun AddEntryScreen(
+    navController: NavController,
     viewModel: AddEntryViewModel = koinViewModel(),
-    progress: Int = 0,
-    onClose: () -> Unit
+    progress: Int = 0
 ) {
     AddEntryScreenContent(
-        onClose = onClose,
+        navController = navController,
         saveData = viewModel::addEntry,
         challengeProgress = progress
     )
@@ -69,7 +70,7 @@ fun AddEntryScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AddEntryScreenContent(
-    onClose: () -> Unit = {},
+    navController: NavController? = null,
     saveData: (String, String, Float, String) -> Unit = { _, _, _, _ -> },
     challengeProgress: Int = 0
 ) {
@@ -90,10 +91,10 @@ private fun AddEntryScreenContent(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { LargeTitle(text = R.string.add_entry_title) },
+                title = { LargeTitle(modifier = Modifier.padding(horizontal = largePadding()), text = R.string.add_entry_title) },
                 navigationIcon = {
                     SmallIconButton {
-                        onClose.invoke()
+                        navController?.popBackStack()
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors().copy(
@@ -182,7 +183,7 @@ private fun AddEntryScreenContent(
                     if (challengeProgress + 1 == 100) {
                         showEndChallengeDialog = true
                     } else {
-                        onClose.invoke()
+                        navController?.popBackStack()
                     }
                 } else {
                     Toast.makeText(context, R.string.add_entry_validate_error, Toast.LENGTH_SHORT)
@@ -210,13 +211,13 @@ private fun AddEntryScreenContent(
         BasicAlertDialog(
             onDismissRequest = {
                 showEndChallengeDialog = false
-                onClose.invoke()
+                navController?.popBackStack()
             },
             modifier = Modifier.wrapContentSize(),
             properties = DialogProperties(usePlatformDefaultWidth = true)
         ) {
             Surface(modifier = Modifier.wrapContentSize(), shape = RoundedCornerShape(10.dp)) {
-                EmptyCard() {
+                EmptyCard {
                     Column(
                         modifier = Modifier.padding(largePadding()),
                         verticalArrangement = Arrangement.Center,
@@ -227,7 +228,7 @@ private fun AddEntryScreenContent(
                         LottieWithCoilPlaceholder()
                         MediumSpacer()
                         LargeActionButton(text = R.string.add_entry_end_challenge_button) {
-                            onClose.invoke()
+                            navController?.popBackStack()
                         }
                     }
                 }
@@ -237,18 +238,9 @@ private fun AddEntryScreenContent(
 }
 
 @Preview(showBackground = true, showSystemUi = true)
-@Composable
-private fun AddEntryPreview() {
-    _100_days_of_codeTheme {
-        Surface {
-            AddEntryScreenContent()
-        }
-    }
-}
-
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun AddEntryDarkPreview() {
+private fun AddEntryPreview() {
     _100_days_of_codeTheme {
         Surface {
             AddEntryScreenContent()
