@@ -8,12 +8,13 @@ import androidx.compose.material3.Surface
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.AddEntry
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Dashboard
+import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Info
 import com.alphaomardiallo.a100_days_of_code.feature.addentry.presentation.AddEntryScreen
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.DashboardScreen
+import com.alphaomardiallo.a100_days_of_code.feature.info.presentation.InfoScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,13 +25,12 @@ class MainActivity : ComponentActivity() {
             _100_days_of_codeTheme {
 
                 val navController = rememberNavController()
-                val currentDest = navController.currentBackStackEntryAsState()
 
                 Surface {
                     NavHost(navController = navController, startDestination = Dashboard) {
                         composable<Dashboard> { DashboardScreen(navController = navController) }
                         composable<AddEntry> { AddEntryScreen(navController = navController) }
-
+                        composable<Info> { InfoScreen(navController = navController) }
                     }
                 }
             }

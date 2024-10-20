@@ -247,55 +247,41 @@ private fun AllChallengesCompleted(
     }
 }
 
-@Composable
-private fun ProgressSectionContentPreview() {
-    Column(
-        modifier = Modifier
-            .padding(largePadding())
-            .fillMaxSize()
-    ) {
-        ProgressSection(
-            challenges = emptyList(),
-            user = null
-        )
-        largePadding()
-        ProgressSection(
-            challenges = listOf(
-                Challenge(
-                    declarationOfIntention = "Exploring the world of Android development, building apps that bring ideas to life.",
-                    currentProgress = 51,
-                    startDate = null,
-                    endDate = null,
-                    isCompleted = false,
-                    entries = emptyList()
-                )
-            ),
-            user = User(name = "Alpha")
-        )
-        largePadding()
-        ProgressSection(
-            challenges = emptyList(),
-            user = User(name = "Alpha")
-        )
-    }
-}
-
 @Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun OnBoardingPreview() {
     _100_days_of_codeTheme {
         Surface {
-            ProgressSectionContentPreview()
-        }
-    }
-}
-
-@Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun OnBoardingDarkPreview() {
-    _100_days_of_codeTheme {
-        Surface {
-            ProgressSectionContentPreview()
+            Column(
+                modifier = Modifier
+                    .padding(largePadding())
+                    .fillMaxSize()
+            ) {
+                ProgressSection(
+                    challenges = emptyList(),
+                    user = null
+                )
+                largePadding()
+                ProgressSection(
+                    challenges = listOf(
+                        Challenge(
+                            declarationOfIntention = "Exploring the world of Android development, building apps that bring ideas to life.",
+                            currentProgress = 51,
+                            startDate = null,
+                            endDate = null,
+                            isCompleted = false,
+                            entries = emptyList()
+                        )
+                    ),
+                    user = User(name = "Alpha")
+                )
+                largePadding()
+                ProgressSection(
+                    challenges = emptyList(),
+                    user = User(name = "Alpha")
+                )
+            }
         }
     }
 }

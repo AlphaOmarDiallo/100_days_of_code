@@ -34,14 +34,16 @@ import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.Challenge
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.User
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.getAverageMoodFromCurrentChallenge
-import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MediumSpacer
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.AddEntry
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.getPreviewChallenges
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.getPreviewUser
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.DashboardTitleSection
+import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.LinkSection
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.ProgressSection
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.StatSection
+import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.model.StatItem
 import com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation.OnBoardingScreen
 import com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation.StartScreen
 import org.koin.androidx.compose.koinViewModel
@@ -75,6 +77,7 @@ fun DashboardScreen(navController: NavController, viewModel: DashboardViewModel 
         }
     ) { paddingValues ->
         DashboardContent(
+            navController = navController,
             paddingValues = paddingValues,
             user = uiState.value.user,
             challenges = uiState.value.challenges,
@@ -132,6 +135,7 @@ fun DashboardScreen(navController: NavController, viewModel: DashboardViewModel 
 
 @Composable
 private fun DashboardContent(
+    navController: NavController? = null,
     paddingValues: PaddingValues = PaddingValues(),
     user: User? = null,
     challenges: List<Challenge?> = emptyList(),
@@ -155,7 +159,6 @@ private fun DashboardContent(
         ) {
             showDialog.invoke()
         }
-        MediumSpacer()
         // Stat section
         if (challenges.isNotEmpty()) {
             val completedChallenges = challenges.filterNotNull().filter { it.isCompleted }
@@ -172,8 +175,11 @@ private fun DashboardContent(
                 )
 
             )
+            SmallSpacer()
             StatSection(list = list)
         }
+
+        LinkSection(navController = navController)
     }
 }
 

@@ -7,3 +7,6 @@ object Dashboard
 
 @Serializable
 object AddEntry
+
+@Serializable
+object Info

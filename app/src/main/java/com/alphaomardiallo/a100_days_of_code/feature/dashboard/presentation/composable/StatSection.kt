@@ -21,18 +21,22 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Smal
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.smallPadding
-import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.StatItem
+import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.model.StatItem
 
 @Composable
 fun StatSection(list: List<StatItem> = emptyList()) {
-    EmptyCard(modifier = Modifier.fillMaxWidth()) {
-        Row(
-            modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.tertiaryContainer),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            list.filter { it.stat != 0 }.forEach {
-                StatItemView(modifier = Modifier.weight(1f), stat = it.stat, label = it.label)
+    if (list.isNotEmpty() && list.any { it.stat != 0 }){
+        EmptyCard(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.tertiaryContainer),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                list.filter { it.stat != 0 }.forEach {
+                    StatItemView(modifier = Modifier.weight(1f), stat = it.stat, label = it.label)
+                }
             }
         }
     }
@@ -45,39 +49,28 @@ private fun StatItemView(modifier: Modifier, stat: Int, label: Int) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        LargeTitleString(text = stat.toString(), color = MaterialTheme.colorScheme.onTertiaryContainer)
+        LargeTitleString(
+            text = stat.toString(),
+            color = MaterialTheme.colorScheme.onTertiaryContainer
+        )
         mediumPadding()
         SmallBodyText(text = label, color = MaterialTheme.colorScheme.onTertiaryContainer)
     }
 }
 
-@Composable
-private fun ProgressSectionContentPreview() {
-    Column(
-        modifier = Modifier
-            .padding(largePadding())
-            .fillMaxSize()
-    ) {
-        StatSection()
-    }
-}
-
 @Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun OnBoardingPreview() {
     _100_days_of_codeTheme {
         Surface {
-            ProgressSectionContentPreview()
-        }
-    }
-}
-
-@Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun OnBoardingDarkPreview() {
-    _100_days_of_codeTheme {
-        Surface {
-            ProgressSectionContentPreview()
+            Column(
+                modifier = Modifier
+                    .padding(largePadding())
+                    .fillMaxSize()
+            ) {
+                StatSection()
+            }
         }
     }
 }

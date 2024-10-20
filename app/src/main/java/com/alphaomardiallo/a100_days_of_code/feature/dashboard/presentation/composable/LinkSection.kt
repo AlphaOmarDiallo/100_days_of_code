@@ -1,0 +1,150 @@
+package com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable
+
+import _100_days_of_codeTheme
+import android.content.res.Configuration
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.sharp.List
+import androidx.compose.material.icons.sharp.Build
+import androidx.compose.material.icons.sharp.Info
+import androidx.compose.material.icons.sharp.Warning
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.alphaomardiallo.a100_days_of_code.R
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.EmptyCard
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeTitle
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPadding
+import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Info
+
+private const val CardHeight = 100
+
+@Composable
+fun LinkSection(navController: NavController? = null) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = mediumPadding())
+    ) {
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Card(
+                modifier = Modifier.weight(1f),
+                click = { navController?.navigate(Info) },
+                backgroundColor = MaterialTheme.colorScheme.secondaryContainer
+            ) {
+                Row {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Sharp.List,
+                        contentDescription = Icons.AutoMirrored.Sharp.List.name,
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer
+                    )
+                    SmallSpacer()
+                    LargeTitle(
+                        text = R.string.info_button_history,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                    )
+                }
+            }
+            SmallSpacer()
+            Card(
+                modifier = Modifier.weight(1f),
+                click = { navController?.navigate(Info) },
+                backgroundColor = MaterialTheme.colorScheme.primary
+            ) {
+                Row {
+                    Icon(
+                        imageVector = Icons.Sharp.Build,
+                        contentDescription = Icons.Sharp.Build.name,
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                    SmallSpacer()
+                    LargeTitle(
+                        text = R.string.info_button_resources,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            }
+        }
+        SmallSpacer()
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Card(
+                modifier = Modifier.weight(1f),
+                click = { navController?.navigate(Info) },
+                backgroundColor = MaterialTheme.colorScheme.secondary
+            ) {
+                Row {
+                    Icon(
+                        imageVector = Icons.Sharp.Warning,
+                        contentDescription = Icons.Sharp.Warning.name,
+                        tint = MaterialTheme.colorScheme.onSecondary
+                    )
+                    SmallSpacer()
+                    LargeTitle(
+                        text = R.string.info_button_rules,
+                        color = MaterialTheme.colorScheme.onSecondary
+                    )
+                }
+            }
+            SmallSpacer()
+            Card(
+                modifier = Modifier.weight(1f),
+                click = { navController?.navigate(Info) },
+                backgroundColor = MaterialTheme.colorScheme.errorContainer
+            ) {
+                Row {
+                    Icon(imageVector = Icons.Sharp.Info, contentDescription = Icons.Sharp.Info.name)
+                    SmallSpacer()
+                    LargeTitle(
+                        text = R.string.info_button_about_us,
+                        color = MaterialTheme.colorScheme.onErrorContainer
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun Card(
+    modifier: Modifier = Modifier,
+    click: () -> Unit = {},
+    backgroundColor: Color = Color.Transparent,
+    content: @Composable () -> Unit = {}
+) {
+    EmptyCard(modifier = modifier.height(CardHeight.dp), click = { click.invoke() }) {
+        Box(
+            modifier = Modifier
+                .background(backgroundColor)
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            content.invoke()
+        }
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun LinkSectionPreview() {
+    _100_days_of_codeTheme {
+        Surface {
+            LinkSection()
+        }
+    }
+}

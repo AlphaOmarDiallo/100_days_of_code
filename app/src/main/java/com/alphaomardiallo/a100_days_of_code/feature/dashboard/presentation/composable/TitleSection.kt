@@ -50,26 +50,14 @@ private fun TitleWithoutUser() {
     }
 }
 
-@Composable
-private fun DashboardTitleContentPreview() {
-    Column {
-        TitleWithoutUser()
-        TitleWithUser(user = getPreviewUser())
-    }
-}
-
 @Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun DashboardTitlePreview() {
     _100_days_of_codeTheme {
-        DashboardTitleContentPreview()
-    }
-}
-
-@Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun DashboardTitleDarkPreview() {
-    _100_days_of_codeTheme {
-        DashboardTitleContentPreview()
+        Column {
+            TitleWithoutUser()
+            TitleWithUser(user = getPreviewUser())
+        }
     }
 }
