@@ -3,6 +3,7 @@ package com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.com
 import _100_days_of_codeTheme
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.EmptyCard
-import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeTitle
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Info
 
@@ -54,7 +55,7 @@ fun LinkSection(navController: NavController? = null) {
                         tint = MaterialTheme.colorScheme.onSecondaryContainer
                     )
                     SmallSpacer()
-                    LargeTitle(
+                    Title(
                         text = R.string.info_button_history,
                         color = MaterialTheme.colorScheme.onSecondaryContainer
                     )
@@ -73,7 +74,7 @@ fun LinkSection(navController: NavController? = null) {
                         tint = MaterialTheme.colorScheme.onPrimary
                     )
                     SmallSpacer()
-                    LargeTitle(
+                    Title(
                         text = R.string.info_button_resources,
                         color = MaterialTheme.colorScheme.onPrimary
                     )
@@ -94,7 +95,7 @@ fun LinkSection(navController: NavController? = null) {
                         tint = MaterialTheme.colorScheme.onSecondary
                     )
                     SmallSpacer()
-                    LargeTitle(
+                    Title(
                         text = R.string.info_button_rules,
                         color = MaterialTheme.colorScheme.onSecondary
                     )
@@ -106,10 +107,10 @@ fun LinkSection(navController: NavController? = null) {
                 click = { navController?.navigate(Info) },
                 backgroundColor = MaterialTheme.colorScheme.errorContainer
             ) {
-                Row {
+                Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.Center,verticalAlignment = Alignment.CenterVertically) {
                     Icon(imageVector = Icons.Sharp.Info, contentDescription = Icons.Sharp.Info.name)
                     SmallSpacer()
-                    LargeTitle(
+                    Title(
                         text = R.string.info_button_about_us,
                         color = MaterialTheme.colorScheme.onErrorContainer
                     )

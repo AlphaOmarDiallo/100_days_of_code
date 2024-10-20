@@ -33,6 +33,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Lott
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MediumCategoryButton
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MediumSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallBodyTextString
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallTitle
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallTitleString
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
@@ -228,10 +229,10 @@ private fun AllChallengesCompleted(
                         lottieJson = R.raw.plant_growing
                     )
                 }
+                SmallSpacer()
                 Column(
                     modifier = Modifier
-                        .fillMaxHeight()
-                        .weight(1f),
+                        .fillMaxHeight(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
