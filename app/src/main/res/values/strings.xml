@@ -70,4 +70,8 @@
 
     <!-- Learn -->
     <string name="learn_title">Learn</string>"
+
+    <!-- Rules -->
+    <string name="rules_title">Rules</string>"
+    <string name="rules_website">https://www.100daysofcode.com</string>"
 </resources>

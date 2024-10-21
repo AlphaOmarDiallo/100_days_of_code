@@ -1,6 +1,5 @@
-package com.alphaomardiallo.a100_days_of_code.di
+package com.alphaomardiallo.a100_days_of_code.common.di
 
-import com.alphaomardiallo.a100_days_of_code.common.di.commonModule
 import com.alphaomardiallo.a100_days_of_code.feature.addentry.di.addEntryModule
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.di.dashboardModule
 import com.alphaomardiallo.a100_days_of_code.feature.info.di.infoModule
@@ -13,5 +12,5 @@ fun moduleList() = listOf(
     dashboardModule,
     addEntryModule,
     infoModule,
-    learnModule
+    learnModule,
 )

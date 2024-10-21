@@ -99,7 +99,7 @@ private fun LearningScreenContent(
 @Composable
 private fun LearningItemCard(context: Context? = null, learnItem: LearnItem = LearnItem()) {
     EmptyCard(
-        modifier = Modifier.padding(mediumPadding()),
+        modifier = Modifier.padding(largePadding()),
         click = { context?.let { openLink(it, learnItem.url) } }
     ) {
         Column(

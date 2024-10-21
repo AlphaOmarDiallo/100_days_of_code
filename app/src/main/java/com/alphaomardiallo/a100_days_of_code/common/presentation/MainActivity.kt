@@ -13,10 +13,12 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.util.AddEntry
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Dashboard
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Info
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Learning
+import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Rules
 import com.alphaomardiallo.a100_days_of_code.feature.addentry.presentation.AddEntryScreen
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.DashboardScreen
 import com.alphaomardiallo.a100_days_of_code.feature.info.presentation.InfoScreen
 import com.alphaomardiallo.a100_days_of_code.feature.learn.presentation.LearningScreen
+import com.alphaomardiallo.a100_days_of_code.feature.rules.presentation.RulesScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +36,7 @@ class MainActivity : ComponentActivity() {
                         composable<AddEntry> { AddEntryScreen(navController = navController) }
                         composable<Info> { InfoScreen(navController = navController) }
                         composable<Learning> { LearningScreen(navController = navController) }
+                        composable<Rules> { RulesScreen(navController = navController) }
                     }
                 }
             }

@@ -13,3 +13,6 @@ object Info
 
 @Serializable
 object Learning
+
+@Serializable
+object Rules

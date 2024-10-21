@@ -1,7 +1,7 @@
 package com.alphaomardiallo.a100_days_of_code
 
 import android.app.Application
-import com.alphaomardiallo.a100_days_of_code.di.moduleList
+import com.alphaomardiallo.a100_days_of_code.common.di.moduleList
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
