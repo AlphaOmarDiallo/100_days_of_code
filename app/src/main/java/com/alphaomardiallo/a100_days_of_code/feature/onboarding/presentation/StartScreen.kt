@@ -200,18 +200,9 @@ fun StartScreen(
 }
 
 @Preview(showBackground = true, showSystemUi = true)
-@Composable
-private fun OnBoardingPreview() {
-    _100_days_of_codeTheme {
-        Surface {
-            StartScreen()
-        }
-    }
-}
-
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun OnBoardingDarkPreview() {
+private fun OnBoardingPreview() {
     _100_days_of_codeTheme {
         Surface {
             StartScreen()

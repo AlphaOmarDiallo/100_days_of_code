@@ -138,12 +138,13 @@ fun LargeProviderLoginButton(
 
 @Composable
 fun LargeActionButton(
+    modifier: Modifier = Modifier,
     icon: Int? = null,
     text: Int = R.string.app_name,
     click: () -> Unit = {}
 ) {
     SmallIconButton(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         icon = icon,
         text = text,
         click = click
