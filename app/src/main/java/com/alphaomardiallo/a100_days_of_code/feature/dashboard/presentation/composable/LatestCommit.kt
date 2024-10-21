@@ -8,14 +8,20 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.Entry
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.EntryCard
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
 
 @Composable
 fun LatestEntry(entry: Entry, click: () -> Unit = {}){
+    Column {
+    Title(text = R.string.dashboard_latest_entry_title)
+    SmallSpacer()
     EntryCard(entry = entry) {
         click.invoke()
-    }
+    }}
 }
 
 @Preview(showBackground = true, showSystemUi = true)

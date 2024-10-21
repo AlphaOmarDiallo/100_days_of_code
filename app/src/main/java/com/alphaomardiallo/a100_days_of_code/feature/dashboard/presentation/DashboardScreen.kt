@@ -185,7 +185,7 @@ private fun DashboardContent(
                 LatestEntry(entry = entry)
             }
         }
-
+        SmallSpacer()
         LinkSection(navController = navController)
 
         LargeSpacer()

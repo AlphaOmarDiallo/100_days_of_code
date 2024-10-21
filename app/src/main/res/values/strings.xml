@@ -7,7 +7,7 @@
     <string name="loader">Loading…</string>
 
     <!-- Entry card -->
-    <string name="entry_card_mood">Mood: %s</string>
+    <string name="dashboard_entry_card_mood">Mood: %s</string>
 
     <!-- OnBoarding -->
     <string name="onboarding_commit_title">Welcome to the 100 Days Of Code challenge!</string>
@@ -53,10 +53,13 @@
     <string name="dashboard_my_progress_start">Start</string>
     <string name="dashboard_my_progress_challenges_completed">So far, you have completed %d challenges. That represents %d days of learning.</string>
 
+    <string name="dashboard_stat_title">Achievements</string>
     <string name="dashboard_stat_challenges_completed">Challenge\ncompleted</string>
     <string name="dashboard_stat_longest_streak">Longest\nstreak</string>
     <string name="dashboard_stat_current_streak">Current\nstreak</string>
     <string name="dashboard_stat_mood">Your\nmood</string>
+
+    <string name="dashboard_latest_entry_title">Last commit</string>
 
     <!-- Add Entry -->
     <string name="add_entry_title">Track progress</string>"

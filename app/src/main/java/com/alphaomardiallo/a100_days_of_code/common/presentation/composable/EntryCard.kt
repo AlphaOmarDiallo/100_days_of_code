@@ -39,7 +39,7 @@ fun EntryCard(modifier: Modifier = Modifier, entry: Entry, click: () -> Unit) {
                 Column {
                     SmallTitleString(
                         text = String.format(
-                            stringResource(id = R.string.entry_card_mood),
+                            stringResource(id = R.string.dashboard_entry_card_mood),
                             entry.mood
                         )
                     )

@@ -15,9 +15,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.EmptyCard
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeTitleString
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallBodyText
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.smallPadding
@@ -26,16 +29,20 @@ import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.mode
 @Composable
 fun StatSection(list: List<StatItem> = emptyList()) {
     if (list.isNotEmpty() && list.any { it.stat != 0 }){
-        EmptyCard(modifier = Modifier.fillMaxWidth()) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.tertiaryContainer),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                list.filter { it.stat != 0 }.forEach {
-                    StatItemView(modifier = Modifier.weight(1f), stat = it.stat, label = it.label)
+        Column {
+            Title(text = R.string.dashboard_stat_title)
+            SmallSpacer()
+            EmptyCard(modifier = Modifier.fillMaxWidth()) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.tertiaryContainer),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    list.filter { it.stat != 0 }.forEach {
+                        StatItemView(modifier = Modifier.weight(1f), stat = it.stat, label = it.label)
+                    }
                 }
             }
         }
