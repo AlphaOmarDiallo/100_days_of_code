@@ -25,7 +25,7 @@ fun SingleLineTextFields(
     var text by remember { mutableStateOf(textValue) }
 
     OutlinedTextField(
-        value = text,
+        value = textValue,
         onValueChange = { newText ->
             text = newText
             onTextChange(newText)

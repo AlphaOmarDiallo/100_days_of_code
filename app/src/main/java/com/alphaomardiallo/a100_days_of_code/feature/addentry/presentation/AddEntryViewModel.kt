@@ -18,7 +18,7 @@ class AddEntryViewModel(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AddEntryState())
-    private val uiState = _uiState.asStateFlow()
+    val uiState = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {

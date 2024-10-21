@@ -24,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -37,6 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.EmptyCard
@@ -57,13 +59,14 @@ import java.util.Calendar
 @Composable
 fun AddEntryScreen(
     navController: NavController,
-    viewModel: AddEntryViewModel = koinViewModel(),
-    progress: Int = 0
+    viewModel: AddEntryViewModel = koinViewModel()
 ) {
+    val state = viewModel.uiState.collectAsStateWithLifecycle()
+
     AddEntryScreenContent(
         navController = navController,
         saveData = viewModel::addEntry,
-        challengeProgress = progress
+        challengeProgress = state.value.currentChallenge?.currentProgress ?: 0
     )
 }
 
@@ -75,7 +78,7 @@ private fun AddEntryScreenContent(
     challengeProgress: Int = 0
 ) {
     val context = LocalContext.current
-    var titleValue by remember { mutableStateOf("Day ${challengeProgress + 1}") }
+    var titleValue by remember { mutableStateOf("") }
     var descriptionValue by remember { mutableStateOf("") }
     var sliderValue by remember { mutableFloatStateOf(3f) }
     var showEndChallengeDialog by remember { mutableStateOf(false) }
@@ -87,6 +90,11 @@ private fun AddEntryScreenContent(
     val day = calendar.get(Calendar.DAY_OF_MONTH)
 
     var selectedDate by remember { mutableStateOf("$day/${month + 1}/$year") }
+
+    // Update titleValue whenever challengeProgress changes
+    LaunchedEffect(challengeProgress) {
+        titleValue = "Day ${challengeProgress + 1}"
+    }
 
     Scaffold(
         topBar = {
@@ -114,7 +122,7 @@ private fun AddEntryScreenContent(
         ) {
             Title(text = R.string.add_entry_title_of_entry)
             SmallSpacer()
-            SingleLineTextFields(textValue = "Day ${challengeProgress + 1}") { title ->
+            SingleLineTextFields(textValue = titleValue) { title ->
                 titleValue = title
             }
             MediumSpacer()
@@ -236,6 +244,7 @@ private fun AddEntryScreenContent(
         }
     }
 }
+
 
 @Preview(showBackground = true, showSystemUi = true)
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)

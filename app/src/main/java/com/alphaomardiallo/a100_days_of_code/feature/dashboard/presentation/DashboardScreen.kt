@@ -34,12 +34,14 @@ import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.Challenge
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.User
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.getAverageMoodFromCurrentChallenge
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.AddEntry
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.getPreviewChallenges
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.getPreviewUser
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.DashboardTitleSection
+import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.LatestEntry
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.LinkSection
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.ProgressSection
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable.StatSection
@@ -177,9 +179,17 @@ private fun DashboardContent(
             )
             SmallSpacer()
             StatSection(list = list)
+
+            challenges.lastOrNull()?.entries?.lastOrNull()?.let { entry ->
+                SmallSpacer()
+                LatestEntry(entry = entry)
+            }
         }
 
         LinkSection(navController = navController)
+
+        LargeSpacer()
+        LargeSpacer()
     }
 }
 

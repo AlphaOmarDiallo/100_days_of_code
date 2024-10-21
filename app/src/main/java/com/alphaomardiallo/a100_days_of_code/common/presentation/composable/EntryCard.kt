@@ -17,14 +17,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.Entry
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
+import com.alphaomardiallo.a100_days_of_code.common.presentation.util.longToFormattedDate
 
 @Composable
 fun EntryCard(modifier: Modifier = Modifier, entry: Entry, click: () -> Unit) {
-    EmptyCard(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(largePadding())
-    ) {
+    EmptyCard(modifier = modifier.fillMaxWidth()) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -39,12 +36,17 @@ fun EntryCard(modifier: Modifier = Modifier, entry: Entry, click: () -> Unit) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                SmallTitleString(
-                    text = String.format(
-                        stringResource(id = R.string.entry_card_mood),
-                        entry.mood
+                Column {
+                    SmallTitleString(
+                        text = String.format(
+                            stringResource(id = R.string.entry_card_mood),
+                            entry.mood
+                        )
                     )
-                )
+                    SmallSpacer()
+                    SmallTitleString(text = longToFormattedDate(entry.date))
+                }
+
                 SmallIconButton(icon = R.drawable.sharp_share_24){
                     click.invoke()
                 }
