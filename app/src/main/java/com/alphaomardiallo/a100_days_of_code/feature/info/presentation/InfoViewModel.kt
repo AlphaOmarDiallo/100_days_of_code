@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class InfoViewModel(private val myAppsRepository: MyAppsRepository) : ViewModel() {
-
     private val _uiState = MutableStateFlow(InfoState())
     val uiState: StateFlow<InfoState> = _uiState
 

@@ -1,10 +1,10 @@
-package com.alphaomardiallo.a100_days_of_code.feature.info.di
+package com.alphaomardiallo.a100_days_of_code.feature.learn.di
 
-import com.alphaomardiallo.a100_days_of_code.feature.info.data.remote.MyAppsServiceImpl
-import com.alphaomardiallo.a100_days_of_code.feature.info.data.repository.MyAppsRepositoryImpl
-import com.alphaomardiallo.a100_days_of_code.feature.info.domain.remote.MyAppsService
-import com.alphaomardiallo.a100_days_of_code.feature.info.domain.repository.MyAppsRepository
-import com.alphaomardiallo.a100_days_of_code.feature.info.presentation.InfoViewModel
+import com.alphaomardiallo.a100_days_of_code.feature.learn.data.remote.LearnServiceImpl
+import com.alphaomardiallo.a100_days_of_code.feature.learn.data.repository.LearningRepositoryImpl
+import com.alphaomardiallo.a100_days_of_code.feature.learn.domain.remote.LearnService
+import com.alphaomardiallo.a100_days_of_code.feature.learn.domain.repository.LearningRepository
+import com.alphaomardiallo.a100_days_of_code.feature.learn.presentation.LearningViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.features.DefaultRequest
@@ -23,12 +23,13 @@ import timber.log.Timber
 
 private const val TIME_OUT = 10000
 
-val infoModule = module {
-    single<MyAppsRepository> { MyAppsRepositoryImpl(service = get()) }
+val learnModule = module {
 
-    viewModel { InfoViewModel(myAppsRepository = get()) }
+    single<LearningRepository> { LearningRepositoryImpl(service = get()) }
 
-    factory<MyAppsService> { MyAppsServiceImpl(httpClient = get()) }
+    viewModel { LearningViewModel(learningRepository = get()) }
+
+    factory<LearnService> { LearnServiceImpl(httpClient = get()) }
 
     single {
         HttpClient(Android) {

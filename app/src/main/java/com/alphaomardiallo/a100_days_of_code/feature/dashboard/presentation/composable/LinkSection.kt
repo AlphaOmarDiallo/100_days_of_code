@@ -32,6 +32,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Smal
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Info
+import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Learning
 
 private const val CardHeight = 70
 
@@ -64,7 +65,7 @@ fun LinkSection(navController: NavController? = null) {
             SmallSpacer()
             Card(
                 modifier = Modifier.weight(1f),
-                click = { navController?.navigate(Info) },
+                click = { navController?.navigate(Learning) },
                 backgroundColor = MaterialTheme.colorScheme.primary
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {

@@ -10,3 +10,6 @@ object AddEntry
 
 @Serializable
 object Info
+
+@Serializable
+object Learning

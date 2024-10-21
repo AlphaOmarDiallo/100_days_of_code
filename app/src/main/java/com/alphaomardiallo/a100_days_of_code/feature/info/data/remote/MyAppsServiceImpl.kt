@@ -20,6 +20,6 @@ class MyAppsServiceImpl(val httpClient: HttpClient) : MyAppsService {
     }
 
     private companion object {
-        const val BASE_URL = "https://myapps-hppaqs61.b4a.run/"
+        const val BASE_URL = "https://myapps-hppaqs61.b4a.run/app-list"
     }
 }
