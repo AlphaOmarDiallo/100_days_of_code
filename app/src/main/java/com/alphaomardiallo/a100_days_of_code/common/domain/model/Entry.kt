@@ -6,4 +6,5 @@ data class Entry(
     val title: String = "",
     val content: String = "",
     val mood: Int = 3,
+    val number: Int = 0,
 )

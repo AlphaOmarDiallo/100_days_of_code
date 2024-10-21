@@ -74,7 +74,7 @@ fun AddEntryScreen(
 @Composable
 private fun AddEntryScreenContent(
     navController: NavController? = null,
-    saveData: (String, String, Float, String) -> Unit = { _, _, _, _ -> },
+    saveData: (String, String, Float, String, Int) -> Unit = { _, _, _, _, _ -> },
     challengeProgress: Int = 0
 ) {
     val context = LocalContext.current
@@ -187,7 +187,7 @@ private fun AddEntryScreenContent(
                 text = R.string.add_entry_validate
             ) {
                 if (titleValue.isNotBlank() && descriptionValue.isNotBlank()) {
-                    saveData.invoke(titleValue, descriptionValue, sliderValue, selectedDate)
+                    saveData.invoke(titleValue, descriptionValue, sliderValue, selectedDate, (challengeProgress + 1))
                     if (challengeProgress + 1 == 100) {
                         showEndChallengeDialog = true
                     } else {

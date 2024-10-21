@@ -15,13 +15,12 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Smal
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
 
 @Composable
-fun LatestEntry(entry: Entry, click: () -> Unit = {}){
+fun LatestEntry(entry: Entry) {
     Column {
-    Title(text = R.string.dashboard_latest_entry_title)
-    SmallSpacer()
-    EntryCard(entry = entry) {
-        click.invoke()
-    }}
+        Title(text = R.string.dashboard_latest_entry_title)
+        SmallSpacer()
+        EntryCard(entry = entry)
+    }
 }
 
 @Preview(showBackground = true, showSystemUi = true)

@@ -29,7 +29,7 @@ class AddEntryViewModel(
         }
     }
 
-    fun addEntry(title: String, description: String, mood: Float, date: String) {
+    fun addEntry(title: String, description: String, mood: Float, date: String, entryCount: Int) {
         viewModelScope.launch {
             val updatedChallenge = uiState.value.currentChallenge?.addEntry(
                 Entry(
@@ -37,7 +37,8 @@ class AddEntryViewModel(
                     title = title,
                     content = description,
                     mood = mood.toInt(),
-                    date = stringDateToMillis.invoke(date)
+                    date = stringDateToMillis.invoke(date),
+                    number = entryCount
                 )
             )
             updatedChallenge?.let {
