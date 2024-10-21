@@ -53,7 +53,7 @@ fun LearningScreen(
                 title = {
                     LargeTitle(
                         modifier = Modifier.padding(horizontal = largePadding()),
-                        text = R.string.add_entry_title
+                        text = R.string.learn_title
                     )
                 },
                 navigationIcon = {

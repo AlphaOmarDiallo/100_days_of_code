@@ -18,7 +18,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -34,12 +33,15 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.BodyText
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.BodyTextString
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeTitle
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LoaderGeneric
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MediumSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallBodyTextString
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallIconButton
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallTitleString
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.openLink
 import com.alphaomardiallo.a100_days_of_code.feature.info.domain.model.App
 import org.koin.androidx.compose.koinViewModel
@@ -59,7 +61,10 @@ private fun InfoDialogContent(list: List<App> = emptyList(), navController: NavC
         topBar = {
             TopAppBar(
                 title = {
-                    LargeTitle(text = R.string.info_title)
+                    LargeTitle(
+                        modifier = Modifier.padding(horizontal = largePadding()),
+                        text = R.string.info_title
+                    )
                 },
                 navigationIcon = {
                     SmallIconButton {
@@ -72,9 +77,7 @@ private fun InfoDialogContent(list: List<App> = emptyList(), navController: NavC
                     navigationIconContentColor = MaterialTheme.colorScheme.onErrorContainer
                 )
             )
-        },
-        containerColor = MaterialTheme.colorScheme.errorContainer,
-        contentColor = MaterialTheme.colorScheme.onErrorContainer
+        }
     ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
@@ -105,7 +108,7 @@ private fun InfoDialogContent(list: List<App> = emptyList(), navController: NavC
 
                 item {
                     MediumSpacer()
-                    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center){
+                    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                         LoaderGeneric()
                     }
                 }
@@ -145,12 +148,8 @@ private fun AppItem(app: App) {
                     .weight(1f),
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(
-                    text = app.name,
-                    style = MaterialTheme.typography.titleSmall,
-                    modifier = Modifier.padding(8.dp)
-                )
-                Text(text = app.description, modifier = Modifier.padding(horizontal = 8.dp))
+                SmallTitleString(text = app.name)
+                BodyTextString(text = app.description)
             }
         }
     }
