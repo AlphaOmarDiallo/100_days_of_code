@@ -81,4 +81,8 @@
     <!-- Rules -->
     <string name="rules_title">Rules</string>"
     <string name="rules_website">https://www.100daysofcode.com</string>"
+
+    <!-- History -->
+    <string name="history_title">History</string>
+    <string name="history_subtitle">Declaration of intention</string>
 </resources>

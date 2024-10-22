@@ -16,3 +16,6 @@ object Learning
 
 @Serializable
 object Rules
+
+@Serializable
+object History
