@@ -1,6 +1,5 @@
 package com.alphaomardiallo.a100_days_of_code.feature.history.presentation
 
-import _100_days_of_codeTheme
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -27,6 +26,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -38,11 +38,11 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Body
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.EntryCard
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeTitle
-import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LoaderGeneric
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LottieWithCoilPlaceholder
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallIconButton
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.longToFormattedDate
 import kotlinx.coroutines.launch
@@ -132,7 +132,7 @@ private fun HistoryScreenContent(
         if (challenges.isEmpty()) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    LargeTitle(text = R.string.history_empty)
+                    LargeTitle(text = R.string.history_empty, align = TextAlign.Center)
                     LargeSpacer()
                     LottieWithCoilPlaceholder()
                 }
@@ -200,7 +200,7 @@ private fun HistoryScreenContent(
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun HistoryScreenPreview() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Surface {
             HistoryScreenContent()
         }

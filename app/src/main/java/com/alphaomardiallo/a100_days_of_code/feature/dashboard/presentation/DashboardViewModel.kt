@@ -38,24 +38,6 @@ class DashboardViewModel(
         }
     }
 
-    fun createNewUserAndChallenge(
-        name: String,
-        intention: String,
-        startFrom: Int = 0,
-        startDate: String = ""
-    ) {
-        viewModelScope.launch {
-            userRepository.upsertUser(User(name = name))
-            challengeRepository.upsertChallenge(
-                Challenge(
-                    currentProgress = startFrom,
-                    declarationOfIntention = intention,
-                    startDate = stringDateToMillis.invoke(startDate)
-                )
-            )
-        }
-    }
-
     fun createNewChallenge(
         intention: String,
         startFrom: Int = 0,

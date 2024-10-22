@@ -1,6 +1,5 @@
 package com.alphaomardiallo.a100_days_of_code.feature.learn.presentation
 
-import _100_days_of_codeTheme
 import android.content.Context
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
@@ -34,6 +33,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Load
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallIconButton
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallTitleString
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.smallPadding
@@ -125,7 +125,7 @@ private fun LearningItemCard(context: Context? = null, learnItem: LearnItem = Le
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun LearningSectionPreview() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Surface {
             LearningScreenContent()
         }

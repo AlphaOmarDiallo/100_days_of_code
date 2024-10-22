@@ -1,6 +1,5 @@
 package com.alphaomardiallo.a100_days_of_code.common.presentation.composable
 
-import _100_days_of_codeTheme
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.smallPadding
 
@@ -69,7 +68,7 @@ fun EventCard(
 
 @Composable
 private fun PreviewContentPhone() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Surface {
             Column(modifier = Modifier.padding(largePadding())) {
                 EmptyCard(

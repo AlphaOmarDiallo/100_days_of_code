@@ -1,3 +1,5 @@
+package com.alphaomardiallo.a100_days_of_code.common.presentation.theme
+
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF506527)

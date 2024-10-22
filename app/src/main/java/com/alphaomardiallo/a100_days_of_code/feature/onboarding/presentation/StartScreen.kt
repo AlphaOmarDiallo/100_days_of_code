@@ -1,6 +1,6 @@
 package com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation
 
-import _100_days_of_codeTheme
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 import android.app.DatePickerDialog
 import android.content.res.Configuration
 import android.widget.DatePicker
@@ -124,7 +124,10 @@ fun StartScreen(
                     align = TextAlign.Justify
                 )
                 SmallSpacer()
-                SingleLineTextFields { name = it }
+                SingleLineTextFields(
+                    textValue = name,
+                    onTextChange = { name = it }
+                )
                 MediumSpacer()
             }
 
@@ -203,7 +206,7 @@ fun StartScreen(
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun OnBoardingPreview() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Surface {
             StartScreen()
         }

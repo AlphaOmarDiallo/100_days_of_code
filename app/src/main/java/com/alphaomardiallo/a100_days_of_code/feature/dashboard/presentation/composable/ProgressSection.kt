@@ -1,6 +1,5 @@
 package com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable
 
-import _100_days_of_codeTheme
 import android.content.res.Configuration
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -21,10 +20,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import colorGold
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.Challenge
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.User
@@ -37,6 +36,8 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Smal
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallTitle
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallTitleString
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.colorGold
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.smallPadding
@@ -217,13 +218,15 @@ private fun AllChallengesCompleted(
                     verticalArrangement = Arrangement.Center
                 ) {
                     MediumSpacer()
-                    SmallTitleString(
-                        text = String.format(
-                            stringResource(id = R.string.dashboard_my_progress_challenges_completed),
-                            challenges.size,
-                            (challenges.size * 100)
-                        )
+
+                    val progressText = String.format(
+                        LocalContext.current.resources.getQuantityText(
+                            R.plurals.dashboard_my_progress_challenges_completed,
+                            challenges.size
+                        ).toString(), challenges.size, (challenges.size * 100)
                     )
+
+                    SmallTitleString(text = progressText)
                     LottieWithCoilPlaceholder(
                         size = 80.dp,
                         lottieJson = R.raw.plant_growing
@@ -252,7 +255,7 @@ private fun AllChallengesCompleted(
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun OnBoardingPreview() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Surface {
             Column(
                 modifier = Modifier

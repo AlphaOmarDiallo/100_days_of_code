@@ -1,6 +1,5 @@
 package com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable
 
-import _100_days_of_codeTheme
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +12,7 @@ import com.alphaomardiallo.a100_days_of_code.common.domain.model.Entry
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.EntryCard
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 
 @Composable
 fun LatestEntry(entry: Entry) {
@@ -27,7 +27,7 @@ fun LatestEntry(entry: Entry) {
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun LatestEntryPreview() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Surface(modifier = Modifier.fillMaxSize()) {
             Column {
                 LatestEntry(entry = Entry())

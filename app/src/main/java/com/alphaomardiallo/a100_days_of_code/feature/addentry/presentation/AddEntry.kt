@@ -1,6 +1,5 @@
 package com.alphaomardiallo.a100_days_of_code.feature.addentry.presentation
 
-import _100_days_of_codeTheme
 import android.app.DatePickerDialog
 import android.content.res.Configuration
 import android.widget.DatePicker
@@ -52,6 +51,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Sing
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallIconButton
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import org.koin.androidx.compose.koinViewModel
 import java.util.Calendar
@@ -250,7 +250,7 @@ private fun AddEntryScreenContent(
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun AddEntryPreview() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Surface {
             AddEntryScreenContent()
         }

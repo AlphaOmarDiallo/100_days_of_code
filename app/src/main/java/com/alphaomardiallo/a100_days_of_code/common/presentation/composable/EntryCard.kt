@@ -1,6 +1,5 @@
 package com.alphaomardiallo.a100_days_of_code.common.presentation.composable
 
-import _100_days_of_codeTheme
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -34,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.Entry
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.longToFormattedDate
@@ -113,6 +113,7 @@ fun EntryCard(
                                     .size(22.dp)
                                     .clickable {
                                         openTikTok(context)
+                                        shareItems = !shareItems
                                     }
                             )
                         }
@@ -133,6 +134,7 @@ fun EntryCard(
                                     .size(22.dp)
                                     .clickable {
                                         openInstagram(context)
+                                        shareItems = !shareItems
                                     }
                             )
                         }
@@ -156,6 +158,7 @@ fun EntryCard(
                                             context = context,
                                             text = "Day${entry.number} - ${entry.content} #100DaysOfCode"
                                         )
+                                        shareItems = !shareItems
                                     }
                             )
                         }
@@ -182,7 +185,7 @@ fun EntryCard(
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun EntryCardPreview() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Surface(modifier = Modifier.fillMaxSize()) {
             Column {
                 EntryCard(

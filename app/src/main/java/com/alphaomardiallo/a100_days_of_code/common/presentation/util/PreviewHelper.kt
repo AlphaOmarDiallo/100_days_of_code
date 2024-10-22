@@ -17,5 +17,3 @@ private val challenges = listOf(
 fun getPreviewUser(actualUser: Boolean = true) = if (actualUser) User(name = "Alpha") else null
 
 fun getPreviewChallenges(actualChallenges: Boolean = true) = if (actualChallenges) challenges else emptyList()
-
-fun getPreviewChallengesDone() = challenges.map { it.isCompleted = true }

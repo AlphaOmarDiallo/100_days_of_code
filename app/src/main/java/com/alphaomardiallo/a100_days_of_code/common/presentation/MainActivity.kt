@@ -1,6 +1,5 @@
 package com.alphaomardiallo.a100_days_of_code.common.presentation
 
-import _100_days_of_codeTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,6 +8,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.AddEntry
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Dashboard
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.History
@@ -28,8 +28,7 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
 
         setContent {
-            _100_days_of_codeTheme {
-
+            Theme_100DOC {
                 val navController = rememberNavController()
 
                 Surface {

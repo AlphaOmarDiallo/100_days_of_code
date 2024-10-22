@@ -1,6 +1,4 @@
 package com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation
-
-import _100_days_of_codeTheme
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,6 +24,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Lott
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MediumSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 
 @Composable
@@ -46,7 +45,7 @@ fun CommitScreen(
         Column {
             LargeTitle(
                 modifier = Modifier.fillMaxWidth(),
-                text = R.string.app_name_short,
+                text = R.string.onboarding_commit_title,
                 align = TextAlign.Center,
                 color = getTextColor()
             )
@@ -104,7 +103,7 @@ fun CommitScreen(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun OnBoardingPreview() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Surface {
             CommitScreen()
         }
@@ -114,7 +113,7 @@ private fun OnBoardingPreview() {
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun OnBoardingDarkPreview() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Surface {
             CommitScreen()
         }

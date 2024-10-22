@@ -1,6 +1,5 @@
 package com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.composable
 
-import _100_days_of_codeTheme
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -30,6 +29,7 @@ import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.EmptyCard
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.History
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Info
@@ -153,7 +153,7 @@ private fun Card(
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun LinkSectionPreview() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Surface {
             LinkSection()
         }

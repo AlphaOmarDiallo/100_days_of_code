@@ -1,6 +1,5 @@
 package com.alphaomardiallo.a100_days_of_code.common.presentation.composable
 
-import _100_days_of_codeTheme
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 
 @Composable
 fun SingleLineTextFields(
@@ -22,12 +22,9 @@ fun SingleLineTextFields(
     textValue: String = "",
     onTextChange: (String) -> Unit = {},
 ) {
-    var text by remember { mutableStateOf(textValue) }
-
     OutlinedTextField(
         value = textValue,
         onValueChange = { newText ->
-            text = newText
             onTextChange(newText)
         },
         modifier = modifier.fillMaxWidth(),
@@ -57,7 +54,7 @@ fun MultiLineTextFields(
 
 @Composable
 private fun PreviewContent() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Column {
             SingleLineTextFields()
             LargeSpacer()

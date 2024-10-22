@@ -1,6 +1,5 @@
 package com.alphaomardiallo.a100_days_of_code.feature.onboarding.presentation
 
-import _100_days_of_codeTheme
 import android.content.res.Configuration
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -15,6 +14,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import timber.log.Timber
@@ -75,19 +75,10 @@ fun OnBoardingContent(
 }
 
 @Preview(showBackground = true, showSystemUi = true)
-@Composable
-private fun OnBoardingPreview() {
-    _100_days_of_codeTheme {
-        Surface {
-            OnBoardingContent()
-        }
-    }
-}
-
 @Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun OnBoardingDarkPreview() {
-    _100_days_of_codeTheme {
+private fun OnBoardingPreview() {
+    Theme_100DOC {
         Surface {
             OnBoardingContent()
         }

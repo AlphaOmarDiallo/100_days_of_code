@@ -1,6 +1,5 @@
 package com.alphaomardiallo.a100_days_of_code.common.presentation.composable
 
-import _100_days_of_codeTheme
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -30,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.alphaomardiallo.a100_days_of_code.R
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPadding
 
@@ -171,7 +171,7 @@ fun LargeSensitiveActionButton(
 
 @Composable
 private fun PreviewContentPhone() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Surface {
             Column(modifier = Modifier.padding(largePadding())) {
                 SmallIconButton()

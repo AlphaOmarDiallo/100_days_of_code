@@ -1,6 +1,5 @@
 package com.alphaomardiallo.a100_days_of_code.common.presentation.composable
 
-import _100_days_of_codeTheme
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -17,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import com.alphaomardiallo.a100_days_of_code.R
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 
 @Composable
@@ -201,7 +201,7 @@ fun SmallBodyTextString(
 
 @Composable
 private fun PreviewContentPhone() {
-    _100_days_of_codeTheme {
+    Theme_100DOC {
         Surface {
             Column(modifier = Modifier.padding(largePadding())) {
                 LargeTitle()
