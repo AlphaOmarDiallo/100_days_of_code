@@ -7,6 +7,7 @@
 
     <!-- Entry card -->
     <string name="dashboard_entry_card_mood">Mood: %s</string>
+    <string name="dashboard_entry_card_delete">Delete commit forever</string>
 
     <!-- OnBoarding -->
     <string name="onboarding_commit_title">Welcome to the 100 Days Of Code challenge!</string>

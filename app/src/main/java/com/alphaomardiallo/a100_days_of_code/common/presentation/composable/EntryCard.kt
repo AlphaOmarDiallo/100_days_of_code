@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -50,6 +51,7 @@ fun EntryCard(
     var showTwitter by remember { mutableStateOf(false) }
     var showInstagram by remember { mutableStateOf(false) }
     var showTikTok by remember { mutableStateOf(false) }
+    var showDelete by remember { mutableStateOf(false) }
 
     LaunchedEffect(shareItems) {
         if (shareItems) {
@@ -172,8 +174,28 @@ fun EntryCard(
                     if (listMode) {
                         SmallSpacer()
                         SmallIconButtonClose(icon = R.drawable.sharp_delete_forever_24) {
-                            deleteAction.invoke()
+                            showDelete = !showDelete
                         }
+                    }
+                }
+            }
+            if (showDelete) {
+                MediumSpacer()
+                AnimatedVisibility(
+                    visible = true,
+                    enter = slideInVertically()
+
+                    /*slideInHorizontally(
+                        initialOffsetX = { it },
+                        animationSpec = tween(durationMillis = 300)
+                    )*/
+                ) {
+                    LargeSensitiveActionButton(
+                        text = R.string.dashboard_entry_card_delete,
+                        icon = R.drawable.sharp_delete_forever_24
+                    ) {
+                        deleteAction.invoke()
+                        showDelete = !showDelete
                     }
                 }
             }
