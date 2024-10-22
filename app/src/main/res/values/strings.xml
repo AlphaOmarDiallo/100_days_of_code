@@ -76,6 +76,7 @@
 
     <!-- Learn -->
     <string name="learn_title">Learn</string>"
+    <string name="learn_subtitle">This is an unordered list of resources to help you learn.\nIf you have any suggestion, please visit the about us page for the contact details.</string>"
 
     <!-- Rules -->
     <string name="rules_title">Rules</string>"

@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.alphaomardiallo.a100_days_of_code.R
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.BodyText
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.BodyTextString
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.EmptyCard
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeTitle
@@ -35,6 +36,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Smal
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallTitleString
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPadding
+import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.smallPadding
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.openLink
 import com.alphaomardiallo.a100_days_of_code.feature.learn.domain.model.LearnItem
 import org.koin.androidx.compose.koinViewModel
@@ -89,6 +91,9 @@ private fun LearningScreenContent(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
+            item {
+                BodyText(modifier = Modifier.padding(largePadding()), text = R.string.learn_subtitle)
+            }
             items(list) { learningItem ->
                 LearningItemCard(context = context, learnItem = learningItem)
             }
@@ -99,7 +104,7 @@ private fun LearningScreenContent(
 @Composable
 private fun LearningItemCard(context: Context? = null, learnItem: LearnItem = LearnItem()) {
     EmptyCard(
-        modifier = Modifier.padding(largePadding()),
+        modifier = Modifier.padding(smallPadding()),
         click = { context?.let { openLink(it, learnItem.url) } }
     ) {
         Column(
