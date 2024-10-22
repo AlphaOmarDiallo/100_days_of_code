@@ -24,6 +24,18 @@ data class Challenge(
         )
     }
 
+    fun removeEntry(entryToRemove: Entry): Challenge {
+        val updatedEntries = entries.filter { it != entryToRemove }
+        val updatedProgress = currentProgress - 1
+
+        return this.copy(
+            entries = updatedEntries,
+            currentProgress = updatedProgress,
+            isCompleted = updatedProgress >= 100,
+            endDate = if (updatedProgress >= 100) System.currentTimeMillis() else null
+        )
+    }
+
     fun toEntity(): ChallengeEntity {
         return ChallengeEntity(
             id = id,

@@ -85,4 +85,5 @@
     <!-- History -->
     <string name="history_title">History</string>
     <string name="history_subtitle">Declaration of intention</string>
+    <string name="history_empty">Nothing to see. Time to start a new challenge.</string>
 </resources>

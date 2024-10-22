@@ -39,7 +39,12 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.mediumPad
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.longToFormattedDate
 
 @Composable
-fun EntryCard(modifier: Modifier = Modifier, entry: Entry) {
+fun EntryCard(
+    modifier: Modifier = Modifier,
+    entry: Entry,
+    listMode: Boolean = false,
+    deleteAction: () -> Unit = {}
+) {
     val context = LocalContext.current
     var shareItems by remember { mutableStateOf(false) }
     var showTwitter by remember { mutableStateOf(false) }
@@ -104,9 +109,11 @@ fun EntryCard(modifier: Modifier = Modifier, entry: Entry) {
                             Icon(
                                 painter = painterResource(id = R.drawable.tiktok_logo),
                                 contentDescription = "Tiktok logo",
-                                modifier = Modifier.size(22.dp).clickable{
-                                    openTikTok(context)
-                                }
+                                modifier = Modifier
+                                    .size(22.dp)
+                                    .clickable {
+                                        openTikTok(context)
+                                    }
                             )
                         }
                         MediumSpacer()
@@ -122,9 +129,11 @@ fun EntryCard(modifier: Modifier = Modifier, entry: Entry) {
                             Icon(
                                 painter = painterResource(id = R.drawable.insta_logo),
                                 contentDescription = "Instagram logo",
-                                modifier = Modifier.size(22.dp).clickable{
-                                    openInstagram(context)
-                                }
+                                modifier = Modifier
+                                    .size(22.dp)
+                                    .clickable {
+                                        openInstagram(context)
+                                    }
                             )
                         }
                         MediumSpacer()
@@ -153,9 +162,16 @@ fun EntryCard(modifier: Modifier = Modifier, entry: Entry) {
                         MediumSpacer()
                     }
                 }
-
-                SmallIconButton(icon = R.drawable.sharp_share_24) {
-                    shareItems = !shareItems
+                Row {
+                    SmallIconButton(icon = R.drawable.sharp_share_24) {
+                        shareItems = !shareItems
+                    }
+                    if (listMode) {
+                        SmallSpacer()
+                        SmallIconButtonClose(icon = R.drawable.sharp_delete_forever_24) {
+                            deleteAction.invoke()
+                        }
+                    }
                 }
             }
         }
@@ -170,6 +186,7 @@ fun EntryCardPreview() {
         Surface(modifier = Modifier.fillMaxSize()) {
             Column {
                 EntryCard(
+                    listMode = true,
                     entry = Entry(
                         title = "Day 1: Let's start",
                         content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec turpis nunc, tempus quis elit quis, sodales euismod ante. Proin sed erat interdum, egestas diam non, aliquet leo. Morbi venenatis urna et libero vestibulum semper. Duis commodo nunc ac nisl volutpat lobortis. Nullam ornare elit sed justo elementum, eu pellentesque sapien malesuada. Nulla eu rutrum mi. Cras consectetur porta augue ut posuere. Donec ut consequat leo. "
@@ -221,14 +238,16 @@ private fun openTikTok(context: Context) {
     // Create an intent to open TikTok app
     val intent = context.packageManager.getLaunchIntentForPackage(tiktokPackage)
 
-    try { if (intent != null) {
-        // TikTok app is installed, open it
-        context.startActivity(intent)
-    } else {
-        // TikTok app is not installed, open the web version
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(tiktokUrl))
-        context.startActivity(browserIntent)
-    }} catch (e: Exception) {
+    try {
+        if (intent != null) {
+            // TikTok app is installed, open it
+            context.startActivity(intent)
+        } else {
+            // TikTok app is not installed, open the web version
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(tiktokUrl))
+            context.startActivity(browserIntent)
+        }
+    } catch (e: Exception) {
         Toast.makeText(context, "Error opening TikTok", Toast.LENGTH_SHORT).show()
     }
 }

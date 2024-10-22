@@ -4,6 +4,7 @@ import _100_days_of_codeTheme
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,16 +33,21 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.domain.model.Challenge
+import com.alphaomardiallo.a100_days_of_code.common.domain.model.Entry
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.BodyTextString
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.EntryCard
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LargeTitle
-import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.MediumSpacer
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LoaderGeneric
+import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.LottieWithCoilPlaceholder
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallIconButton
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.SmallSpacer
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.Title
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.largePadding
+import com.alphaomardiallo.a100_days_of_code.common.presentation.util.longToFormattedDate
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import timber.log.Timber
 
 @Composable
 fun HistoryScreen(
@@ -51,14 +57,17 @@ fun HistoryScreen(
     val state = viewModel.uiState.collectAsStateWithLifecycle()
     HistoryScreenContent(
         challenges = state.value.challenges,
-        returnAction = { navController?.popBackStack() })
+        returnAction = { navController?.popBackStack() },
+        deleteAction = viewModel::deleteEntry
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HistoryScreenContent(
     challenges: List<Challenge> = emptyList(),
-    returnAction: () -> Unit = {}
+    returnAction: () -> Unit = {},
+    deleteAction: (Long, Entry) -> Unit = { _, _ -> }
 ) {
     val pagerState = rememberPagerState(pageCount = { challenges.size })
     val coroutineScope = rememberCoroutineScope()
@@ -79,8 +88,8 @@ private fun HistoryScreenContent(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors().copy(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.onSecondaryContainer,
                 )
             )
         },
@@ -106,8 +115,8 @@ private fun HistoryScreenContent(
                         BodyTextString(
                             text = (index + 1).toString(),
                             color =
-                                if (pagerState.currentPage == index) MaterialTheme.colorScheme.primary
-                                else MaterialTheme.colorScheme.onSurface
+                            if (pagerState.currentPage == index) MaterialTheme.colorScheme.primary
+                            else MaterialTheme.colorScheme.onSurface
                         )
                         if (pagerState.currentPage == index) {
                             HorizontalDivider(
@@ -120,37 +129,67 @@ private fun HistoryScreenContent(
             }
         }
     ) { paddingValues ->
-        LaunchedEffect(key1 = challenges) {
-            pagerState.scrollToPage(challenges.size - 1)
-        }
+        if (challenges.isEmpty()) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    LargeTitle(text = R.string.history_empty)
+                    LargeSpacer()
+                    LottieWithCoilPlaceholder()
+                }
+            }
+        } else {
+            LaunchedEffect(key1 = challenges) {
+                pagerState.scrollToPage(challenges.size - 1)
+            }
 
-        HorizontalPager(
-            state = pagerState,
-            modifier = Modifier
-                .padding(paddingValues)
-                .padding(largePadding())
-                .fillMaxSize()
-        ) {
-            LazyColumn(
+            HorizontalPager(
+                state = pagerState,
                 modifier = Modifier
+                    .padding(paddingValues)
+                    .padding(largePadding())
                     .fillMaxSize()
             ) {
-                item {
-                    Title(
-                        modifier = Modifier.padding(horizontal = largePadding()),
-                        text = R.string.history_subtitle
-                    )
-                    SmallSpacer()
-                    BodyTextString(
-                        modifier = Modifier.padding(horizontal = largePadding()),
-                        text = challenges[pagerState.currentPage].declarationOfIntention
-                    )
-                    MediumSpacer()
-                }
+                val challenge = challenges[pagerState.currentPage]
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {
+                    item {
+                        Title(
+                            modifier = Modifier.padding(horizontal = largePadding()),
+                            text = R.string.history_subtitle
+                        )
+                        SmallSpacer()
+                        BodyTextString(
+                            modifier = Modifier.padding(horizontal = largePadding()),
+                            text = challenge.declarationOfIntention
+                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(largePadding()),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            challenge.startDate?.let {
+                                BodyTextString(text = longToFormattedDate(it))
+                            }
+                            challenge.endDate?.let {
+                                BodyTextString(text = longToFormattedDate(it))
+                            }
+                        }
+                    }
 
-                items(challenges[pagerState.currentPage].entries.sortedByDescending { it.number }) { entry ->
-                    EntryCard(entry = entry)
-                    SmallSpacer()
+                    val sortedEntries = challenge.entries.sortedByDescending { it.number }
+
+                    items(sortedEntries) { entry ->
+                        val isLastItem = entry == sortedEntries.first()
+
+                        EntryCard(entry = entry, listMode = isLastItem && !challenge.isCompleted) {
+                            Timber.d("Delete entry ${entry.number}")
+                            deleteAction.invoke(challenge.id, entry)
+                        }
+                        SmallSpacer()
+                    }
                 }
             }
         }
