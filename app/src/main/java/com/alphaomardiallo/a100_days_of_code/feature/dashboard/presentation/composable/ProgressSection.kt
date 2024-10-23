@@ -124,9 +124,7 @@ private fun OnGoingChallenge(challenge: Challenge?) {
     EventCard(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.tertiaryContainer)
-            .padding(
-                smallPadding()
-            ),
+            .padding(smallPadding()),
         click = { Timber.d("My progress card clicked") }
     ) {
         val targetProgress = (challenge?.currentProgress?.toFloat()?.div(100)) ?: 0f

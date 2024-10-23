@@ -12,6 +12,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
@@ -19,13 +21,13 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100
 @Composable
 fun SingleLineTextFields(
     modifier: Modifier = Modifier,
-    textValue: String = "",
-    onTextChange: (String) -> Unit = {},
+    textValue: TextFieldValue = TextFieldValue(""),
+    onTextChange: (TextFieldValue) -> Unit = {}
 ) {
     OutlinedTextField(
         value = textValue,
         onValueChange = { newText ->
-            onTextChange(newText)
+            onTextChange(newText.copy(selection = TextRange(newText.text.length)))
         },
         modifier = modifier.fillMaxWidth(),
         singleLine = true

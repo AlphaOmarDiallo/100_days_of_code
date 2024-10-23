@@ -130,7 +130,7 @@ fun LinkSection(navController: NavController? = null) {
         Card(
             modifier = Modifier.fillMaxWidth(),
             click = { navController?.navigate(Settings) },
-            backgroundColor = MaterialTheme.colorScheme.surfaceContainerHighest
+            backgroundColor = MaterialTheme.colorScheme.tertiaryContainer
         ){
             Row(
                 modifier = Modifier.fillMaxSize(),
@@ -141,7 +141,7 @@ fun LinkSection(navController: NavController? = null) {
                 SmallSpacer()
                 Title(
                     text = R.string.info_button_settings,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onTertiaryContainer
                 )
             }
         }

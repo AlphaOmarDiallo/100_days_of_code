@@ -34,6 +34,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
@@ -122,8 +124,8 @@ private fun AddEntryScreenContent(
         ) {
             Title(text = R.string.add_entry_title_of_entry)
             SmallSpacer()
-            SingleLineTextFields(textValue = titleValue) { title ->
-                titleValue = title
+            SingleLineTextFields(textValue = TextFieldValue(titleValue, selection = TextRange(titleValue.length))) { newTextField ->
+                titleValue = newTextField.text
             }
             MediumSpacer()
 

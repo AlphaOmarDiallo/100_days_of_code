@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -18,12 +19,14 @@ import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.sharp.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,8 +35,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.alphaomardiallo.a100_days_of_code.R
 import com.alphaomardiallo.a100_days_of_code.common.presentation.composable.BodyText
@@ -53,16 +59,34 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun SettingsScreen(
     navController: NavController? = null,
-    viewModel: SettingsViewModel? = koinViewModel()
+    viewModel: SettingsViewModel = koinViewModel()
 ) {
-    SettingsScreenContent() {
+    val state = viewModel.uiState.collectAsStateWithLifecycle()
+
+    SettingsScreenContent(
+        state = state,
+        updateName = viewModel::updateUserName
+    ) {
         navController?.popBackStack()
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SettingsScreenContent(onBackClicked: () -> Unit = {}) {
+private fun SettingsScreenContent(
+    state: State<SettingsState>? = null,
+    updateName: (String) -> Unit = {},
+    onBackClicked: () -> Unit = {}
+) {
+    var userName by remember { mutableStateOf(state?.value?.userName ?: "") }
+
+    val radioOptions = listOf(
+        R.string.settings_notification_when_morning,
+        R.string.settings_notification_when_afternoon,
+        R.string.settings_notification_when_evening
+    )
+    val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[1]) }
+
     var turnOnNotification by remember { mutableStateOf(true) }
     var notificationEveryday by remember { mutableStateOf(true) }
     var notificationMonday by remember { mutableStateOf(true) }
@@ -89,9 +113,9 @@ private fun SettingsScreenContent(onBackClicked: () -> Unit = {}) {
                     }
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors().copy(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
-                    titleContentColor = MaterialTheme.colorScheme.onSurface,
-                    navigationIconContentColor = MaterialTheme.colorScheme.onSurface
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                    navigationIconContentColor = MaterialTheme.colorScheme.onTertiaryContainer
                 )
             )
         }
@@ -116,8 +140,13 @@ private fun SettingsScreenContent(onBackClicked: () -> Unit = {}) {
                 Column(modifier = Modifier.padding(largePadding())) {
                     LargeTitle(text = R.string.settings_user_name)
                     MediumSpacer()
-                    SingleLineTextFields() { name ->
-
+                    SingleLineTextFields(
+                        textValue = TextFieldValue(
+                            state?.value?.userName ?: "",
+                            selection = TextRange(state?.value?.userName?.length ?: 0)
+                        )
+                    ) { newName ->
+                        updateName.invoke(newName.text)
                     }
                 }
             }
@@ -140,8 +169,28 @@ private fun SettingsScreenContent(onBackClicked: () -> Unit = {}) {
                     }
 
                     if (turnOnNotification) {
-                        Row(modifier = Modifier.fillMaxWidth()) {
-
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            radioOptions.forEach { text ->
+                                Column(
+                                    modifier = Modifier
+                                        .selectable(
+                                            selected = text == selectedOption,
+                                            onClick = { onOptionSelected(text) }
+                                        )
+                                        .padding(smallPadding()),
+                                    verticalArrangement = Arrangement.Center,
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    RadioButton(
+                                        selected = text == selectedOption,
+                                        onClick = { onOptionSelected(text) }
+                                    )
+                                    BodyText(text = text)
+                                }
+                            }
                         }
 
                         EmptyCard {
