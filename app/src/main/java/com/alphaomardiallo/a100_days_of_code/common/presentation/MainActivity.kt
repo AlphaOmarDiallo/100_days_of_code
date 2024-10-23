@@ -22,7 +22,7 @@ import com.alphaomardiallo.a100_days_of_code.feature.history.presentation.Histor
 import com.alphaomardiallo.a100_days_of_code.feature.info.presentation.InfoScreen
 import com.alphaomardiallo.a100_days_of_code.feature.learn.presentation.LearningScreen
 import com.alphaomardiallo.a100_days_of_code.feature.rules.RulesScreen
-import com.alphaomardiallo.a100_days_of_code.feature.settings.SettingsScreen
+import com.alphaomardiallo.a100_days_of_code.feature.settings.presentation.SettingsScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -94,5 +94,20 @@
     <string name="settings_title">Settings</string>
     <string name="settings_user_name">User name</string>
     <string name="settings_notification">Notification</string>
+    <string name="settings_notification_subtitle">Setup reminders to log your progress, stay motivated and share with other participants of the #100DaysOfCode challenge.</string>
+    <string name="settings_notification_turn_on">Turn on notifications</string>
+    <string name="settings_notification_days">Days of the week</string>
+    <string name="settings_notification_everyday">Everyday</string>
+    <string name="settings_notification_monday">Monday</string>
+    <string name="settings_notification_tuesday">Tuesday</string>
+    <string name="settings_notification_wednesday">Wednesday</string>
+    <string name="settings_notification_thursday">Thursday</string>
+    <string name="settings_notification_friday">Friday</string>
+    <string name="settings_notification_saturday">Saturday</string>
+    <string name="settings_notification_sunday">Sunday</string>
+    <string name="settings_notification_when">When would you like your notification?</string>
+    <string name="settings_notification_when_morning">Morning</string>
+    <string name="settings_notification_when_afternoon">Afternoon</string>
+    <string name="settings_notification_when_evening">Evening</string>
 
 </resources>
