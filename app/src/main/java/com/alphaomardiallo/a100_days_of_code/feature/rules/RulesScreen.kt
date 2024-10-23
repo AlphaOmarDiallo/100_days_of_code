@@ -1,4 +1,4 @@
-package com.alphaomardiallo.a100_days_of_code.feature.rules.presentation
+package com.alphaomardiallo.a100_days_of_code.feature.rules
 
 import com.alphaomardiallo.a100_days_of_code.common.presentation.theme.Theme_100DOC
 import android.content.res.Configuration

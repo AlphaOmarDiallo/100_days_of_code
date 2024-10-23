@@ -15,12 +15,14 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.util.History
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Info
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Learning
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Rules
+import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Settings
 import com.alphaomardiallo.a100_days_of_code.feature.addentry.presentation.AddEntryScreen
 import com.alphaomardiallo.a100_days_of_code.feature.dashboard.presentation.DashboardScreen
 import com.alphaomardiallo.a100_days_of_code.feature.history.presentation.HistoryScreen
 import com.alphaomardiallo.a100_days_of_code.feature.info.presentation.InfoScreen
 import com.alphaomardiallo.a100_days_of_code.feature.learn.presentation.LearningScreen
-import com.alphaomardiallo.a100_days_of_code.feature.rules.presentation.RulesScreen
+import com.alphaomardiallo.a100_days_of_code.feature.rules.RulesScreen
+import com.alphaomardiallo.a100_days_of_code.feature.settings.SettingsScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +41,7 @@ class MainActivity : ComponentActivity() {
                         composable<Learning> { LearningScreen(navController = navController) }
                         composable<Rules> { RulesScreen(navController = navController) }
                         composable<History> { HistoryScreen(navController = navController) }
+                        composable<Settings> { SettingsScreen(navController = navController) }
                     }
                 }
             }

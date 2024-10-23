@@ -38,6 +38,7 @@
     <string name="info_button_resources">Learn</string>
     <string name="info_button_rules">Rules</string>
     <string name="info_button_about_us">About us</string>
+    <string name="info_button_settings">Settings</string>
 
     <!-- Dashboard -->
     <string name="dashboard_title">Hey %s!</string>
@@ -88,4 +89,10 @@
     <string name="history_title">History</string>
     <string name="history_subtitle">Declaration of intention</string>
     <string name="history_empty">Nothing to see. Time to start a new challenge.</string>
+
+    <!-- History -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_user_name">User name</string>
+    <string name="settings_notification">Notification</string>
+
 </resources>

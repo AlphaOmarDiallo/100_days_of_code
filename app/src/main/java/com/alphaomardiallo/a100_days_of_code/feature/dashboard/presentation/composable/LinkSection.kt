@@ -14,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.sharp.List
 import androidx.compose.material.icons.sharp.Build
 import androidx.compose.material.icons.sharp.Info
+import androidx.compose.material.icons.sharp.Settings
 import androidx.compose.material.icons.sharp.Warning
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -35,6 +36,7 @@ import com.alphaomardiallo.a100_days_of_code.common.presentation.util.History
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Info
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Learning
 import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Rules
+import com.alphaomardiallo.a100_days_of_code.common.presentation.util.Settings
 
 private const val CardHeight = 70
 
@@ -124,6 +126,25 @@ fun LinkSection(navController: NavController? = null) {
                 }
             }
         }
+        SmallSpacer()
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            click = { navController?.navigate(Settings) },
+            backgroundColor = MaterialTheme.colorScheme.surfaceContainerHighest
+        ){
+            Row(
+                modifier = Modifier.fillMaxSize(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(imageVector = Icons.Sharp.Settings, contentDescription = Icons.Sharp.Settings.name)
+                SmallSpacer()
+                Title(
+                    text = R.string.info_button_settings,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+        }
     }
 }
 
@@ -149,8 +170,8 @@ private fun Card(
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
-@Preview(showBackground = true, showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, showSystemUi = false)
+@Preview(showBackground = true, showSystemUi = false, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun LinkSectionPreview() {
     Theme_100DOC {

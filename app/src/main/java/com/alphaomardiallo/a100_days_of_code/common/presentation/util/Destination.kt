@@ -19,3 +19,6 @@ object Rules
 
 @Serializable
 object History
+
+@Serializable
+object Settings
