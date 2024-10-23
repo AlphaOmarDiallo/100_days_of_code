@@ -184,11 +184,6 @@ fun EntryCard(
                 AnimatedVisibility(
                     visible = true,
                     enter = slideInVertically()
-
-                    /*slideInHorizontally(
-                        initialOffsetX = { it },
-                        animationSpec = tween(durationMillis = 300)
-                    )*/
                 ) {
                     LargeSensitiveActionButton(
                         text = R.string.dashboard_entry_card_delete,
